@@ -53,7 +53,7 @@ function Content() {
   return (
     <div
       className="flex h-screen w-screen flex-col
-  bg-neutral-100 "
+  bg-gray-800 "
     >
       <Header />
       {/* <StickyScroll content={content} /> */}

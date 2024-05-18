@@ -50,7 +50,7 @@ export default function Footer() {
           respectivos dueños.
         </span>
       </div>
-      <div className="sm:font flex justify-center bg-gray-800/75 pb-2 text-xs font-medium text-white  sm:px-8 ">
+      <div className="sm:font flex justify-center bg-gray-800/75 pb-3 text-xs font-medium text-white  sm:px-8 ">
         <ul className="grid grid-cols-2 sm:flex sm:max-w-[600px]">
           <li className="sm:px-2">
             <Link to="">Aviso de privacidad</Link>

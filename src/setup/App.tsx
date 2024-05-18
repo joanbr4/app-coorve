@@ -7,6 +7,8 @@ import LandingPage from "../pages/landing";
 import Register from "../pages/register";
 import Login from "../pages/login";
 import Content from "../pages/content";
+import Chatgpt from "@/pages/chatgpt";
+import Faqs from "@/pages/faq";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,6 +17,8 @@ const router = createBrowserRouter(
       <Route path="/content" element={<Content />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/chatgpt" element={<Chatgpt />} />
+      <Route path="/faqs" element={<Faqs />} />
     </>
   )
 );

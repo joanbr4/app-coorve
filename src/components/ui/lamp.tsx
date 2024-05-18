@@ -33,11 +33,11 @@ export function Lamp() {
         {/* <button className="m-1 rounded-lg border bg-slate-300/25 px-2 pb-2 hover:bg-gray-300 hover:text-black/75">
           <Link to="content">Start</Link>
         </button> */}
-        <button class="group relative m-1 inline-flex h-12 items-center justify-center overflow-hidden rounded-md border bg-neutral-950 px-2 px-6 pb-2 font-medium text-neutral-200 transition hover:scale-110">
+        <button className="group relative m-1 inline-flex  items-center justify-center overflow-hidden rounded-md border bg-neutral-950 px-2 py-2 font-medium text-neutral-200 transition hover:scale-110">
           <Link to="content">
             <span>Lets</span>
-            <div class="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(100%)]">
-              <div class="relative h-full w-8 bg-white/20">Go!</div>
+            <div className="justify-left absolute inset-0 flex h-full w-full [transform:skew(-2deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-2deg)_translateX(100%)]">
+              <div className="relative h-full w-8 bg-white/20">Go!</div>
             </div>
           </Link>
         </button>
