@@ -26,24 +26,19 @@ type TitemMenu = {
 };
 
 const menuItems: TitemMenu[] = [
+  // {
+  //   name: "Market Place",
+  //   href: "/marketplace",
+  //   icon: PlayCircleIcon,
+  // },
   {
-    name: "Market Place",
-    href: "/marketplace",
+    name: "Planes",
+    href: "#pricing",
     icon: PlayCircleIcon,
   },
   {
     name: "Sobre Nosotros",
     href: "/aboutUs",
-    icon: PlayCircleIcon,
-  },
-  {
-    name: "Agendar llamada",
-    href: "/makeCall",
-    icon: PlayCircleIcon,
-  },
-  {
-    name: "Noticias",
-    href: "/noticias",
     icon: PlayCircleIcon,
   },
 ];
@@ -58,7 +53,7 @@ function Header() {
 
   return (
     <nav className="flex h-2 items-center  bg-gray-800 py-6 text-white">
-      <div className="mx-auto flex w-[800px] justify-between">
+      <div className="mx-auto mt-6 flex w-[800px] justify-between px-2">
         <div className="my-auto px-5 sm:items-center sm:pt-2">
           <Link to="/">
             <img
@@ -68,17 +63,24 @@ function Header() {
             />
           </Link>
         </div>
-        <div className="m-auto hidden sm:flex">
+        <div className="ml-auto hidden items-center sm:flex">
           <ul className=" -ml-14 flex ">
             {menuItems.map((item: TitemMenu) => (
-              <li className=" px-2 py-2" key={item.name}>
-                <NavLink to={item.href}>{item.name}</NavLink>
+              <li
+                className="hover:text-slay-800/25 px-6 py-2 hover:underline"
+                key={item.name}
+              >
+                {item.name == "Planes" ? (
+                  <a href={item.href}>{item.name}</a>
+                ) : (
+                  <NavLink to={item.href}>{item.name}</NavLink>
+                )}
               </li>
             ))}
           </ul>
         </div>
-        <button className="text-whie mr-2 hidden rounded-lg border border-black bg-slate-100/50 p-1 sm:block">
-          <Link to="login">Login</Link>
+        <button className="text-whie my-2 mr-2 hidden rounded-lg border border-white  p-2 hover:border-2 sm:block">
+          <Link to="/login">Login</Link>
         </button>
         <div className="ml-auto mr-2 flex sm:hidden">
           <button

@@ -1,0 +1,112 @@
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
+
+type Ttarifa = {
+  titulo: string;
+  detalles: string;
+  precio: number;
+  features: string[];
+  action: string;
+};
+export const tarifas: Ttarifa[] = [
+  {
+    titulo: "Free",
+    detalles: "Receive 10 free leads, every week",
+    precio: 0,
+    features: [
+      "Receive 10 leads upon signup (~10 leads)",
+      "Receive 10 new leads every week",
+      "(~10 leads)",
+      "20+ data points per company",
+      "Likely to outsource field",
+      "Partnership opportunitie",
+    ],
+    action: "Sign Up",
+  },
+  {
+    titulo: "Monthly",
+    detalles: "Receive a new list, every month",
+    precio: 50,
+    features: [
+      "Receive previous month's list upon signup (~1,000 leads)",
+      "Receive a brand new list on the 1st of every month",
+      "(~1,000 leads)",
+      "Every list has 500+ verified email addresses",
+      "Every list has 1,000+ LinkedIn accounts",
+    ],
+    action: "Suscribe",
+  },
+];
+function TarifasCard() {
+  return (
+    <>
+      {tarifas.map((tarifa: Ttarifa) => (
+        <div className="min-y-[30px] flex w-[300px] flex-col p-4 lg:mx-4">
+          <div className="my-6">
+            <h3 className="text-center text-4xl">{tarifa.titulo}</h3>
+            <p className="text-center">{tarifa.detalles}</p>
+          </div>
+          <div className="my-3 flex justify-center text-center text-5xl">
+            ${tarifa.precio} <span className="mt-auto text-xl">/MONTH</span>
+          </div>
+          <ul className=" mx-auto my-6 text-left">
+            {tarifa.features.map((feat) => (
+              <li className="my-2 flex max-w-60">
+                <div className="my-auto">
+                  <svg
+                    width="21px"
+                    height="17px"
+                    viewBox="0 0 21 17"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g
+                      id="Page-1"
+                      stroke="none"
+                      stroke-width="1"
+                      fill="none"
+                      fill-rule="evenodd"
+                    >
+                      <g
+                        id="ui-icons"
+                        transform="translate(-109.000000, -67.000000)"
+                        fill="#22BC66"
+                      >
+                        <polygon
+                          id="check"
+                          points="108.994099 76.4000626 115.987848 83.419577 129.407253 69.9978283 126.587674 67.1592372 115.987848 77.7490936 111.827057 73.5894775"
+                        ></polygon>
+                      </g>
+                    </g>
+                  </svg>
+                </div>
+                <div className=" ml-2">{feat}</div>
+              </li>
+            ))}
+          </ul>
+          <button
+            className={
+              tarifa.precio === 0
+                ? "mx-auto  flex w-full items-center justify-center rounded-md border bg-white p-1 text-lg font-bold text-gray-800"
+                : "mx-auto w-full rounded-md border  bg-gray-800 p-1 text-lg font-bold text-white"
+            }
+          >
+            <p className="mr-2">{tarifa.action}</p>
+            {tarifa.precio === 0 ? (
+              <svg
+                width="1em"
+                viewBox="0 0 15 12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9.6 7H1a1 1 0 1 1 0-2h8.6L7 2.4A1 1 0 0 1 8.4 1l4.3 4.2c.2.3.3.5.3.8 0 .3-.1.5-.3.7L8.4 11A1 1 0 1 1 7 9.5L9.6 7z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            ) : null}
+          </button>
+        </div>
+      ))}
+    </>
+  );
+}
+export { TarifasCard };

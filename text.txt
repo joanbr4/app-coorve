@@ -1,0 +1,4 @@
+- registro tipo twitter: manual, api google, api 
+- base SQL: turso 
+- base NOSQL: mongoose
+- validation : 
