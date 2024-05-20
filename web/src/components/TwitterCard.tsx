@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
-const TweetEmbed = ({ url }) => {
+const TweetEmbed = ({ url }: { url: string }) => {
+  console.log({ url });
   useEffect(() => {
     // Cargar el script de Twitter para los widgets
     const script = document.createElement("script");
@@ -29,7 +30,8 @@ const TweetEmbed = ({ url }) => {
     </blockquote>
   );
 };
-const TweetEmbed2 = ({ url }) => {
+const TweetEmbed2 = ({ url }: { url: string }) => {
+  console.log(url);
   useEffect(() => {
     // Cargar el script de Twitter para los widgets
     const script = document.createElement("script");

@@ -36,12 +36,12 @@ function Login() {
   };
 
   //Patron Clasico
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    property: string
-  ) => {
-    setForm((form) => ({ ...form, [property]: e.target.value }));
-  };
+  // const handleChange = (
+  //   e: React.ChangeEvent<HTMLInputElement>,
+  //   property: string
+  // ) => {
+  //   setForm((form) => ({ ...form, [property]: e.target.value }));
+  // };
   const handlingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.table(form);
