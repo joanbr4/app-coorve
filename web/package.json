@@ -9,11 +9,12 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pnpm lint && pnpm build",
-      "post-commit": "echo \" [Husky] post-commit\""
-    }
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "pnpm test",
+      "git add"
+    ]
   },
   "dependencies": {
     "@headlessui/react": "^2.0.3",
@@ -44,6 +45,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
     "postcss": "^8.4.38",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "tailwindcss": "^3.4.3",
