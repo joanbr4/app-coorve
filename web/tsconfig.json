@@ -25,5 +25,14 @@
     }
   },
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "coverage",
+    "vite.config.ts",
+    "src/__tests__",
+    "src/__mocks__",
+    "prisma/**/*.ts"
+  ]
 }
