@@ -3,9 +3,10 @@
     "strict": true,
     "allowSyntheticDefaultImports": true,
     "target": "ESNext",
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
+    "module": "commonjs",
+    // "moduleResolution": "nodeNext",
     "outDir": "dist",
+    "allowImportingTsExtensions": false,
     "sourceMap": false,
     "experimentalDecorators": true,
     "noImplicitAny": true,
@@ -20,7 +21,7 @@
     "dist",
     "coverage",
     "src/__tests__",
-    "src/__mocks__",
-    "prisma/**/*.ts"
+    "src/__mocks__"
+    // "prisma/**/*.ts"
   ]
 }

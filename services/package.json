@@ -8,10 +8,17 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec node --experimental-specifier-resolution=node --loader tsx src/main.ts",
     "build": "tsc",
+    "generate": "drizzle-kit generate",
+    "migrate": "drizzle-kit migrate",
+    "migrate2": "pnpm dlx drizzle-kit migrate",
+    "push": "drizzle-kit push",
     "start": "node dist/index.js",
     "eslint": "eslint \"./**/*.{js,ts}\"",
     "lint": "eslint --ext .ts src",
-    "lint:fix": "eslint --ext .ts src --fix"
+    "lint:fix": "eslint --ext .ts src --fix",
+    "up": "docker compose up -d",
+    "up2": "docker start coorve || pnpm container",
+    "container": "docker run --name coorve_db -e POSTGRES_DB=coorve_db -e POSTGRES_PASSWORD=admin postgres:16-alpine"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -34,22 +41,33 @@
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.3.0",
+    "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.12.12",
     "@types/supertest": "^6.0.2",
+    "drizzle-kit": "^0.21.4",
     "eslint": "^9.3.0",
     "express": "^4.19.2",
     "globals": "^15.3.0",
     "husky": "^9.0.11",
-    "lint-staged": "^15.2.2",
+    "lint-staged": "^15.2.4",
     "supertest": "^7.0.0",
-    "tsx": "^4.10.5",
-    "typescript-eslint": "^7.9.0",
+    "tsx": "^4.11.0",
+    "typescript-eslint": "^7.10.0",
     "vitest": "^1.6.0"
   },
   "dependencies": {
+    "@libsql/client": "^0.6.0",
+    "@paralleldrive/cuid2": "^2.2.2",
+    "@types/pg": "^8.11.6",
+    "@vercel/postgres": "^0.8.0",
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.30.10",
+    "jsonwebtoken": "^9.0.2",
     "nodemon": "^3.1.0",
+    "pg": "^8.11.5",
     "typescript": "^5.4.5",
     "zod": "^3.23.8"
   }

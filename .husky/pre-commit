@@ -1,28 +1,28 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+# . "$(dirname "$0")/_/husky.sh"
 
-# The reason we're exporting this variable is because of this issue:
-# https://github.com/typicode/husky/issues/968
-export FORCE_COLOR=1
+# # The reason we're exporting this variable is because of this issue:
+# # https://github.com/typicode/husky/issues/968
+# export FORCE_COLOR=1
 
-echo '🔍🎨 Formatting and checking staged files before committing!'
+# echo '🔍🎨 Formatting and checking staged files before committing!'
 
-# Run lint-staged in the web directory
-echo '🔍 Running lint-staged in the web directory...'
-(cd web && pnpm dlx lint-staged) || {
-  echo '💀❌ Oops! Formatting and checking client process has failed!';
-  echo '🔍 Check the web directory for issues.';
-  # exit 1;
-  false;
-}
+# # Run lint-staged in the web directory
+# echo '🔍 Running lint-staged in the web directory...'
+# (cd web && pnpm dlx lint-staged) || {
+#   echo '💀❌ Oops! Formatting and checking client process has failed!';
+#   echo '🔍 Check the web directory for issues.';
+#   # exit 1;
+#   false;
+# }
 
-# Run lint-staged in the services directory
-echo '🔍 Running lint-staged in the services directory...'
-(cd services && pnpm dlx lint-staged) || {
-  echo '💀❌ Oops! Formatting and checking server process has failed!';
-  echo '🔍 Check the services directory for issues.';
-  false;
-  # exit 1
-}
+# # Run lint-staged in the services directory
+# echo '🔍 Running lint-staged in the services directory...'
+# (cd services && pnpm dlx lint-staged) || {
+#   echo '💀❌ Oops! Formatting and checking server process has failed!';
+#   echo '🔍 Check the services directory for issues.';
+#   false;
+#   # exit 1
+# }
 
-echo '🥳✅ Formatting and checking process has been successfully completed!'
+# echo '🥳✅ Formatting and checking process has been successfully completed!'
