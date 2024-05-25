@@ -1,4 +1,4 @@
-import { Config, defineConfig } from "drizzle-kit"
+import { defineConfig } from "drizzle-kit"
 import { dbConfig } from "./src/config/index"
 
 export default defineConfig({

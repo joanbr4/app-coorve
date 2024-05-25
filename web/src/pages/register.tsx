@@ -65,7 +65,14 @@ function Register() {
           <input
             className="my-2 rounded-lg px-3 py-3"
             {...register("email")}
-            placeholder="Email"
+            placeholder="Nombre"
+            type="email"
+          />
+
+          <input
+            className="my-2 rounded-lg px-3 py-3"
+            {...register("email")}
+            placeholder="Apellidos"
             type="email"
           />
           <input
@@ -73,6 +80,12 @@ function Register() {
             // type="number", lo pasamos como atributo
             placeholder="Age"
             {...register("age", { type: "number" })}
+          />
+          <input
+            className="my-2 rounded-lg px-3 py-3"
+            {...register("email")}
+            placeholder="Email"
+            type="email"
           />
           <input
             className="my-2 rounded-lg px-3 py-3"

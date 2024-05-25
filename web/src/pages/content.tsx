@@ -75,9 +75,9 @@ function Content() {
           <button className="mx-2 my-2 rounded-md border bg-white p-2 font-sans text-lg text-gray-800">
             Send me leads every month
           </button>
-          <button className="mx-2 flex w-auto rounded-md border p-2 font-sans text-lg">
+          <button className="ounded-md mx-2 my-2 flex w-auto justify-between rounded-md border p-2 font-sans text-lg">
             <span>Show me a live demo</span>
-            <ArrowRightIcon className="mx-2 my-auto size-6" />
+            <ArrowRightIcon className="mx-2 my-0 size-6 " />
           </button>
         </div>
         <div className="mx-auto mt-8 flex flex-col px-4 font-['Open_Sans'] sm:px-8 md:flex-row ">
@@ -177,7 +177,7 @@ function Content() {
             Build your own, independent acquisition channel and scale at your
             pace
           </p>
-          <div className="xs:flex-row mx-auto my-[70px] flex w-full max-w-[900px] flex-col items-center justify-between ">
+          <div className="mx-auto my-[70px] flex w-full max-w-[900px] flex-col items-center justify-between md:flex-row ">
             <div className="xs:text-left xs:mr-8 xs:max-w-[330px]  mx-auto text-center">
               <div className="font-inter xs:max-w-[900px] mx-auto my-2 flex-col  text-4xl  leading-none sm:leading-none">
                 <h3 className="mb-2">
@@ -196,8 +196,8 @@ function Content() {
               <img src="./src/assets/image2.png" />
             </div>
           </div>
-          <div className="xs:flex-row mx-auto my-[45px] flex w-full max-w-[900px] flex-col items-center justify-between ">
-            <div className="xs:text-left xs:max-w-[350px] xs:mr-[50px] xs:order-2 mx-auto text-center">
+          <div className="mx-auto my-[45px] flex w-full max-w-[900px] flex-col items-center justify-between md:flex-row ">
+            <div className="xs:text-left xs:max-w-[350px] xs:mr-[50px] mx-auto text-center md:order-2">
               <div className=" xs:leading-none mx-auto my-2  max-w-[900px] flex-col text-4xl leading-none">
                 <h3 className="mb-2">
                   That are
@@ -215,7 +215,7 @@ function Content() {
               <img src="./src/assets/cercle2.png" />
             </div>
           </div>
-          <div className="xs:flex-row mx-auto my-[45px] flex w-full max-w-[900px] flex-col items-center justify-between">
+          <div className="mx-auto my-[45px] flex w-full max-w-[900px] flex-col items-center justify-between md:flex-row">
             <div className="xs:text-left xs:max-w-[350px] xs:mr-[50px] mx-auto  flex flex-col text-center">
               <div className="xs:leading-none mx-auto my-2 max-w-[900px] flex-col  font-['Opens_sans']  text-4xl leading-none">
                 <h3 className="mb-2">
@@ -234,8 +234,8 @@ function Content() {
               <img src="./src/assets/lines2.png" />
             </div>
           </div>
-          <div className="xs:flex-row mx-auto my-[45px] flex w-full max-w-[900px] flex-col items-center justify-between ">
-            <div className="xs:text-left xs:max-w-[350px] xs:ml-[50px] xs:order-2 mx-auto flex flex-col text-center">
+          <div className="mx-auto my-[45px] flex w-full max-w-[900px] flex-col items-center justify-between md:flex-row ">
+            <div className="xs:text-left xs:max-w-[350px] xs:ml-[50px] mx-auto flex flex-col text-center md:order-2">
               <div className="xs:leading-none mx-auto my-2 max-w-[900px] flex-col  font-['Opens_sans']  text-4xl leading-none">
                 <h3 className="mb-2">
                   And

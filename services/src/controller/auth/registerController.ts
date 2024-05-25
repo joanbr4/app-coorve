@@ -8,7 +8,6 @@ import { generatedId } from "../../utils/cuidGenerator"
 
 export const registerController = async (req: Request, res: Response) => {
   const { name, apellidos, email, password, genere, created_at } = req.body
-  console.log(req.body)
   const foundUser = await getCheckEmail(email)
 
   const user = foundUser[0]

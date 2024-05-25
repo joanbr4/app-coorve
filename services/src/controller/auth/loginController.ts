@@ -13,7 +13,8 @@ export const loginController = async (req: Request, res: Response) => {
 
   if (!passaword) throw new Error("Datos incorrectos")
 
-  const { id, password: pssw, ...safeUser } = user
+  const { name, apellidos, email: Email, genere, created_at } = user
+  const safeUser = { name, apellidos, Email, genere, created_at }
 
   const authTokenUser = generateToken(user.id, "auth")
   const refreshTokenUser = generateToken(user.id, "refresh")

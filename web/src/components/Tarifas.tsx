@@ -7,7 +7,10 @@ function TarifasCard() {
   return (
     <>
       {tarifas.map((tarifa: Ttarifa) => (
-        <div className="min-y-[30px] flex w-[300px] flex-col p-4 lg:mx-4">
+        <div
+          className="min-y-[30px] flex w-[300px] flex-col p-4 lg:mx-4"
+          key={tarifa.titulo}
+        >
           <div className="my-6">
             <h3 className="text-center text-4xl">{tarifa.titulo}</h3>
             <p className="text-center">{tarifa.detalles}</p>
@@ -16,8 +19,8 @@ function TarifasCard() {
             ${tarifa.precio} <span className="mt-auto text-xl">/MONTH</span>
           </div>
           <ul className=" mx-auto my-6 text-left">
-            {tarifa.features.map((feat) => (
-              <li className="my-2 flex max-w-60">
+            {tarifa.features.map((feat, index) => (
+              <li className="my-2 flex max-w-60" key={index}>
                 <div className="my-auto">
                   <svg
                     width="21px"
@@ -29,9 +32,9 @@ function TarifasCard() {
                     <g
                       id="Page-1"
                       stroke="none"
-                      stroke-width="1"
+                      strokeWidth="1"
                       fill="none"
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                     >
                       <g
                         id="ui-icons"

@@ -1,7 +1,7 @@
 /* eslint max-classes-per-file: 0 */
 import { ZodIssue } from "zod"
 
-/* eslint-disable max-classes-per-file */
+ 
 class DefaultError extends Error {
   public status: number
   public message: string
