@@ -83,7 +83,7 @@ function Header() {
           </ul>
         </div>
         <button className="text-whie my-2 mr-2 hidden rounded-lg border border-white  p-2 hover:border-2 sm:block">
-          <Link to="/login">Login</Link>
+          <Link to="/signup">Login</Link>
         </button>
         <div className="ml-auto mr-2 flex sm:hidden">
           <button

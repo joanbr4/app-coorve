@@ -75,7 +75,7 @@ function Login() {
             Send
           </button>
           <button className="y-8 w-3 rounded-md border text-sm">
-            <NavLink to="/register">No tengo cuenta</NavLink>
+            <NavLink to="/signin">No tengo cuenta</NavLink>
           </button>
         </form>
       </div>

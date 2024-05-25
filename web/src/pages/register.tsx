@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Form, redirect, useActionData } from "react-router-dom";
 import { UserRegister, userRegisterSchemas } from "@/schemas";
 
-export const action = async ({ request }: { request: Request }) => {
+export async function action({ request }: { request: Request }) {
   const formData = await request.formData();
   const dataObject = Object.fromEntries(formData);
   const validateFormZod = userRegisterSchemas.safeParse({
@@ -14,15 +14,25 @@ export const action = async ({ request }: { request: Request }) => {
     password: dataObject.password,
     confirm: dataObject.confirm,
   });
-
-  // console.log(validateFormZod);
-  if (validateFormZod.data) return redirect("/home");
+  const { confirm, ...rest } = dataObject; // eslint-disable-line no-unused-vars
+  const payload = { ...rest, created_at: new Date() };
+  console.log(payload);
+  if (validateFormZod.success !== false) {
+    await fetch("/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+    return redirect("/signup");
+  }
   const errorsFormated = validateFormZod.error?.issues.reduce((acc, item) => {
     return { ...acc, [item.path[0] as string]: item.message };
   }, {});
   // console.log(validateFormZod, errorsFormated);
   return errorsFormated;
-};
+}
 
 const initialState = {
   name: "",

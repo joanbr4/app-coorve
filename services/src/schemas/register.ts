@@ -9,10 +9,6 @@ export const userRgisterSchema = userSchema
     genere: true,
     created_at: true,
   })
-  .extend({ password: z.string().min(8), confirmPassword: z.string().min(8) })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Password no coincide",
-    path: ["confirmPassword"],
-  })
+  .extend({ password: z.string().min(8) })
 
 export type UserRegister = z.infer<typeof userRgisterSchema>

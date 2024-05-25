@@ -10,4 +10,10 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    proxy: {
+      "/login": "http://localhost:3000/api/v1/auth",
+      "/register": "http://localhost:3000/api/v1/auth",
+    },
+  },
 });

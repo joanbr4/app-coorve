@@ -3,10 +3,11 @@ import express from "express"
 import { appConfig } from "./config/index"
 import { pathRoot } from "./routes/routes.js"
 import { authRouter } from "./routes/auth.js"
+import cors from "cors"
 // import { client } from "./db/client"
 
 const app = express()
-
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
