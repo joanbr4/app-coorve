@@ -1,15 +1,22 @@
 import { z } from "zod";
+import { userSchema } from "./userSchema";
 
-const genereSchema = z.enum(["hombre", "mujer", "ns/nc"]);
-
-export const userRegisterSchemas = z
-  .object({
+export const registerSchema = userSchema
+  .pick({
+    name: true,
+    surname: true,
+    phone: true,
+    genere: true,
+    email: true,
+    password: true,
+    confirm: true,
+  })
+  .extend({
     name: z.string().min(3, { message: "El nombre no puede estar vacío" }),
     surname: z
       .string()
       .min(3, { message: "El/los apellidos no puede estar vacío" }),
     phone: z.string().min(5, { message: "El teléfono no puede estar vacío" }),
-    genere: genereSchema,
     email: z
       .string()
       .min(5, { message: "El email no puede estar vacío" })
@@ -41,4 +48,4 @@ export const userRegisterSchemas = z
     { path: ["phone"], message: "El teléfono debe contener solo números" }
   );
 
-export type UserRegister = z.infer<typeof userRegisterSchemas>;
+export type UserRegister = z.infer<typeof registerSchema>;

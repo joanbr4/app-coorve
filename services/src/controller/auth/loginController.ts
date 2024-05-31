@@ -1,20 +1,22 @@
 import { Request, Response } from "express"
-import bcrypt from "bcrypt"
 import { getCheckEmail } from "../../repository"
 import { generateToken } from "../../utils/jwtAuth"
+import { InvalidCredentials } from "../../utils/errors"
+import { checkPassword } from "../../utils/passwordHash"
 
 export const loginController = async (req: Request, res: Response) => {
-  const { email, password } = req.body
-  const foundUser = await getCheckEmail(email)
+  const { email: Email, password } = req.body
+
+  const foundUser = await getCheckEmail(Email)
 
   const user = foundUser[0]
-  if (!user) throw new Error("Datos incorrectos")
-  const passaword = bcrypt.compare(user.password, password)
+  if (!user) throw new InvalidCredentials()
 
-  if (!passaword) throw new Error("Datos incorrectos")
+  const passaword = checkPassword(password, user.password)
+  if (!passaword) throw new InvalidCredentials()
 
-  const { name, apellidos, email: Email, genere, created_at } = user
-  const safeUser = { name, apellidos, Email, genere, created_at }
+  const { name, apellidos, email, genere, created_at } = user
+  const safeUser = { name, apellidos, email, genere, created_at }
 
   const authTokenUser = generateToken(user.id, "auth")
   const refreshTokenUser = generateToken(user.id, "refresh")
@@ -25,5 +27,6 @@ export const loginController = async (req: Request, res: Response) => {
     sameSite: "none",
     secure: true,
   })
+
   res.status(200).send({ user: safeUser, authTokenUser, refreshTokenUser })
 }

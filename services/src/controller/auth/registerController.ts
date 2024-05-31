@@ -7,6 +7,7 @@ import { generatedId } from "../../utils/cuidGenerator"
 // import { user } from "../../schemas/user"
 
 export const registerController = async (req: Request, res: Response) => {
+  console.log("asdsa", req.body)
   const {
     name,
     surname: apellidos,
@@ -15,25 +16,28 @@ export const registerController = async (req: Request, res: Response) => {
     genere,
     created_at,
   } = req.body
+  if (req.body == undefined) {
+  }
 
   const foundUser = await getCheckEmail(email)
-
   const user = foundUser[0]
-  if (user) throw new Error("Correo ya existe")
 
-  const passwordCrypt = await hashPassword(password)
+  if (user) throw new Error("Ya existe este email")
+  else {
+    const passwordCrypt = await hashPassword(password)
 
-  const idGener = generatedId()
+    const idGener = generatedId()
 
-  await db.insert(users).values({
-    id: idGener,
-    name: name,
-    apellidos: apellidos,
-    email: email,
-    password: passwordCrypt,
-    genere: genere,
-    created_at: created_at,
-  })
+    await db.insert(users).values({
+      id: idGener,
+      name: name,
+      apellidos: apellidos,
+      email: email,
+      password: passwordCrypt,
+      genere: genere,
+      created_at: created_at,
+    })
 
-  res.status(200).send({ idGener })
+    res.status(200).json({ message: "User created successfully", idGener })
+  }
 }

@@ -1,7 +1,6 @@
 /* eslint max-classes-per-file: 0 */
 import { ZodIssue } from "zod"
 
- 
 class DefaultError extends Error {
   public status: number
   public message: string
@@ -21,7 +20,7 @@ class ValidationError {
   }
 }
 class InvalidCredentials extends DefaultError {
-  constructor(message: string = "Invalid Credentials") {
+  constructor(message: string = "Datos Erroneos") {
     super(401, `${message}`)
   }
 }

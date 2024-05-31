@@ -1,38 +1,9 @@
-import { useState } from "react";
-import { Form, redirect, useActionData } from "react-router-dom";
-import { UserRegister, userRegisterSchemas } from "@/schemas";
-
-export async function action({ request }: { request: Request }) {
-  const formData = await request.formData();
-  const dataObject = Object.fromEntries(formData);
-  const validateFormZod = userRegisterSchemas.safeParse({
-    name: dataObject.name,
-    surname: dataObject.surname,
-    phone: dataObject.phone,
-    genere: dataObject.genere,
-    email: dataObject.email,
-    password: dataObject.password,
-    confirm: dataObject.confirm,
-  });
-  const { confirm, ...rest } = dataObject; // eslint-disable-line no-unused-vars
-  const payload = { ...rest, created_at: new Date() };
-  console.log(payload);
-  if (validateFormZod.success !== false) {
-    await fetch("/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-    return redirect("/signup");
-  }
-  const errorsFormated = validateFormZod.error?.issues.reduce((acc, item) => {
-    return { ...acc, [item.path[0] as string]: item.message };
-  }, {});
-  // console.log(validateFormZod, errorsFormated);
-  return errorsFormated;
-}
+import { useEffect, useState } from "react";
+import { redirect, Form, useActionData } from "react-router-dom";
+import { UserRegister, registerSchema } from "../schemas/registerSchema";
+import { ErrorfromServer } from "@/types/types";
+import { isErrorFromServer, isUserRegister } from "@/utils/guardFunction";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 const initialState = {
   name: "",
@@ -45,12 +16,68 @@ const initialState = {
 };
 type InitialStateKeys = keyof typeof initialState;
 
+export const action = async ({ request }: { request: Request }) => {
+  const formData = await request.formData();
+  const dataObject = Object.fromEntries(formData);
+  const dataValidatedZod = registerSchema.safeParse({
+    name: dataObject.name,
+    surname: dataObject.surname,
+    phone: dataObject.phone,
+    genere: dataObject.genere,
+    email: dataObject.email,
+    password: dataObject.password,
+    confirm: dataObject.confirm,
+  });
+  if (dataValidatedZod.success == false) {
+    const errorsFormated = dataValidatedZod.error?.issues.reduce(
+      (acc, item) => {
+        return { ...acc, [item.path[0] as string]: item.message };
+      },
+      {}
+    ) as UserRegister;
+
+    return errorsFormated;
+  } else {
+    const payload = {
+      name: dataObject.name,
+      surname: dataObject.surname,
+      phone: dataObject.phone,
+      genere: dataObject.genere,
+      email: dataObject.email,
+      password: dataObject.password,
+      created_at: new Date(),
+    };
+    const response = await fetch("/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+    if (response.status !== 200) {
+      const errorMessage = await response.json();
+      return errorMessage;
+    } else {
+      return redirect("/signup");
+    }
+  }
+};
+
 function Register() {
   const [form, setForm] = useState<typeof initialState>(initialState);
+  const [errorsZod, setErrorsZod] = useState<typeof initialState>(initialState);
   const [watchPass, setWatchPass] = useState<boolean>(false);
+  const [errorEmail, setErrorEmail] = useState<string>("");
 
-  const errorLoader = useActionData() as UserRegister;
-  console.log(errorLoader);
+  const dataFromAction = useActionData() as UserRegister | ErrorfromServer;
+  useEffect(() => {
+    if (isUserRegister(dataFromAction)) {
+      setErrorsZod(dataFromAction);
+    } else if (isErrorFromServer(dataFromAction)) {
+      console.log(dataFromAction.message);
+      setErrorEmail(dataFromAction.message);
+    }
+  }, [dataFromAction]);
 
   //Props Getter, patrón de Diseño React
   const register = (
@@ -85,27 +112,12 @@ function Register() {
     setForm((form) => ({ ...form, [property]: e.target.value }));
   };
 
-  // const handlingSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-
-  //   const dataForm = new FormData(e.currentTarget);
-  //   const dataValidatedZod = userRegisterSchemas.safeParse(dataForm);
-  //   console.log("12", dataValidatedZod);
-  //   if (!dataValidatedZod) {
-  //     setErrorsZod(dataValidatedZod);
-  //   }
-  //   // const user = await fetch("/login");
-  //   // if (!user) throw new Error("Error en el registro");
-  //   // redirect("/home");
-  //   // console.table(form);
-  // };
-
   return (
     <div
       className="flex h-screen w-screen flex-col
-    bg-neutral-100 "
+    bg-gray-500 "
     >
-      <div className="m-auto justify-center rounded-lg border border-solid border-black p-6 ">
+      <div className="m-auto justify-center rounded-lg border border-solid border-black bg-blue-500 p-6 ">
         <Form method="POST" className="flex flex-col">
           <input
             className="my-2 rounded-lg px-3 py-3"
@@ -113,8 +125,8 @@ function Register() {
             placeholder="Nombre"
             type="text"
           />
-          {errorLoader && (
-            <div className="text-red-500">{errorLoader.name}</div>
+          {dataFromAction && (
+            <div className="text-red-500">{errorsZod.name}</div>
           )}
           <input
             className="my-2 rounded-lg px-3 py-3"
@@ -122,30 +134,24 @@ function Register() {
             placeholder="Apellidos"
             type="text"
           />
-          {errorLoader && (
-            <div className="text-red-500">{errorLoader.surname}</div>
-          )}
+          {errorsZod && <div className="text-red-500">{errorsZod.surname}</div>}
 
           <input
             className="my-2 rounded-lg px-3 py-3"
-            placeholder="Telephone"
+            placeholder="Teléfono"
             {...register("phone")}
             type="text"
             // {...register("phone", { type: "text" })}
           />
-          {errorLoader && (
-            <div className="text-red-500">{errorLoader.phone}</div>
-          )}
+          {errorsZod && <div className="text-red-500">{errorsZod.phone}</div>}
           <input
             className="my-2 rounded-lg px-3 py-3"
-            placeholder="Genere"
+            placeholder="Género"
             {...register("genere")}
             type="text"
             // {...register("phone", { type: "text" })}
           />
-          {errorLoader && (
-            <div className="text-red-500">{errorLoader.genere}</div>
-          )}
+          {errorsZod && <div className="text-red-500">{errorsZod.genere}</div>}
 
           <input
             className="my-2 rounded-lg px-3 py-3"
@@ -153,13 +159,12 @@ function Register() {
             placeholder="Email"
             type="email"
           />
-          {errorLoader && (
-            <div className="text-red-500">{errorLoader.email}</div>
-          )}
+          {errorsZod && <div className="text-red-500">{errorsZod.email}</div>}
+          {errorEmail && <div className="text-red-500">{errorEmail}</div>}
 
-          <div>
+          <div className="relative w-full">
             <input
-              className="my-2 rounded-lg px-3 py-3"
+              className="my-2 w-full rounded-lg px-3 py-3"
               type={watchPass ? "text" : "password"}
               {
                 ...register("password")
@@ -170,26 +175,62 @@ function Register() {
               } /* We pass a function with last value associated to reactState, always within  async func or consecutive setForm */
               placeholder="Password"
             />
-            <button onClick={() => setWatchPass(!watchPass)}>ver </button>
+            <EyeIcon
+              onClick={() => setWatchPass(false)}
+              width={25}
+              height={25}
+              className={
+                watchPass
+                  ? "absolute right-4 top-5 block text-gray-300"
+                  : "hidden"
+              }
+            />
+            <EyeSlashIcon
+              onClick={() => setWatchPass(true)}
+              width={25}
+              height={25}
+              className={
+                watchPass
+                  ? "hidden"
+                  : "absolute right-4 top-5 block text-gray-300"
+              }
+            />
           </div>
 
-          {errorLoader && (
-            <div className="text-red-500">{errorLoader.password}</div>
+          {errorsZod && (
+            <div className="text-red-500">{errorsZod.password}</div>
           )}
-          <div>
+          <div className="relative w-full">
             <input
-              className="my-2 rounded-lg px-3 py-3"
+              className="my-2 w-full rounded-lg px-3 py-3"
               type={watchPass ? "text" : "password"}
               onChange={(e) => handleChange(e, "confirm")}
-              placeholder="Confirm Password"
+              placeholder="Confirmar Password"
               name="confirm"
             />
-            <button onClick={() => setWatchPass(!watchPass)}>ver </button>
+            <EyeIcon
+              onClick={() => setWatchPass(false)}
+              width={25}
+              height={25}
+              className={
+                watchPass
+                  ? "absolute right-4 top-5 block text-gray-300"
+                  : "hidden"
+              }
+            />
+            <EyeSlashIcon
+              onClick={() => setWatchPass(true)}
+              width={25}
+              height={25}
+              className={
+                watchPass
+                  ? "hidden"
+                  : "absolute right-4 top-5 block text-gray-300"
+              }
+            />
           </div>
 
-          {errorLoader && (
-            <div className="text-red-500">{errorLoader.confirm}</div>
-          )}
+          {errorsZod && <div className="text-red-500">{errorsZod.confirm}</div>}
 
           <button
             type="submit"
@@ -204,4 +245,4 @@ function Register() {
   );
 }
 
-export default Register;
+export { Register };

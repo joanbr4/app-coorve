@@ -55,6 +55,12 @@ import { TarifasCard } from "@/components/Tarifas";
 //     ),
 //   },
 // ];
+const minus = (data: string) => {
+  return data.toLowerCase();
+};
+console.log(
+  minus("LA DECISION MAS INTELIGENTE PARA DESPEGAR TU NEGOCIO A OTRO NIVEL.")
+);
 function Content() {
   return (
     <div
@@ -64,19 +70,18 @@ function Content() {
       <Header />
       <div className="my-24 flex w-full flex-col text-white ">
         <div className="font-inter mx-auto my-2 max-w-[900px] text-center text-8xl text-[80px] font-bold leading-[3.8rem] sm:leading-none">
-          Find new clients for your digital agency
+          Next gen del real state
         </div>
         <span className="mx-auto my-2 max-w-[950px] text-center font-['Open_Sans'] text-2xl">
-          1,000+ handpicked recently funded startups that just raised millions
-          and are looking to outsource your services. In your inbox. Every
-          month.
+          Coorve es la empresa que provee herramientas para la generación de
+          clientes potenciales para el sector inmobiliario
         </span>
         <div className="mx-auto flex flex-auto flex-col font-bold lg:flex-row">
           <button className="mx-2 my-2 rounded-md border bg-white p-2 font-sans text-lg text-gray-800">
-            Send me leads every month
+            Quiero empezar a recibir leads
           </button>
           <button className="ounded-md mx-2 my-2 flex w-auto justify-between rounded-md border p-2 font-sans text-lg">
-            <span>Show me a live demo</span>
+            <span>Ver demo en tiempo real</span>
             <ArrowRightIcon className="mx-2 my-0 size-6 " />
           </button>
         </div>
@@ -99,14 +104,14 @@ function Content() {
             </div>
             <div className="flex flex-col">
               <span className="xs:my-2 text-xl sm:my-2">
-                Sign up in
+                Registrate en
                 <span className="ml-1 underline decoration-[#39ba93] decoration-2 underline-offset-2">
-                  10 seconds
+                  10 segundos
                 </span>
               </span>
               <span className="my-2 md:max-w-60">
-                All you have to do is click the subscribe button and enter your
-                email. That's it.
+                Lo unico que debes hacer es registrarte, y una vez dentro
+                suscribete a tu membresia.
               </span>
             </div>
           </div>
@@ -128,14 +133,14 @@ function Content() {
             </div>
             <div className="flex flex-col">
               <span className="text-xl sm:my-2">
-                Receive leads
+                Sube tus productos a
                 <span className="ml-1 underline decoration-[#39ba93] decoration-2 underline-offset-2">
-                  instantly
+                  promover
                 </span>
               </span>
               <span className="my-2 md:max-w-60">
-                Receive the previous month's list upon sign up. And a new list
-                every month.
+                Rel equipo de Coorve tardara de 2 a 3 dias en realizar toda la
+                estrategia y lanzar la campaña.
               </span>
             </div>
           </div>
@@ -157,39 +162,39 @@ function Content() {
             </div>
             <div className="flex flex-col">
               <span className="text-xl  sm:my-2">
-                Start reaching out
+                Empieza a recibir leads
                 <span className="ml-1 underline decoration-[#39ba93] decoration-2 underline-offset-2">
-                  today
+                  hoy
                 </span>
               </span>
               <span className="my-2 md:max-w-60">
-                Now that you have your leads, you can start reaching out and
-                closing deals.
+                Ahora lo único que debes preocuparte es en recibir todos los
+                clientes que empezaran a llegar para cerrar mas negocios!.
               </span>
             </div>
           </div>
         </div>
         <div className="xs:px-8 flex flex-col px-4">
           <div className="font-inter mx-auto my-2 max-w-[900px] text-center text-[3.8rem] font-bold leading-[3.6rem] sm:leading-none">
-            Build your acquisition channel
+            Nueva fuente de generación de leads, totalmente potenciada.
           </div>
           <p className="xs:mb-[50px] mx-auto  max-w-[950px] text-center font-['Open_Sans'] text-xl">
-            Build your own, independent acquisition channel and scale at your
-            pace
+            Hemos construido el sistema mas eficiente para maximizar el
+            presupuesto de nuestros aliados
           </p>
           <div className="mx-auto my-[70px] flex w-full max-w-[900px] flex-col items-center justify-between md:flex-row ">
-            <div className="xs:text-left xs:mr-8 xs:max-w-[330px]  mx-auto text-center">
+            <div className="xs:text-left xs:mr-8 mx-auto  text-center md:max-w-[330px]">
               <div className="font-inter xs:max-w-[900px] mx-auto my-2 flex-col  text-4xl  leading-none sm:leading-none">
                 <h3 className="mb-2">
-                  Find newly funded startups that
+                  Master
                   <span className="ml-1 underline decoration-[#39ba93] underline-offset-2">
-                    just raised millions
+                    Brockers
                   </span>
                 </h3>
               </div>
               <p className="text-l w-full font-['Open_Sans']">
-                From startups, to nonprofit organizations, to enterprises. These
-                companies have big needs and even bigger budgets.
+                Para empresas con equipos desarrollados y un plan de expansión,
+                si buscan un sistema eficiente y escalable.
               </p>
             </div>
             <div className=" mx-auto pt-[40px] ">
@@ -197,18 +202,19 @@ function Content() {
             </div>
           </div>
           <div className="mx-auto my-[45px] flex w-full max-w-[900px] flex-col items-center justify-between md:flex-row ">
-            <div className="xs:text-left xs:max-w-[350px] xs:mr-[50px] mx-auto text-center md:order-2">
+            <div className="xs:text-left xs:mr-[50px] mx-auto text-center md:order-2 md:max-w-[350px]">
               <div className=" xs:leading-none mx-auto my-2  max-w-[900px] flex-col text-4xl leading-none">
                 <h3 className="mb-2">
-                  That are
+                  Brocker
                   <span className="ml-1 underline decoration-[#39ba93] underline-offset-2">
-                    handpicked for your agency
+                    independiente
                   </span>
                 </h3>
               </div>
               <p className="text-l w-full font-['Open_Sans']">
-                No, you won't find Jeff Bezos and Amazon. You'll find companies
-                that are easy to reach out to and build relationships with.
+                Nuestro sistema permite que los pequeños que esten buscando una
+                alternativa potente y eficiente que acelere el cierre de sus
+                operaciones esta en el lugar correcto.
               </p>
             </div>
             <div className=" xs:w-[700px] mx-auto pt-[40px] ">
@@ -216,18 +222,18 @@ function Content() {
             </div>
           </div>
           <div className="mx-auto my-[45px] flex w-full max-w-[900px] flex-col items-center justify-between md:flex-row">
-            <div className="xs:text-left xs:max-w-[350px] xs:mr-[50px] mx-auto  flex flex-col text-center">
+            <div className="xs:text-left xs:mr-[50px] mx-auto flex  flex-col text-center md:max-w-[350px]">
               <div className="xs:leading-none mx-auto my-2 max-w-[900px] flex-col  font-['Opens_sans']  text-4xl leading-none">
                 <h3 className="mb-2">
-                  That are
+                  Broker
                   <span className="ml-1 underline decoration-[#39ba93] underline-offset-2">
-                    looking to outsource your services
+                    hipotecario
                   </span>
                 </h3>
               </div>
               <p className="text-l w-full font-['Open_Sans']">
-                There are clear signals that these companies are lacking or
-                investing in certain domains. This is where you fit in.
+                Sistema ideado para la captacion de asesores inmobiliarios y
+                compradores.
               </p>
             </div>
             <div className=" xs:max-w-[700px] mx-auto pt-[40px] ">
@@ -235,19 +241,19 @@ function Content() {
             </div>
           </div>
           <div className="mx-auto my-[45px] flex w-full max-w-[900px] flex-col items-center justify-between md:flex-row ">
-            <div className="xs:text-left xs:max-w-[350px] xs:ml-[50px] mx-auto flex flex-col text-center md:order-2">
+            <div className="xs:text-left xs:ml-[50px] mx-auto flex flex-col text-center md:order-2 md:max-w-[350px]">
               <div className="xs:leading-none mx-auto my-2 max-w-[900px] flex-col  font-['Opens_sans']  text-4xl leading-none">
                 <h3 className="mb-2">
-                  And
+                  La decisión más inteligente para
                   <span className="ml-1 mr-1 underline decoration-[#39ba93] underline-offset-2">
-                    reach out to the key decision maker
+                    despegar tu negocio
                   </span>
-                  with ease
+                  a otro nivel
                 </h3>
               </div>
               <p className="text-l w-full font-['Open_Sans']">
-                I manually collect and verify every single data point. You can
-                expect verified email addresses when publicly available.
+                Tranquilo el sistema lo armamos nosotros para ti, y te damos
+                todas las facilidades para que te adaptes a la eficiencia.
               </p>
             </div>
             <div className=" xs:max-w-[700px] mx-auto pt-[40px] ">
@@ -256,10 +262,10 @@ function Content() {
           </div>
         </div>
         <div className="mx-auto flex flex-col items-center justify-between px-4 lg:flex-row">
-          <div className="w-full lg:mx-4 lg:w-[400px]">
+          <div className="w-full max-w-[350px] md:mx-4 md:max-w-[400px]">
             <TweetEmbed url={"htppasd"} />
           </div>
-          <div className="w-full lg:mx-4 lg:w-[400px]">
+          <div className="w-full max-w-[350px] md:mx-4 md:max-w-[400px]">
             <TweetEmbed2 url={"asdfasf"} />
           </div>
         </div>
@@ -267,15 +273,15 @@ function Content() {
           <div className="xs:text-left xs:max-w-[350px] xs:ml-[50px] xs:order-2 mx-auto flex flex-col text-center">
             <div className="xs:leading-none mx-auto my-2 flex max-w-[900px] flex-col  text-6xl  font-bold leading-none">
               <h3 className="mb-2">
-                Make your
+                La decisión más inteligente para despegar
                 <span className="ml-2 mr-1 underline decoration-[#39ba93] decoration-4 underline-offset-2">
-                  money back, forever
+                  tu negocio a otro nivel.
                 </span>
               </h3>
             </div>
             <p className="mb-12 w-full font-['Open_Sans'] text-xl">
-              Even a tiny deal with a recently funded startup will make your
-              money back for years
+              Tranquilo el sistema lo armamos nosotros para ti, y te damos todas
+              las facilidades para que te adaptes a la eficiencia.
             </p>
           </div>
           <div className="lg:max-w-70 lg:max-y-[70px] mx-auto flex flex-col items-center justify-center lg:flex-row">

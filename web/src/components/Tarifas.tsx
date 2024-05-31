@@ -1,6 +1,4 @@
-// import { ArrowRightIcon } from "@heroicons/react/24/outline";
-
-import { tarifas } from "@/data";
+import { tarifas } from "@/dataTarifa";
 import { Ttarifa } from "@/types/types";
 
 function TarifasCard() {
@@ -16,7 +14,8 @@ function TarifasCard() {
             <p className="text-center">{tarifa.detalles}</p>
           </div>
           <div className="my-3 flex justify-center text-center text-5xl">
-            ${tarifa.precio} <span className="mt-auto text-xl">/MONTH</span>
+            ${tarifa.precio}{" "}
+            <span className="mt-auto text-xl">/{tarifa.time}</span>
           </div>
           <ul className=" mx-auto my-6 text-left">
             {tarifa.features.map((feat, index) => (
