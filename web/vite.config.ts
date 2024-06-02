@@ -14,6 +14,7 @@ export default defineConfig({
     proxy: {
       "/login": "http://localhost:3000/api/v1/auth",
       "/register": "http://localhost:3000/api/v1/auth",
+      "/resetPass": "http://localhost:3000/api/v1/auth",
     },
   },
 });

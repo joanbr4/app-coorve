@@ -8,6 +8,7 @@ const appConfigSchema = z
     refreshJwtKey: z.string(),
     generatedJwtExpires: z.string(),
     refreshedJwtExpires: z.string(),
+    api_key_resend: z.string(),
   })
   .strict()
 
@@ -31,6 +32,7 @@ const appConfig = appConfigSchema.parse({
   refreshJwtKey: process.env.REFRESH_JWT_KEY,
   generatedJwtExpires: process.env.GENERATED_JWT_EXPIRATION,
   refreshedJwtExpires: process.env.REFRESHED_JWT_EXPIRATION,
+  api_key_resend: process.env.API_KEY_RESEND,
 })
 
 const dbConfig = dbConfigSchema.parse({

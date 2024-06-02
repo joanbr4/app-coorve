@@ -1,16 +1,40 @@
 import { resetSchema } from "@/schemas/resetSchema";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 type emailReset = {
   email: string;
+  password: string;
+  confirm: string;
 };
 const initialState = {
   email: "",
+  password: "",
+  confirm: "",
 };
-function ResetPass() {
+type InitialStateKeys = keyof typeof initialState;
+
+function UpdatePass() {
   const [sendEmail, setSendEmail] = useState<boolean>(false);
   const [form, setForm] = useState<emailReset>(initialState);
   const [errorEmail, setErrorEmail] = useState<emailReset>(initialState);
+  const [watchPass, setWatchPass] = useState<boolean>(false);
+  const link = useParams();
+
+  //Props Getter
+  const register = (propertyName: InitialStateKeys) => {
+    return {
+      name: propertyName,
+      type:
+        propertyName === "email" ? "email" : watchPass ? "text" : "password",
+      value: form[propertyName],
+      placeholder:
+        propertyName == "confirm" ? "confirm password" : propertyName,
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+        setForm({ ...form, [propertyName]: e.target.value });
+      },
+    };
+  };
 
   const sendReset = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,7 +49,11 @@ function ResetPass() {
       console.log(errorZod);
       setErrorEmail(errorZod);
     } else {
-      const payload = form;
+      const payload = {
+        link: link.linkId,
+        password: form.password,
+        closed_at: new Date(),
+      };
       console.log("w323", payload);
       fetch("/resetPass/" + form.email, {
         method: "POST",
@@ -41,27 +69,75 @@ function ResetPass() {
     <div className="flex h-screen  w-screen bg-gray-800">
       <div className="m-auto max-w-[400px] rounded-lg border bg-white">
         <div className="m-8 flex flex-col align-baseline">
-          <h2 className="my-2 text-xl">Reseter tu contraseña</h2>
+          <h2 className="my-2 text-xl font-bold">Resetear la contraseña</h2>
           <p className="mb-2 text-sm">
-            Si la cuenta existe, enviaremos un correo con las instrucciones para
-            resetear la contrseña.
+            Para resetear su contraseña, por favor rellene los siguientes
+            campos, asegurandote que rellenas cada campo manualmente
           </p>
-          <hr />
+
           <div className={sendEmail ? "hidden" : "block"}>
             <form
               className="my-2 flex flex-col "
               onSubmit={sendReset}
               action="/resetPass"
             >
-              <label htmlFor="email" className="text-lg">
-                Email
-              </label>
               <input
-                className="rounded-lg border p-2"
-                name="email"
-                onChange={(e) => setForm({ email: e.target.value })}
-                placeholder="email"
+                className="my-2 w-full rounded-lg border p-2"
+                {...register("email")}
               />
+              <div className="relative">
+                <input
+                  className="my-2 w-full rounded-lg border p-2"
+                  {...register("password")}
+                />
+                <EyeIcon
+                  onClick={() => setWatchPass(false)}
+                  width={25}
+                  height={25}
+                  className={
+                    watchPass
+                      ? "absolute right-4 top-5 block text-gray-300"
+                      : "hidden"
+                  }
+                />
+                <EyeSlashIcon
+                  onClick={() => setWatchPass(true)}
+                  width={25}
+                  height={25}
+                  className={
+                    watchPass
+                      ? "hidden"
+                      : "absolute right-4 top-5 block text-gray-300"
+                  }
+                />
+              </div>
+              <div className="relative">
+                <input
+                  className="my-2 w-full rounded-lg border p-2"
+                  {...register("confirm")}
+                />
+                <EyeIcon
+                  onClick={() => setWatchPass(false)}
+                  width={25}
+                  height={25}
+                  className={
+                    watchPass
+                      ? "absolute right-4 top-5 block text-gray-300"
+                      : "hidden"
+                  }
+                />
+                <EyeSlashIcon
+                  onClick={() => setWatchPass(true)}
+                  width={25}
+                  height={25}
+                  className={
+                    watchPass
+                      ? "hidden"
+                      : "absolute right-4 top-5 block text-gray-300"
+                  }
+                />
+              </div>
+
               {errorEmail && (
                 <span className="text-red-500">{errorEmail.email}</span>
               )}
@@ -109,4 +185,4 @@ function ResetPass() {
     </div>
   );
 }
-export { ResetPass };
+export { UpdatePass };

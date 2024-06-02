@@ -4,7 +4,6 @@ import { hashPassword } from "../../utils/passwordHash"
 import { users } from "../../db/schemas"
 import { db } from "../../db/client"
 import { generatedId } from "../../utils/cuidGenerator"
-// import { user } from "../../schemas/user"
 
 export const registerController = async (req: Request, res: Response) => {
   console.log("asdsa", req.body)
