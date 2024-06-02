@@ -3,7 +3,7 @@ import {
   ArrowRightIcon,
 } from "@heroicons/react/24/outline";
 import Footer from "../components/footer";
-import Header from "../components/header";
+import { Login } from "../components/header";
 // import { StickyScroll } from "../components/ui/sticky-scroll-reveal";
 import { TweetEmbed, TweetEmbed2 } from "@/components/TwitterCard";
 import { TarifasCard } from "@/components/Tarifas";
@@ -67,7 +67,7 @@ function Content() {
       className="flex h-full w-full flex-col
   bg-gray-800 "
     >
-      <Header />
+      <Login />
       <div className="my-24 flex w-full flex-col text-white ">
         <div className="font-inter mx-auto my-2 max-w-[900px] text-center text-8xl text-[80px] font-bold leading-[3.8rem] sm:leading-none">
           Next gen del real state

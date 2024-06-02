@@ -12,6 +12,7 @@ import Faqs from "@/pages/faq";
 import { UserPage } from "@/pages/userPage";
 import { ResetPass } from "@/pages/resetPass";
 import { UpdatePass } from "@/pages/updatePass";
+import { Dashboard } from "@/pages/dashboard";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,7 +23,13 @@ const router = createBrowserRouter(
       <Route path="/signup" element={<Login />} />
       {/* <Route path="/chatgpt" element={<Chatgpt />} /> */}
       <Route path="/faqs" element={<Faqs />} />
-      <Route path="/user" element={<UserPage />} />
+      <Route path="/user" element={<UserPage />}>
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="perfil" element={<Faqs />} />
+        <Route path="configarucion" element={<Faqs />} />
+        <Route path="facturas" element={<Faqs />} />
+      </Route>
+
       <Route path="/reset-password" element={<ResetPass />} />
       <Route path="/password/reset/:linkId" element={<UpdatePass />} />
     </>

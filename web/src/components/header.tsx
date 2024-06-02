@@ -45,7 +45,7 @@ const menuItems: TitemMenu[] = [
     icon: PlayCircleIcon,
   },
 ];
-function Header() {
+function Login() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
   const open = () => {
@@ -146,5 +146,20 @@ function Header() {
     </nav>
   );
 }
-
-export default Header;
+function Logout() {
+  return (
+    <nav>
+      <div className="my-auto bg-blue-500 px-5 sm:items-center sm:pt-2">
+        <Link to="/">
+          <img
+            src="src/assets/logo-de-coorve-transparante-1024x269.webp"
+            alt="Logo"
+            width="150"
+          />
+        </Link>
+        <button className="ml-auto flex text-white">Salir</button>
+      </div>
+    </nav>
+  );
+}
+export { Login, Logout };
