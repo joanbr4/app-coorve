@@ -157,7 +157,9 @@ function Logout() {
             width="150"
           />
         </Link>
-        <button className="ml-auto flex text-white">Salir</button>
+        <button className="ml-auto flex text-white">
+          <NavLink to="/content">Salir</NavLink>
+        </button>
       </div>
     </nav>
   );

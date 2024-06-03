@@ -13,6 +13,9 @@ import { UserPage } from "@/pages/userPage";
 import { ResetPass } from "@/pages/resetPass";
 import { UpdatePass } from "@/pages/updatePass";
 import { Dashboard } from "@/pages/dashboard";
+import { Perfil } from "@/pages/perfil";
+import { Configuration } from "@/pages/configuracion";
+import { Facturación } from "@/pages/facturación";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,9 +28,9 @@ const router = createBrowserRouter(
       <Route path="/faqs" element={<Faqs />} />
       <Route path="/user" element={<UserPage />}>
         <Route path="dashboard" element={<Dashboard />} />
-        <Route path="perfil" element={<Faqs />} />
-        <Route path="configarucion" element={<Faqs />} />
-        <Route path="facturas" element={<Faqs />} />
+        <Route path="perfil" element={<Perfil />} />
+        <Route path="settings" element={<Configuration />} />
+        <Route path="facturas" element={<Facturación />} />
       </Route>
 
       <Route path="/reset-password" element={<ResetPass />} />

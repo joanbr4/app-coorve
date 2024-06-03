@@ -80,7 +80,7 @@ function Login() {
       } else {
         const data = await response.json();
         setUser(data);
-        navigate("/user");
+        navigate("/user/dashboard");
       }
     }
   };
