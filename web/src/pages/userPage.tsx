@@ -6,11 +6,11 @@ function UserPage() {
   const { user } = useAuth();
 
   return (
-    <div className="h-screen bg-gray-800">
+    <div className="flex h-screen flex-col bg-gray-800">
       <Logout />
-      <div className="flex h-screen">
-        <aside className="bg-blue-100 ">
-          <ul>
+      <div className="flex flex-1">
+        <aside className="flex-shrink-0 bg-blue-100 ">
+          <ul className="flex-grow">
             <li className="">
               <NavLink
                 to="dashboard"
@@ -46,7 +46,7 @@ function UserPage() {
           </ul>
         </aside>
         <center className="w-full">
-          <Outlet />
+          <Outlet context={user} />
         </center>
       </div>
     </div>

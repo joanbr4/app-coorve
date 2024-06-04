@@ -19,5 +19,7 @@ export type TUser = {
   apellidos: string;
   email: string;
   genere: string;
+  residency: string;
   created_at: string;
+  telephone: string;
 } | null;

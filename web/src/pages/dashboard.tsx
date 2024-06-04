@@ -38,8 +38,13 @@ export default class Dashboard extends PureComponent {
             ))}
           </ul>
         </div>
-        <PieChart width={800} height={400} onMouseEnter={this.onPieEnter}>
-          {/* <Pie
+        <PieChart
+          width={800}
+          height={400}
+          onMouseEnter={this.onPieEnter}
+          className="h-[200px] w-[300px]"
+        >
+          {/* <Pie  
             data={data}
             cx={120}
             cy={200}
@@ -72,6 +77,7 @@ export default class Dashboard extends PureComponent {
               <Cell
                 key={`cell-${index}`}
                 fill={COLORS[index % COLORS.length]}
+                className="w-[500px]"
               />
             ))}
           </Pie>
