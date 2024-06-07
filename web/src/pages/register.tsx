@@ -19,6 +19,7 @@ type InitialStateKeys = keyof typeof initialState;
 export const action = async ({ request }: { request: Request }) => {
   const formData = await request.formData();
   const dataObject = Object.fromEntries(formData);
+  console.log("as", dataObject);
   const dataValidatedZod = registerSchema.safeParse({
     name: dataObject.name,
     surname: dataObject.surname,
@@ -47,6 +48,7 @@ export const action = async ({ request }: { request: Request }) => {
       password: dataObject.password,
       created_at: new Date(),
     };
+    console.log(payload);
     const response = await fetch("/register", {
       method: "POST",
       headers: {
@@ -144,13 +146,19 @@ function Register() {
             // {...register("phone", { type: "text" })}
           />
           {errorsZod && <div className="text-red-500">{errorsZod.phone}</div>}
-          <input
+          <select
             className="my-2 rounded-lg px-3 py-3"
-            placeholder="Género"
-            {...register("genere")}
-            type="text"
+            name="genere"
+            // placeholder="Género"
+            // {...register("genere")}
+            // type="text"
             // {...register("phone", { type: "text" })}
-          />
+            onChange={(e) => setForm({ ...form, genere: e.target.value })}
+          >
+            <option value="hombre">Hombre</option>
+            <option value="mujer">Mujer</option>
+            <option value="ns/nc">Prefiero no decirlo</option>
+          </select>
           {errorsZod && <div className="text-red-500">{errorsZod.genere}</div>}
 
           <input

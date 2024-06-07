@@ -1,18 +1,25 @@
 import "dotenv/config"
 import express from "express"
 import { appConfig } from "./config/index"
-import { pathRoot } from "./routes/routes.js"
 import { authRouter } from "./routes/auth.js"
 import cors from "cors"
 import { errorMiddlewareAfter } from "./middleware/errorMiddleware"
+import helmet from "helmet"
+import { tokenPath } from "./routes/tokens"
 // import { client } from "./db/client"
+import cookieParser from "cookie-parser"
 
 const app = express()
 app.use(cors())
+//Sett http headers appropriately, a collect of small middware
+app.use(helmet())
+app.use(cookieParser())
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.use(pathRoot.v1.auth, authRouter)
+app.use(authRouter)
+app.use(tokenPath)
 
 app.use(errorMiddlewareAfter)
 

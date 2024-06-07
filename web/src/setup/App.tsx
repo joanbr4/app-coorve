@@ -16,6 +16,9 @@ import { Dashboard } from "@/pages/dashboard";
 import { Perfil } from "@/pages/perfil";
 import { Configuration } from "@/pages/configuracion";
 import { Facturación } from "@/pages/facturación";
+import { PrivateRoute } from "./FilteredRoutes";
+import { ErrorBoundary } from "@/pages/errors/ErrorBoundary";
+import { NotFoundPage } from "@/pages/errors/NotFounPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,7 +29,8 @@ const router = createBrowserRouter(
       <Route path="/signup" element={<Login />} />
       {/* <Route path="/chatgpt" element={<Chatgpt />} /> */}
       <Route path="/faqs" element={<Faqs />} />
-      <Route path="/user" element={<UserPage />}>
+      {/* <Route path="/user" element={<UserPage />}> */}
+      <Route path="/user" element={<PrivateRoute element={<UserPage />} />}>
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="perfil" element={<Perfil />} />
         <Route path="settings" element={<Configuration />} />
@@ -35,6 +39,9 @@ const router = createBrowserRouter(
 
       <Route path="/reset-password" element={<ResetPass />} />
       <Route path="/password/reset/:linkId" element={<UpdatePass />} />
+
+      {/* other */}
+      <Route path="*" element={<NotFoundPage />} />
     </>
   )
 );

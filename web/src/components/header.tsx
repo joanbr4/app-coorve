@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 // import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import {
   Dialog,
@@ -147,6 +147,16 @@ function Login() {
   );
 }
 function Logout() {
+  const navigate = useNavigate();
+
+  const handlingLogout = async () => {
+    const response = await fetch("/logout", { method: "POST" });
+    if (response.ok) {
+      return navigate("/content");
+    } else {
+      console.log("adssdsd", response);
+    }
+  };
   return (
     <nav>
       <div className="my-auto bg-blue-500 px-5 sm:items-center sm:pt-2">
@@ -157,8 +167,8 @@ function Logout() {
             width="150"
           />
         </Link>
-        <button className="ml-auto flex text-white">
-          <NavLink to="/content">Salir</NavLink>
+        <button className="ml-auto flex text-white" onClick={handlingLogout}>
+          Salir
         </button>
       </div>
     </nav>

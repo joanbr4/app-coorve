@@ -4,7 +4,7 @@ import { NavLink, Outlet } from "react-router-dom";
 
 function UserPage() {
   const { user } = useAuth();
-
+  console.log("ssa", user);
   return (
     <div className="flex h-screen flex-col bg-gray-800">
       <Logout />

@@ -2,6 +2,7 @@ import React, {
   ReactNode,
   createContext,
   useContext,
+  useEffect,
   // useContext,
   // useEffect,
   useMemo,
@@ -16,6 +17,7 @@ export type TAuthContext = {
   setUser: (user: TUser) => void;
   error: string;
   setError: (error: string) => void;
+  loading: boolean;
 };
 
 const AuthContext = createContext<TAuthContext | null>(null);
@@ -33,28 +35,34 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<TUser>(null);
   console.log("userProv", user);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState<boolean>(true);
 
   const value = useMemo(
-    () => ({ children, user, setUser, error, setError }),
-    [children, user, error]
+    () => ({ children, user, setUser, error, setError, loading }),
+    [children, user, error, loading]
   );
 
-  // useEffect(() => {
-  //   fetch(urls.getMe)
-  //     .then((res) => {
-  //       if (!res.ok) {
-  //         throw new Error(res.statusText);
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       setUser(data);
-  //     })
-  //     .catch((err) => {
-  //       setError(err.message);
-  //       setUser(null);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch("/me", {
+      method: "POST",
+      credentials: "include",
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(res.statusText);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setUser(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setUser(null);
+        setLoading(false);
+      });
+  }, []);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

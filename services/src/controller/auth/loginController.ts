@@ -6,7 +6,7 @@ import { checkPassword } from "../../utils/passwordHash"
 
 export const loginController = async (req: Request, res: Response) => {
   const { email: Email, password } = req.body
-
+  const expirationInMilliseconds = 86400000
   const foundUser = await getCheckEmail(Email)
 
   const user = foundUser[0]
@@ -21,11 +21,15 @@ export const loginController = async (req: Request, res: Response) => {
   const authTokenUser = generateToken(user.id, "auth")
   const refreshTokenUser = generateToken(user.id, "refresh")
 
-  res.cookie("token", authTokenUser, {
+  res.cookie("authToken", authTokenUser, {
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24 * 7,
     sameSite: "none",
     secure: true,
+  })
+  res.cookie("refreshToken", refreshTokenUser, {
+    httpOnly: true,
+    maxAge: expirationInMilliseconds,
   })
 
   res.status(200).send({ user: safeUser, authTokenUser, refreshTokenUser })

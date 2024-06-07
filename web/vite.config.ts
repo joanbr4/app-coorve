@@ -15,6 +15,8 @@ export default defineConfig({
       "/login": "http://localhost:3000/api/v1/auth",
       "/register": "http://localhost:3000/api/v1/auth",
       "/resetPass": "http://localhost:3000/api/v1/auth",
+      "/me": "http://localhost:3000/api/v1/auth",
+      "/logout": "http://localhost:3000/api/v1/auth",
     },
   },
 });

@@ -79,7 +79,9 @@ function Login() {
         setErrorLogin(errorMessage.message);
       } else {
         const data = await response.json();
-        setUser(data);
+        localStorage.setItem("tokenAuth", data.token);
+        localStorage.setItem("tokenRefresh", data.token);
+        setUser(data.user);
         navigate("/user/dashboard");
       }
     }
