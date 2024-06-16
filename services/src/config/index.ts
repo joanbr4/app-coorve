@@ -8,7 +8,15 @@ const appConfigSchema = z
     refreshJwtKey: z.string(),
     generatedJwtExpires: z.string(),
     refreshedJwtExpires: z.string(),
-    api_key_resend: z.string(),
+  })
+  .strict()
+
+const apiConfigSchema = z
+  .object({
+    resend: z.string(),
+    sheets_id: z.string(),
+    sheets_secret: z.string(),
+    sheets_key: z.string(),
   })
   .strict()
 
@@ -32,7 +40,13 @@ const appConfig = appConfigSchema.parse({
   refreshJwtKey: process.env.REFRESH_JWT_KEY,
   generatedJwtExpires: process.env.GENERATED_JWT_EXPIRATION,
   refreshedJwtExpires: process.env.REFRESHED_JWT_EXPIRATION,
-  api_key_resend: process.env.API_KEY_RESEND,
+})
+
+const apiConfig = apiConfigSchema.parse({
+  resend: process.env.API_KEY_RESEND,
+  sheets_id: process.env.API_SHEET_CLIENT_ID,
+  sheets_secret: process.env.API_SHEET_CLIENT_SECRET,
+  sheets_key: process.env.API_SHEETS_KEY,
 })
 
 const dbConfig = dbConfigSchema.parse({
@@ -50,4 +64,4 @@ const bcryptConfig = bcryptConfigSchema.parse({
   saltRounds: 10,
 })
 
-export { appConfig, bcryptConfig, dbConfig }
+export { appConfig, bcryptConfig, dbConfig, apiConfig }

@@ -8,7 +8,7 @@ const authMeController = async (req: Request, res: Response) => {
 
   const dataUser = await db.select().from(users).where(eq(users.id, id))
   const user = dataUser[0]
-  console.log(user)
+  console.log("from meController", user)
 
   const { name, apellidos, email, genere, created_at } = user
   const safeUser = { name, apellidos, email, genere, created_at }

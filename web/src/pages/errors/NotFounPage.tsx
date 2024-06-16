@@ -11,7 +11,7 @@ export const NotFoundPage = () => {
           <NavLink to="/content">Landing</NavLink>
         </button>
         <button className="m-2 rounded-md bg-gray-800 p-2 font-bold text-white">
-          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/signup">Login</NavLink>
         </button>
         <button
           className="m-2 rounded-md bg-gray-800 p-2 font-bold text-white"

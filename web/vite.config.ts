@@ -17,6 +17,7 @@ export default defineConfig({
       "/resetPass": "http://localhost:3000/api/v1/auth",
       "/me": "http://localhost:3000/api/v1/auth",
       "/logout": "http://localhost:3000/api/v1/auth",
+      "/sheets": "http://localhost:3000/api/v1/google",
     },
   },
 });

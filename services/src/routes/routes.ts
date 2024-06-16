@@ -20,5 +20,8 @@ export const pathRoot = {
       users: "/api/v1/dashboard/users",
       auth: "/api/v1/dashboard/auth",
     },
+    google: {
+      sheets: "/api/v1/google/sheets",
+    },
   },
 }

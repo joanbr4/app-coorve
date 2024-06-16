@@ -53,6 +53,7 @@ function TarifasCard() {
             ))}
           </ul>
           <button
+            //FIXME add hoover
             className={
               tarifa.precio === 0
                 ? "mx-auto  flex w-full items-center justify-center rounded-md border bg-white p-1 text-lg font-bold text-gray-800"
