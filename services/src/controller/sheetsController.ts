@@ -7,7 +7,8 @@ import path from "path"
 import { authenticate } from "@google-cloud/local-auth"
 import { Auth, google } from "googleapis"
 
-const SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
+// const SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
+const SCOPES = ["https://www.googleapis.com/auth/drive.readonly"]
 const TOKEN_PATH = path.join(process.cwd(), "token.json")
 const CREDENTIALS_PATH = path.join(process.cwd(), "credentials.json")
 
@@ -69,8 +70,8 @@ async function authorize(): Promise<Auth.OAuth2Client> {
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth client.
  */
 async function listMajors(
-  auth: Auth.OAuth2Client,
-  name: string
+  auth: Auth.OAuth2Client
+  // name: string
 ): Promise<string[][] | void> {
   const sheets = google.sheets({ version: "v4", auth })
   const res = await sheets.spreadsheets.values.get({
@@ -86,18 +87,20 @@ async function listMajors(
   // return rows
   // console.log("Name, Major:")
   let indexUser = 0
-  let user = ""
+  // const user = ""
   const dataUseTable: string[][] = []
   rows.forEach((row) => {
     if (row[0].includes("Concepto")) {
       indexUser = row.findIndex((item) => item == name)
-      user = row[indexUser]
+      // user = row[indexUser]
       console.log(indexUser)
     }
     dataUseTable.push([row[0], row[indexUser]])
   })
   return dataUseTable
 }
+
+authorize().then(listMajors).catch(console.log(error))
 
 const sheetsController = async (req: Request, res: Response) => {
   try {
@@ -114,5 +117,4 @@ const sheetsController = async (req: Request, res: Response) => {
     throw new Error(err)
   }
 }
-
 export default sheetsController

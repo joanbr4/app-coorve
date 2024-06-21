@@ -1,4 +1,0 @@
-
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS houses;
-// created_ap: text("created_at").default(sql`(CURRENT_TIMESTAMP)`),
