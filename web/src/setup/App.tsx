@@ -12,7 +12,7 @@ import Faqs from "@/pages/faq";
 import { UserPage } from "@/pages/userPage";
 import { ResetPass } from "@/pages/resetPass";
 import { UpdatePass } from "@/pages/updatePass";
-import { Dashboard } from "@/pages/dashboard";
+import CircularChart from "@/pages/dashboard";
 import { Perfil } from "@/pages/perfil";
 import { Configuration } from "@/pages/configuracion";
 import { Facturación } from "@/pages/facturación";
@@ -31,7 +31,13 @@ const router = createBrowserRouter(
       <Route path="/faqs" element={<Faqs />} />
       {/* <Route path="/user" element={<UserPage />}> */}
       <Route path="/user" element={<PrivateRoute element={<UserPage />} />}>
-        <Route path="dashboard" element={<Dashboard />} />
+        <Route
+          path="dashboard"
+          element={
+            <CircularChart sales={20} customer={2} retries={4} frequency={23} />
+          }
+        />
+        {/* <Route path="dashboard" element={<Dashboard />} /> */}
         <Route path="perfil" element={<Perfil />} />
         <Route path="settings" element={<Configuration />} />
         <Route path="facturas" element={<Facturación />} />

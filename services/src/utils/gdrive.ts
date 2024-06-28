@@ -69,12 +69,12 @@ async function authorize(): Promise<Auth.OAuth2Client> {
  * Lists the names and IDs of up to 10 files.
  * @param {OAuth2Client} authClient An authorized OAuth2 client.
  */
-async function listFiles(authClient: Auth.OAuth2Client) {
+async function listFiles(authClient: Auth.OAuth2Client, fileName: string) {
   // const folerId = "19YqQZInMkGGOVL7VHPZMDSnDLk0E6_0o"
   const folerId = "1vakbR28Pi-zSL-3OMfb9_P7DoKJluRl0"
   const drive = google.drive({ version: "v3", auth: authClient })
   const res = await drive.files.list({
-    pageSize: 100,
+    pageSize: 1000,
     fields: "nextPageToken, files(id, name)",
     // q: `${folerId} in parents`,
   })
@@ -86,12 +86,24 @@ async function listFiles(authClient: Auth.OAuth2Client) {
 
   console.log("Files:")
   files.map((file) => {
-    console.log(`${file.name} (${file.id})`)
+    if (file.name?.includes(fileName)) {
+      console.log(`${file.name} (${file.id})`)
+      return file.id
+    }
+    // console.log(`${file.name} (${file.id})`)
   })
+  return files
 }
 
 authorize().then(listFiles).catch(console.error)
 
-const googleDriveApi = (nameFile: string) => {}
+const googleDriveApi = async (fileName: string) => {
+  const data = await authorize()
+  const listFilesId = listFiles(data, fileName)
+
+  return listFilesId[0]
+
+  // return nameFile
+}
 
 export { googleDriveApi }

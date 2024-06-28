@@ -1,0 +1,64 @@
+version: "3.8"
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: backend-builder
+    develop:
+      watch:
+        - action: sync
+          path: ./services/src
+          target: /src
+          # ignore:
+          #   - node_modules
+        - action: rebuild
+          path: ./services/package.json
+    ports:
+      - 3000:3000
+    volumes:
+      - pnpm-store:/root/.local/share/pnpm/store
+    networks:
+      - coorve_network
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: frontend-builder
+    environment:
+      - VITE_DOCKER=true
+    develop:
+      watch:
+        - action: sync
+          path: ./web/src
+          target: /src
+          # ignore:
+          #   - node_modules
+        - action: rebuild
+          path: .web/package.json
+    ports:
+      - 5173:5173
+    volumes:
+      - pnpm-store:/root/.local/share/pnpm/store
+    networks:
+      - coorve_network
+
+#   postgress:
+#     image: postgres:16-alpine
+#     container_name: coorve_db
+#     ports:
+#       - 5432:5432
+#     environment:
+#       - POSTGRES_USER=root
+#       - POSTGRES_PASSWORD=admin
+
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+# volumes:
+#   postgres_data:
+volumes:
+  pnpm-store:
+
+networks:
+  coorve_network:

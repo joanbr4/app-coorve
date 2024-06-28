@@ -1,0 +1,17 @@
+# ignoring from all directories
+**/node_modules
+**/dist
+# **/pnpm-lock.yaml
+# !web/node_modules => ! = Except this route
+
+# ignoring other files from main directory
+.git
+.gitignore
+docker-compose.yml
+Dockerfile
+README.md
+
+
+# estilos formatos
+.eslintrc.cjs
+.prettierrc
