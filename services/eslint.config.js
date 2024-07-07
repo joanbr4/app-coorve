@@ -5,7 +5,7 @@ export default [
   {
     languageOptions: { globals: globals.browser },
     rules: {
-      "no-console": "warn",
+      // "no-console": "warn",
     },
   },
   ...tseslint.configs.recommended,

@@ -12,6 +12,7 @@ import { apiRouter } from "./routes/apiSheets"
 
 const app = express()
 app.use(cors())
+
 //Sett http headers appropriately, a collect of small middware
 app.use(helmet())
 app.use(cookieParser())
@@ -28,11 +29,3 @@ app.use(errorMiddlewareAfter)
 app.listen(appConfig.port, () =>
   console.log(`Server is running on http://localhost:${appConfig.port}`)
 )
-
-// client
-//   .connect()
-//   .then(() =>
-//     app.listen(appConfig.port, () =>
-//       console.log(`Server is running on http://localhost:${appConfig.port}`)
-//     )
-//   )

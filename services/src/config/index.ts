@@ -17,6 +17,7 @@ const apiConfigSchema = z
     sheets_id: z.string(),
     sheets_secret: z.string(),
     sheets_key: z.string(),
+    folder_id: z.string(),
   })
   .strict()
 
@@ -47,6 +48,7 @@ const apiConfig = apiConfigSchema.parse({
   sheets_id: process.env.API_SHEET_CLIENT_ID,
   sheets_secret: process.env.API_SHEET_CLIENT_SECRET,
   sheets_key: process.env.API_SHEETS_KEY,
+  folder_id: process.env.FOLDER_ID,
 })
 
 const dbConfig = dbConfigSchema.parse({

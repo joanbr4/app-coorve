@@ -1,11 +1,16 @@
 import fs from "fs/promises"
 import path from "path"
-import process from "process"
 import { authenticate } from "@google-cloud/local-auth"
 import { Auth, google } from "googleapis"
+// import { oauth2 } from "googleapis/build/src/apis/oauth2"
+// import readLine from "readline"
+// import express, { Request, Response } from "express"
 
 // If modifying these scopes, delete token.json.
-const SCOPES = ["https://www.googleapis.com/auth/drive.metadata.readonly"]
+const SCOPES = [
+  "https://www.googleapis.com/auth/drive.metadata.readonly",
+  "https://www.googleapis.com/auth/spreadsheets.readonly",
+]
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
@@ -59,51 +64,10 @@ async function authorize(): Promise<Auth.OAuth2Client> {
     scopes: SCOPES,
     keyfilePath: CREDENTIALS_PATH,
   })
-  if (client.credentials) {
+  if (client?.credentials) {
     await saveCredentials(client)
   }
   return client
 }
 
-/**
- * Lists the names and IDs of up to 10 files.
- * @param {OAuth2Client} authClient An authorized OAuth2 client.
- */
-async function listFiles(authClient: Auth.OAuth2Client, fileName: string) {
-  // const folerId = "19YqQZInMkGGOVL7VHPZMDSnDLk0E6_0o"
-  const folerId = "1vakbR28Pi-zSL-3OMfb9_P7DoKJluRl0"
-  const drive = google.drive({ version: "v3", auth: authClient })
-  const res = await drive.files.list({
-    pageSize: 1000,
-    fields: "nextPageToken, files(id, name)",
-    // q: `${folerId} in parents`,
-  })
-  const files = res.data.files
-  if (files?.length === 0 || files == undefined) {
-    console.log("No files found.")
-    return
-  }
-
-  console.log("Files:")
-  files.map((file) => {
-    if (file.name?.includes(fileName)) {
-      console.log(`${file.name} (${file.id})`)
-      return file.id
-    }
-    // console.log(`${file.name} (${file.id})`)
-  })
-  return files
-}
-
-authorize().then(listFiles).catch(console.error)
-
-const googleDriveApi = async (fileName: string) => {
-  const data = await authorize()
-  const listFilesId = listFiles(data, fileName)
-
-  return listFilesId[0]
-
-  // return nameFile
-}
-
-export { googleDriveApi }
+export { authorize }
