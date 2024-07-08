@@ -5,9 +5,11 @@ function Facturación() {
 
   useEffect(() => {
     const statuses = [
-      "Worker is processing...",
+      "Cooming soon new features...",
+      // "Worker is processing...",
       "Still working...",
       "Almost there...",
+      "Still working...",
       // "Just a moment more...",
     ];
     let currentIndex = 0;

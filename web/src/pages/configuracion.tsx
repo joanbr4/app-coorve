@@ -5,9 +5,11 @@ function Configuration() {
 
   useEffect(() => {
     const statuses = [
-      "Worker is processing...",
+      "Coming soon new features...",
+      // "Worker is processing...",
       "Still working...",
       "Almost there...",
+      "Still working...",
       // "Just a moment more...",
     ];
     let currentIndex = 0;
