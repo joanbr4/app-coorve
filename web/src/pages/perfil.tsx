@@ -7,92 +7,108 @@ function Perfil() {
   const [edit, setEdit] = useState<boolean>(false);
   const user = useOutletContext<TUser>();
   return (
-    <div className="-pt-[30px]  flex h-full w-full bg-gray-100">
-      <div className=" mx-auto grid w-full max-w-[1000px] grid-cols-1 justify-between border p-2 md:grid-cols-2">
-        <img alt="foto_perfil" className="mx-auto mt-8" />
+    <div className="-pt-[30px]  flex h-full w-full justify-center bg-blue-900">
+      <div className="mx-10 my-10 grid w-full max-w-[1000px] grid-cols-1 items-center justify-between rounded-lg border bg-blue-400 p-2 lg:grid-cols-2">
+        {/* <img alt="foto_perfil" className="mx-auto mt-8" />
         <div className="mx-auto mt-8 flex w-full max-w-[400px] flex-col">
-          <div className="mr-auto">Sobre mi</div>
-          <textarea className="h-[100px] px-2" placeholder="Un poco sobre mí" />
-        </div>
+          <div className="mr-auto py-2  font-bold text-blue-900">Sobre mi</div>
+          <textarea className="h-[100px] p-2" placeholder="Un poco sobre mí" />
+        </div> */}
         <div className="mx-auto my-4 flex w-full max-w-[400px] flex-col">
-          <label className="mr-auto">Nombre</label>
+          <label className="mr-auto py-2  font-bold text-blue-900">
+            Nombre
+          </label>
           {edit ? (
             <input
-              className="rounded-md border px-2"
+              className="rounded-md border px-2 py-1"
               defaultValue={user?.name}
             />
           ) : (
-            <div className="rounded-md border bg-white px-2">{user?.name}</div>
+            <div className="rounded-md border bg-white px-2 py-1">
+              {user?.name}
+            </div>
           )}
         </div>
         <div className="mx-auto my-4 flex w-full max-w-[400px] flex-col">
-          <label className="mr-auto">Apellidos</label>
+          <label className="mr-auto py-2  font-bold text-blue-900">
+            Apellidos
+          </label>
           {edit ? (
             <input
-              className="rounded-md border px-2"
+              className="rounded-md border px-2 py-1"
               defaultValue={user?.apellidos}
             />
           ) : (
-            <div className="rounded-md border bg-white px-2">
+            <div className="rounded-md border bg-white px-2 py-1">
               {user?.apellidos}
             </div>
           )}
         </div>
         <div className="mx-auto my-4 flex w-full max-w-[400px] flex-col">
-          <label className="mr-auto">Email</label>
+          <label className="mr-auto py-2  font-bold text-blue-900">Email</label>
           {edit ? (
             <input
-              className="rounded-md border px-2"
+              className="rounded-md border px-2 py-1"
               defaultValue={user?.email}
               readOnly
             />
           ) : (
-            <div className="rounded-md border bg-white px-2">{user?.email}</div>
+            <div className="rounded-md border bg-white px-2 py-1">
+              {user?.email}
+            </div>
           )}
         </div>
         <div className="mx-auto my-4 flex w-full max-w-[400px] flex-col">
-          <label className="mr-auto">Password</label>
+          <label className="mr-auto py-2  font-bold text-blue-900">
+            Password
+          </label>
           {edit ? (
             <input className="rounded-md border px-2" />
           ) : (
-            <div className="rounded-md border bg-white px-2">*****</div>
+            <div className="rounded-md border bg-white px-2 py-1">*****</div>
           )}
         </div>
         <div className="mx-auto my-4 flex w-full max-w-[400px] flex-col">
-          <label className="mr-auto">Telefono</label>
+          <label className="mr-auto py-2  font-bold text-blue-900">
+            Telefono
+          </label>
           {edit ? (
             <input
-              className="rounded-md border px-2"
+              className="rounded-md border px-2 py-1"
               defaultValue={user?.telephone}
             />
           ) : (
-            <div className="rounded-md border bg-white px-2">
-              {user?.telephone ? user?.telephone : "---"}
+            <div className="rounded-md border bg-white px-2 py-1">
+              {user?.telephone ? user?.telephone : "."}
             </div>
           )}
         </div>
         <div className="mx-auto my-2 flex w-full max-w-[400px] flex-col">
-          <label className="mr-auto">Residencia</label>
+          <label className="mr-auto py-2  font-bold text-blue-900">
+            Residencia
+          </label>
           {edit ? (
             <input
-              className="rounded-md border px-2"
+              className="rounded-md border px-2 py-1"
               defaultValue={user?.residency}
             />
           ) : (
-            <div className="rounded-md border bg-white px-2">
-              {user?.residency ? user?.residency : "---"}
+            <div className=" rounded-md border bg-white px-2 py-1">
+              {user?.residency ? user?.residency : "."}
             </div>
           )}
         </div>
         <div className="mx-auto my-2 flex w-full max-w-[400px] flex-col">
-          <label className="mr-auto">Género</label>
+          <label className="mr-auto py-2  font-bold text-blue-900">
+            Género
+          </label>
           {edit ? (
             <input
-              className="rounded-md border px-2"
+              className="rounded-md border px-2 py-1"
               defaultValue={user?.name}
             />
           ) : (
-            <div className="rounded-md border bg-white px-2">
+            <div className="rounded-md border bg-white px-2 py-1">
               {user?.genere}
             </div>
           )}
@@ -100,18 +116,18 @@ function Perfil() {
         <div>
           {!edit ? (
             <button
-              className="my-2 flex rounded-md border bg-gray-800 p-2 text-white"
+              className="my-2 flex rounded-md border bg-gray-800 p-6 text-white"
               onClick={() => setEdit(true)}
             >
-              <PencilSquareIcon width={20} height={20} fill="ffff" />
-              <span className="mx-2">Editar</span>
+              <PencilSquareIcon width={30} height={30} fill="ffff" />
+              <span className="mx-2 text-lg">Editar</span>
             </button>
           ) : (
             <button
-              className="my-2 flex rounded-md border bg-gray-800 p-2 text-white"
+              className="my-2 flex rounded-md border bg-gray-800 p-6 text-white"
               onClick={() => setEdit(false)}
             >
-              <svg width="20px" height="20px" viewBox="0 0 32 32" version="1.1">
+              <svg width="30px" height="30px" viewBox="0 0 32 32" version="1.1">
                 <g
                   id="Page-1"
                   stroke="none"
@@ -131,7 +147,7 @@ function Perfil() {
                   </g>
                 </g>
               </svg>
-              <span className="mx-2">Guardar</span>
+              <span className="mx-2 text-lg">Guardar</span>
             </button>
           )}
         </div>

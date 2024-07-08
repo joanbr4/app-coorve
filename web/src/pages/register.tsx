@@ -155,9 +155,9 @@ function Register() {
             // {...register("phone", { type: "text" })}
             onChange={(e) => setForm({ ...form, genere: e.target.value })}
           >
-            <option value="hombre">Hombre</option>
-            <option value="mujer">Mujer</option>
-            <option value="ns/nc">Prefiero no decirlo</option>
+            <option value="Hombre">Hombre</option>
+            <option value="Mujer">Mujer</option>
+            <option value="NS/NC">Prefiero no decirlo</option>
           </select>
           {errorsZod && <div className="text-red-500">{errorsZod.genere}</div>}
 
