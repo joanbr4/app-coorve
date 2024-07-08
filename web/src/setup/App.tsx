@@ -17,7 +17,7 @@ import { Perfil } from "@/pages/perfil";
 import { Configuration } from "@/pages/configuracion";
 import { Facturación } from "@/pages/facturación";
 import { PrivateRoute } from "./FilteredRoutes";
-import { ErrorBoundary } from "@/pages/errors/ErrorBoundary";
+// import { ErrorBoundary } from "@/pages/errors/ErrorBoundary";
 import { NotFoundPage } from "@/pages/errors/NotFounPage";
 
 const router = createBrowserRouter(
@@ -31,12 +31,7 @@ const router = createBrowserRouter(
       <Route path="/faqs" element={<Faqs />} />
       {/* <Route path="/user" element={<UserPage />}> */}
       <Route path="/user" element={<PrivateRoute element={<UserPage />} />}>
-        <Route
-          path="dashboard"
-          element={
-            <CircularChart sales={20} customer={2} retries={4} frequency={23} />
-          }
-        />
+        <Route path="dashboard" element={<CircularChart />} />
         {/* <Route path="dashboard" element={<Dashboard />} /> */}
         <Route path="perfil" element={<Perfil />} />
         <Route path="settings" element={<Configuration />} />

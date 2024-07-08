@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Resend } from "resend";
-import { appConfig } from "../../config/index";
+import { apiConfig, appConfig } from "../../config/index";
 import { db } from "../../db/client";
 import { resetPassword, users } from "../../db/schemas";
 import { eq } from "drizzle-orm";
@@ -16,7 +16,7 @@ async function resetPassController(req: Request, res: Response) {
   console.log(user);
   if (user) {
     if (password === undefined) {
-      const resend = new Resend(appConfig.api_key_resend);
+      const resend = new Resend(apiConfig.resend);
       const createResetQuery = await db.insert(resetPassword).values({
         link: idGen,
         email: user.email,

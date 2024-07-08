@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const genereSchema = z.enum(["hombre", "mujer", "ns/nc"]);
+const genereSchema = z.enum(["Hombre", "Mujer", "NS/NC"]);
 
 export const userSchema = z.object({
   name: z.string().min(3, { message: "El nombre no puede estar vacío" }),

@@ -81,6 +81,9 @@ const CircularChart = () => {
       "NO contestaron",
       "Agendaron",
       "Renta",
+      "No calificados",
+      "Primer Contacto",
+      "Interesado",
       "Otros",
     ];
     const listKeysClean = Object.entries(rest)
@@ -94,7 +97,10 @@ const CircularChart = () => {
         if (item == "NO_contestaron") return listKeysRaw[4];
         if (item == "agendaron") return listKeysRaw[5];
         if (item == "renta") return listKeysRaw[6];
-        if (item == "otros") return listKeysRaw[7];
+        if (item == "no_calificados") return listKeysRaw[7];
+        if (item == "primer_contacto") return listKeysRaw[8];
+        if (item == "interesado") return listKeysRaw[9];
+        if (item == "otros") return listKeysRaw[10];
       }) as string[];
 
     console.log("keys", listKeysClean);
@@ -117,6 +123,7 @@ const CircularChart = () => {
             "#FF9F40", // Orange
             "#FF4500", // Red
             "#FA8072", // Salmon
+            "#ffffff", //white
           ],
           hoverBackgroundColor: [
             "#FF6384", // Pink (Original)
@@ -127,6 +134,7 @@ const CircularChart = () => {
             "#FF9F40", // Orange
             "#FF4500", // Red
             "#FA8072", // Salmon
+            "#fff", //white
           ],
           hoverOffset: 20, //in pixels outside
           padding: 8,
@@ -141,9 +149,10 @@ const CircularChart = () => {
     dataChart = data;
     // setDataChart(data);
   }
+  // let dataOption = { layout: {}, plugins: {}, responsive: true };
   const option = {
     layout: {
-      padding: 30,
+      padding: 39,
       autoPadding: true,
     },
     plugins: {
@@ -152,7 +161,7 @@ const CircularChart = () => {
         text: "Visualiza tus resultados",
         font: {
           size: 40,
-          weight: "bold",
+          weight: "bold" as "bold",
         },
         color: "white",
         fullSize: true,
@@ -165,27 +174,30 @@ const CircularChart = () => {
           boxHeight: 20,
           font: {
             size: 14,
-            weight: "lighter",
+            weight: "lighter" as "lighter",
           },
         },
       },
       datalabels: {
         display: true,
         color: "white",
-        formatter: (value: number, context: any) => {
+        formatter: (
+          value: number
+          // context: any
+        ) => {
           return value;
         },
         font: {
           size: 40,
         },
-        align: "end", // Aligns labels to the end of the arc
-        anchor: "end", // Anchors labels to the end of the arc
+        align: "end" as "end", // Aligns labels to the end of the arc
+        anchor: "end" as "end", // Anchors labels to the end of the arc
         offset: 8, // Moves labels away from the center of the arc
       },
       tooltip: {
         callbacks: {
           label: function (context: PieTooltipContext) {
-            const label = context.raw;
+            const label = context.raw as string;
             // let label = context.label || "";
 
             // if (label) {
@@ -201,6 +213,7 @@ const CircularChart = () => {
     },
     responsive: true,
   };
+  // dataOption = option;
 
   return (
     <div className="flex min-h-screen items-center justify-center">

@@ -29,6 +29,7 @@ export const action = async ({ request }: { request: Request }) => {
     password: dataObject.password,
     confirm: dataObject.confirm,
   });
+  console.log("zod:", dataValidatedZod);
   if (dataValidatedZod.success == false) {
     const errorsFormated = dataValidatedZod.error?.issues.reduce(
       (acc, item) => {
