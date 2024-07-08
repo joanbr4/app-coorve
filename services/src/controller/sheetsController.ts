@@ -1,7 +1,7 @@
 import { Auth, google } from "googleapis"
-import { NotFoundError } from "../utils/errors"
+import { ErrorsApisDrive, NotFoundError } from "../utils/errors"
 import { authorize } from "./auth/auth2Clientv2"
-import { apiConfig } from "../config"
+import { apiConfig } from "../config/index"
 import { eq } from "drizzle-orm"
 import { db } from "../db/client"
 import { users } from "../db/schemas"
@@ -17,7 +17,6 @@ async function listFiles(
     pageSize: 200,
     fields: "nextPageToken, files(id, name)",
     q: `'${folderId}' in parents`,
-    // q: `'${folderId}' in parents and name contains '${fileName}'`,
   })
 
   const files = res.data.files
@@ -31,71 +30,96 @@ async function listFiles(
     .filter((file) => file.name?.includes(fileName))
     .map((file) => file.id as string)
 
-  // console.log(`${file.name})`)
-  // console.log(`${file.name} (${file.id})`)
-  // fileId.push(file.id as string)
-
-  // console.log(`${file.name} (${file.id})`)
-
   console.log("Files:", fileId)
   return fileId
 }
+let dataObjTable = {
+  total: 0,
+  no_interesa: 0,
+  fuera_presupuesto: 0,
+  cita_realizada: 0,
+  contestaron: 0,
+  NO_contestaron: 0,
+  agendaron: 0,
+  renta: 0,
+  otros: 0,
+}
+type InitialDataObject = typeof dataObjTable
 
 async function listMajors(
   auth: Auth.OAuth2Client,
-  sheetId: string,
-  name: string
-): Promise<string[][] | void> {
+  sheetId: string
+): Promise<InitialDataObject | void> {
   const sheets = google.sheets({ version: "v4", auth })
   const res = await sheets.spreadsheets.values.get({
     spreadsheetId: sheetId,
-    range: "Line!B29:E",
+    range: "Comprador!A1:M",
   })
   const rows = res.data.values as Array<string[]>
-  // console.log(rows)
+
   if (!rows || rows.length === 0) {
     console.log("No data found.")
     return
   }
 
-  let indexUser = 0
-
-  const dataUseTable: string[][] = []
-  console.log("dataF:", dataUseTable)
   rows.forEach((row) => {
-    if (row[0] == "Concepto") {
-      indexUser = row.findIndex((item) => item == name)
-      console.log(indexUser)
-    }
-    dataUseTable.push([row[0], row[indexUser]])
+    if (row[4] == "No interesa") dataObjTable.no_interesa += 1
+    else if (row[4] == "Fuera de presupuesto")
+      dataObjTable.fuera_presupuesto += 1
+    else if (row[4] == "Cita realizada") dataObjTable.cita_realizada += 1
+    else if (row[4] == "Contestaron") dataObjTable.contestaron += 1
+    else if (row[4] == "NO constestaron") dataObjTable.NO_contestaron += 1
+    else if (row[4] == "Agendaron cita") dataObjTable.agendaron += 1
+    else if (row[4] == "Renta") dataObjTable.renta += 1
+    else dataObjTable.otros += 1
   })
+  dataObjTable.total = rows.length - 1
 
-  return dataUseTable
+  const copyTable = { ...dataObjTable }
+  dataObjTable = {
+    total: 0,
+    no_interesa: 0,
+    fuera_presupuesto: 0,
+    cita_realizada: 0,
+    contestaron: 0,
+    NO_contestaron: 0,
+    agendaron: 0,
+    renta: 0,
+    otros: 0,
+  }
+  return copyTable
 }
 
 const sheetsController = async (req: Request, res: Response) => {
   try {
     const { email } = req.body
+    console.log("email", email)
     const dataUser = await db.select().from(users).where(eq(users.email, email))
     const { name: nameUser } = dataUser[0]
     const folderId = apiConfig.folder_id
     const auth = await authorize()
-    const nameFile = "Log Aprov" //XLS doesnt works for api
+    const nameFile = "Buyers - " + nameUser //XLS doesnt works for api
     const filesListId = await listFiles(auth, nameFile, folderId)
-    // const name = "Bordo"
     if (filesListId == undefined)
       throw new NotFoundError("Not Found a User's File")
     if (filesListId.length > 1) throw new NotFoundError("More 1 match file")
 
     const fileId = filesListId[0]
-    const dataUserTable = await listMajors(auth, fileId, nameUser)
+    const dataUserTable = await listMajors(auth, fileId)
     console.log("data", dataUserTable)
 
-    // console.log("datafromG:", dataFileId)
     res.send({ data: dataUserTable })
-  } catch (err: any) {
-    console.log("eerrr", err)
-    throw new Error(err)
+  } catch (error) {
+    const err = error as ErrorsApisDrive
+    console.log(
+      err.message,
+      "on",
+      err.errors?.[0].location,
+      err.errors?.[0].locationType
+    )
+    throw new Error(
+      `${err.message} "on" ${err.errors?.[0].location} ${err.errors?.[0].locationType}`
+    )
   }
 }
 

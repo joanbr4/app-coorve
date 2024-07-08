@@ -15,8 +15,8 @@ dist-ssr
 assets/
 
 # Sensitive files
-services/credentials.json
-services/token.json
+/services/credentials.json
+/services/token.json
 
 # Editor directories and files
 .vscode/*

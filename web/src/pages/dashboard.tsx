@@ -1,170 +1,220 @@
-// import { useAuth } from "@/context/AuthProvider";
-// import React, { PureComponent, useContext, useEffect } from "react";
-// import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
+import { useAuth } from "@/context/AuthProvider";
+import { TdataChart } from "@/types/types";
+import {
+  Chart,
+  PieController,
+  ArcElement,
+  Title,
+  Legend,
+  Tooltip,
+  TooltipItem,
+} from "chart.js";
+// import { title } from "process";
+import { useEffect, useState } from "react";
+import { Pie } from "react-chartjs-2";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 
-import { useState } from "react";
+Chart.register(
+  PieController,
+  ArcElement,
+  Title,
+  Legend,
+  Tooltip,
+  ChartDataLabels
+);
 
-// const data = [
-//   { name: "Interesado", value: 20 },
-//   { name: "No interesado", value: 30 },
-//   { name: "No contactados", value: 40 },
-//   // { name: "Group D", value: 200 },
-// ];
-// const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
-// const total = data.reduce((acc, curr) => acc + curr.value, 0);
+type PieTooltipContext = TooltipItem<"pie">;
 
-// function Dashboard() {
-//   const { user } = useAuth();
-//   const payload = { email: user?.email };
-//   useEffect(() => {
-//     fetch("/sheets", {
-//       method: "POST",
-//       // credentials: "include",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(payload),
-//     })
-//       .then((res) => {
-//         console.log("asd", res);
-//         if (!res.ok) throw new Error(res.statusText);
-//         return res.json();
-//         console.log(data);
-//       })
-//       .then((data) => console.log(data));
-//   }, []);
+const CircularChart = () => {
+  // const [dataChart, setDataChart] = useState<{
+  //   datasets: { data: number[] }[];
+  //   labels: string[];
+  // }>();
+  const [dataChartFetch, setDataChartFetch] = useState<TdataChart>();
 
-//   const demoUrl = "https://codesandbox.io/s/pie-chart-with-padding-angle-7ux0o";
+  const { user } = useAuth();
+  const payload = { email: user?.email };
 
-//   return (
-//     <>
-//       <div className="mt-10 flex">
-//         <ul className="mx-auto  flex  items-center">
-//           <li className="mx-2 flex rounded-lg border font-bold ">
-//             <span className="rounded-l-md px-6 py-4 text-white ">Total</span>
-//             <span className="rounded-r-md bg-white p-4">{total}</span>
-//           </li>
-//           {data.map((item, index) => (
-//             <li key={index} className="mx-2 flex rounded-lg border font-bold  ">
-//               <span
-//                 style={{ backgroundColor: COLORS[index % COLORS.length] }}
-//                 className="rounded-l-md  px-6 py-4 text-white "
-//               >
-//                 {item.name}
-//               </span>
-//               <span className="rounded-r-md bg-white p-4 ">{item.value}</span>
-//             </li>
-//           ))}
-//         </ul>
-//       </div>
-//       <PieChart
-//         width={800}
-//         height={400}
-//         // onMouseEnter={this.onPieEnter}
-//         className="h-[200px] w-[300px]"
-//       >
-//         {/* <Pie
-//             data={data}
-//             cx={120}
-//             cy={200}
-//             innerRadius={60}
-//             outerRadius={80}
-//             fill="#8884d8"
-//             paddingAngle={5}
-//             dataKey="value"
-//           >
-//             {data.map((entry, index) => (
-//               <Cell
-//                 key={`cell-${index}`}
-//                 fill={COLORS[index % COLORS.length]}
-//               />
-//             ))}
-//           </Pie> */}
-//         <Pie
-//           data={data}
-//           cx={420}
-//           cy={200}
-//           startAngle={180}
-//           endAngle={0}
-//           innerRadius={60}
-//           outerRadius={80}
-//           fill="#8884d8"
-//           paddingAngle={5}
-//           dataKey="value"
-//         >
-//           {data.map((entry, index) => (
-//             <Cell
-//               key={`cell-${index}`}
-//               fill={COLORS[index % COLORS.length]}
-//               className="w-[500px]"
-//             />
-//           ))}
-//         </Pie>
-//       </PieChart>
-//     </>
-//   );
-// }
-// export { Dashboard };
-const CircularChart = ({ sales, customer, retries, frequency }) => {
-  const [activeSegment, setActiveSegment] = useState(null);
+  useEffect(() => {
+    fetch("/sheets", {
+      method: "POST",
+      // credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => {
+        console.log("asd", res);
+        if (!res.ok) throw new Error(res.statusText);
+        return res.json();
+      })
+      .then((data) => {
+        setDataChartFetch(data.data);
+      });
+  }, []);
 
-  const data = [
-    { name: "Sales", value: sales, color: "#FF6384" },
-    { name: "Customer", value: customer, color: "#36A2EB" },
-    { name: "Retries", value: retries, color: "#FFCE56" },
-    { name: "Frequency", value: frequency, color: "#4BC0C0" },
-  ];
-
-  const total = data.reduce((sum, item) => sum + item.value, 0);
-  let startAngle = 0;
-
-  const handleMouseEnter = (index) => {
-    setActiveSegment(index);
+  // let dataChart = { datasets: "", labels: "" };
+  let dataChart = {
+    datasets: [
+      {
+        data: [0],
+        // label: "Scores",
+        // backgroundColor: [""],
+        // hoverBackgroundColor: [""],
+        // hoverOffset: 0, //in pixels outside
+        // padding: 0,
+        // circumference: 0,
+        // rotation: 0,
+      },
+    ],
+    labels: [""],
   };
+  if (dataChartFetch) {
+    console.log("23", dataChartFetch);
+    const { total, ...rest } = dataChartFetch;
+    const listKeysRaw = [
+      "No interesa",
+      "Fuera de presupuesto",
+      "Cita realizada",
+      "Contestaron",
+      "NO contestaron",
+      "Agendaron",
+      "Renta",
+      "Otros",
+    ];
+    const listKeysClean = Object.entries(rest)
+      .filter((item) => item[1] != 0)
+      .map((item) => item[0])
+      .map((item) => {
+        if (item == "no_interesa") return listKeysRaw[0];
+        if (item == "fuera_presupuesto") return listKeysRaw[1];
+        if (item == "cita_realizada") return listKeysRaw[2];
+        if (item == "contestaron") return listKeysRaw[3];
+        if (item == "NO_contestaron") return listKeysRaw[4];
+        if (item == "agendaron") return listKeysRaw[5];
+        if (item == "renta") return listKeysRaw[6];
+        if (item == "otros") return listKeysRaw[7];
+      }) as string[];
 
-  const handleMouseLeave = () => {
-    setActiveSegment(null);
+    console.log("keys", listKeysClean);
+    const listValues = Object.entries(rest)
+      .filter((item) => item[1] !== 0)
+      .map((item) => item[1]);
+
+    // const listValues = Array.from(Object.values(rest));
+    const data = {
+      datasets: [
+        {
+          // label: "Scores",
+          data: listValues,
+          backgroundColor: [
+            "#FF6384", // Pink (Original)
+            "#36A2EB", // Blue (Original)
+            "#FFCE56", // Yellow (Original)
+            "#4BC0C0", // Green
+            "#9966FF", // Purple
+            "#FF9F40", // Orange
+            "#FF4500", // Red
+            "#FA8072", // Salmon
+          ],
+          hoverBackgroundColor: [
+            "#FF6384", // Pink (Original)
+            "#36A2EB", // Blue (Original)
+            "#FFCE56", // Yellow (Original)
+            "#4BC0C0", // Green
+            "#9966FF", // Purple
+            "#FF9F40", // Orange
+            "#FF4500", // Red
+            "#FA8072", // Salmon
+          ],
+          hoverOffset: 20, //in pixels outside
+          padding: 8,
+          circumference: 180,
+          rotation: 270,
+        },
+      ],
+
+      // These labels appear in the legend and in the tooltips when hovering different arcs
+      labels: listKeysClean,
+    };
+    dataChart = data;
+    // setDataChart(data);
+  }
+  const option = {
+    layout: {
+      padding: 30,
+      autoPadding: true,
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: "Visualiza tus resultados",
+        font: {
+          size: 40,
+          weight: "bold",
+        },
+        color: "white",
+        fullSize: true,
+      },
+      legend: {
+        display: true,
+        labels: {
+          color: "white",
+          padding: 40,
+          boxHeight: 20,
+          font: {
+            size: 14,
+            weight: "lighter",
+          },
+        },
+      },
+      datalabels: {
+        display: true,
+        color: "white",
+        formatter: (value: number, context: any) => {
+          return value;
+        },
+        font: {
+          size: 40,
+        },
+        align: "end", // Aligns labels to the end of the arc
+        anchor: "end", // Anchors labels to the end of the arc
+        offset: 8, // Moves labels away from the center of the arc
+      },
+      tooltip: {
+        callbacks: {
+          label: function (context: PieTooltipContext) {
+            const label = context.raw;
+            // let label = context.label || "";
+
+            // if (label) {
+            //   label += ": ";
+            // }
+            // if (context.raw !== null) {
+            //   label += context.raw;
+            // }
+            return label;
+          },
+        },
+      },
+    },
+    responsive: true,
   };
 
   return (
-    <svg width="300" height="300" viewBox="-1 -1 2 2">
-      {data.map((item, index) => {
-        const angle = (item.value / total) * 360;
-        const endAngle = startAngle + angle;
-        const largeArcFlag = angle > 180 ? 1 : 0;
-        const startRad = (startAngle * Math.PI) / 180;
-        const endRad = (endAngle * Math.PI) / 180;
-
-        const x1 = Math.cos(startRad);
-        const y1 = Math.sin(startRad);
-        const x2 = Math.cos(endRad);
-        const y2 = Math.sin(endRad);
-
-        const pathData = [
-          `M ${x1} ${y1}`,
-          `A 1 1 0 ${largeArcFlag} 1 ${x2} ${y2}`,
-          "L 0 0",
-        ].join(" ");
-
-        startAngle = endAngle;
-
-        return (
-          <path
-            key={item.name}
-            d={pathData}
-            fill={item.color}
-            opacity={activeSegment === index ? 1 : 0.8}
-            onMouseEnter={() => handleMouseEnter(index)}
-            onMouseLeave={handleMouseLeave}
-          />
-        );
-      })}
-      {activeSegment !== null && (
-        <text x="0" y="0" textAnchor="middle" fill="white" fontSize="0.2">
-          {`${data[activeSegment].name}: ${data[activeSegment].value}`}
-        </text>
-      )}
-    </svg>
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="flex flex-col ">
+        <div className="p-8 sm:w-[500px] md:w-[700px] lg:w-[900px]">
+          {dataChart ? <Pie data={dataChart} options={option} /> : null}
+        </div>
+        {dataChartFetch && (
+          <h1 className="mx-auto w-1/3 rounded-md border bg-white py-2 text-lg font-bold text-blue-900">
+            Total: {dataChartFetch.total}
+          </h1>
+        )}
+      </div>
+    </div>
   );
 };
 

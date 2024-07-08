@@ -23,3 +23,15 @@ export type TUser = {
   created_at: string;
   telephone: string;
 } | null;
+
+export type TdataChart = {
+  total: number;
+  no_interesa: number;
+  fuera_presupuesto: number;
+  cita_realizada: number;
+  contestaron: number;
+  NO_contestaron: number;
+  agendaron: number;
+  renta: number;
+  otros: number;
+};

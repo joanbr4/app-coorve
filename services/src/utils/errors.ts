@@ -1,6 +1,9 @@
 /* eslint max-classes-per-file: 0 */
 import { ZodIssue } from "zod"
 
+class ErrorsApisDrive extends Error {
+  errors?: { location: string; locationType: string }[]
+}
 class DefaultError extends Error {
   public status: number
   public message: string
@@ -88,4 +91,5 @@ export {
   InvalidParamError,
   InvalidToken,
   DeletedError,
+  ErrorsApisDrive,
 }
