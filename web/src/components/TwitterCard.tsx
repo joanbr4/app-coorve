@@ -31,7 +31,6 @@ const TweetEmbed = ({ url }: { url: string }) => {
   );
 };
 const TweetEmbed2 = ({ url }: { url: string }) => {
-  console.log(url);
   useEffect(() => {
     // Cargar el script de Twitter para los widgets
     const script = document.createElement("script");

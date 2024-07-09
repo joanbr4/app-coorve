@@ -93,7 +93,7 @@ function Login() {
   return (
     <div
       className="flex h-screen w-screen flex-col
-    bg-gray-800/80 "
+    bg-gray-800 "
     >
       <div className="m-auto flex max-w-[300px] ">
         <BackgroundGradient className="max-w-sm rounded-[22px] bg-white p-4 dark:bg-zinc-900 sm:p-10 md:p-6">
@@ -146,7 +146,7 @@ function Login() {
                 type="submit"
                 className="relative my-4 overflow-hidden rounded-md bg-gray-800 px-5 py-2.5 text-white duration-300 [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] active:translate-y-1 active:scale-x-110 active:scale-y-90"
               >
-                Entraree
+                Entrar
               </button>
               <div className="mt-8 rounded-md  px-2 py-1 text-xs text-gray-800">
                 Resetear contraseña?

@@ -2,28 +2,34 @@ import { useAuth } from "@/context/AuthProvider";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 
 function UserPage() {
-  const { user } = useAuth();
-  console.log("ssa", user);
+  const { user, setUser } = useAuth();
   const navigate = useNavigate();
 
   const handlingLogout = async () => {
-    const response = await fetch("/logout", { method: "POST" });
+    console.log("hola");
+    const response = await fetch("/logout", {
+      method: "POST",
+      credentials: "include",
+    });
     if (response.ok) {
+      setUser(null);
       return navigate("/content");
     } else {
-      console.log("adssdsd", response);
+      console.log("4534", response);
+      console.log("still exist user:", user);
     }
   };
+
   return (
-    <div className="flex h-screen flex-col bg-blue-900">
+    <div className="flex h-screen flex-col">
       {/* <Logout /> */}
       <div className="flex flex-1 flex-col md:flex-row">
-        <aside className="flex flex-shrink-0 bg-gray-800 text-white md:flex-col">
+        <aside className="flex flex-shrink-0  bg-gray-700 text-white md:flex-col">
           <ul className="ml-8 flex flex-grow md:m-0 md:flex-col">
             <li className="">
               <NavLink
                 to="dashboard"
-                className="m-2 flex rounded-lg p-1 hover:bg-blue-600 hover:text-white md:m-4 md:p-8"
+                className="m-2 flex rounded-lg p-2 hover:bg-gray-800 hover:text-white md:m-4 md:p-8"
               >
                 <svg
                   fill="#ffff"
@@ -34,7 +40,7 @@ function UserPage() {
                 >
                   <path
                     d="M833.935 1063.327c28.913 170.315 64.038 348.198 83.464 384.79 27.557 51.84 92.047 71.944 144 44.387 51.84-27.558 71.717-92.273 44.16-144.113-19.426-36.593-146.937-165.46-271.624-285.064Zm-43.821-196.405c61.553 56.923 370.899 344.81 415.285 428.612 56.696 106.842 15.811 239.887-91.144 296.697-32.64 17.28-67.765 25.411-102.325 25.411-78.72 0-154.955-42.353-194.371-116.555-44.386-83.802-109.102-501.346-121.638-584.245-3.501-23.717 8.245-47.21 29.365-58.277 21.346-11.294 47.096-8.02 64.828 8.357ZM960.045 281.99c529.355 0 960 430.757 960 960 0 77.139-8.922 153.148-26.654 225.882l-10.39 43.144h-524.386v-112.942h434.258c9.487-50.71 14.231-103.115 14.231-156.084 0-467.125-380.047-847.06-847.059-847.06-467.125 0-847.059 379.935-847.059 847.06 0 52.97 4.744 105.374 14.118 156.084h487.454v112.942H36.977l-10.39-43.144C8.966 1395.137.044 1319.128.044 1241.99c0-529.243 430.645-960 960-960Zm542.547 390.686 79.85 79.85-112.716 112.715-79.85-79.85 112.716-112.715Zm-1085.184 0L530.123 785.39l-79.85 79.85L337.56 752.524l79.849-79.85Zm599.063-201.363v159.473H903.529V471.312h112.942Z"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                   />
                 </svg>
                 <span className="mx-2 hidden md:block">Dashboard</span>
@@ -43,7 +49,7 @@ function UserPage() {
             <li className="">
               <NavLink
                 to="perfil"
-                className="m-2 flex rounded-lg p-2 hover:bg-blue-600  hover:text-white md:m-4 md:p-8"
+                className="m-2 flex rounded-lg p-2 hover:bg-gray-800  hover:text-white md:m-4 md:p-8"
               >
                 <svg
                   width="30px"
@@ -55,9 +61,9 @@ function UserPage() {
                   <g
                     id="Page-1"
                     stroke="none"
-                    stroke-width="1"
+                    strokeWidth="1"
                     fill="none"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                   >
                     <g
                       id="Dribbble-Light-Preview"
@@ -82,7 +88,7 @@ function UserPage() {
             <li className=" ">
               <NavLink
                 to="settings"
-                className="m-2 flex rounded-lg p-2 hover:bg-blue-600 hover:text-white md:m-4 md:p-8"
+                className="m-2 flex items-center rounded-lg p-2 hover:bg-gray-800 hover:text-white md:m-4 md:p-8"
               >
                 <svg
                   width="30px"
@@ -90,13 +96,14 @@ function UserPage() {
                   viewBox="0 0 30 30"
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
+                  className="my-auto flex items-center"
                 >
                   <g
                     id="Page-1"
                     stroke="none"
-                    stroke-width="1"
+                    strokeWidth="1"
                     fill="none"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                   >
                     <g
                       id="Icon-Set"
@@ -116,7 +123,7 @@ function UserPage() {
             <li className="  ">
               <NavLink
                 to="facturas"
-                className="m-2 flex rounded-lg p-2 hover:bg-blue-600 hover:text-white md:m-4 md:p-8"
+                className="m-2 flex rounded-lg p-2 hover:bg-gray-800 hover:text-white md:m-4 md:p-8"
               >
                 <svg
                   fill="#ffff"
@@ -133,32 +140,29 @@ function UserPage() {
             </li>
           </ul>
           <hr className="hidden md:block" />
-          {/* <vr className="hidden md:block" /> */}
-          <button>
-            <NavLink
-              to="/content"
-              className="m-2 flex rounded-lg p-2 hover:bg-blue-600 hover:text-white md:m-4 md:p-8"
+
+          <button
+            className="m-2 flex rounded-lg p-2 hover:bg-gray-800 hover:text-white md:m-4 md:p-8"
+            onClick={handlingLogout}
+          >
+            <svg
+              width="30px"
+              height="30px"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <svg
-                width="30px"
-                height="30px"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M2 6.5C2 4.01472 4.01472 2 6.5 2H12C14.2091 2 16 3.79086 16 6V7C16 7.55228 15.5523 8 15 8C14.4477 8 14 7.55228 14 7V6C14 4.89543 13.1046 4 12 4H6.5C5.11929 4 4 5.11929 4 6.5V17.5C4 18.8807 5.11929 20 6.5 20H12C13.1046 20 14 19.1046 14 18V17C14 16.4477 14.4477 16 15 16C15.5523 16 16 16.4477 16 17V18C16 20.2091 14.2091 22 12 22H6.5C4.01472 22 2 19.9853 2 17.5V6.5ZM18.2929 8.29289C18.6834 7.90237 19.3166 7.90237 19.7071 8.29289L22.7071 11.2929C23.0976 11.6834 23.0976 12.3166 22.7071 12.7071L19.7071 15.7071C19.3166 16.0976 18.6834 16.0976 18.2929 15.7071C17.9024 15.3166 17.9024 14.6834 18.2929 14.2929L19.5858 13L11 13C10.4477 13 10 12.5523 10 12C10 11.4477 10.4477 11 11 11L19.5858 11L18.2929 9.70711C17.9024 9.31658 17.9024 8.68342 18.2929 8.29289Z"
-                  fill="#fff"
-                />
-              </svg>
-              <span className="mx-2 hidden md:block" onClick={handlingLogout}>
-                Logout
-              </span>
-            </NavLink>
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M2 6.5C2 4.01472 4.01472 2 6.5 2H12C14.2091 2 16 3.79086 16 6V7C16 7.55228 15.5523 8 15 8C14.4477 8 14 7.55228 14 7V6C14 4.89543 13.1046 4 12 4H6.5C5.11929 4 4 5.11929 4 6.5V17.5C4 18.8807 5.11929 20 6.5 20H12C13.1046 20 14 19.1046 14 18V17C14 16.4477 14.4477 16 15 16C15.5523 16 16 16.4477 16 17V18C16 20.2091 14.2091 22 12 22H6.5C4.01472 22 2 19.9853 2 17.5V6.5ZM18.2929 8.29289C18.6834 7.90237 19.3166 7.90237 19.7071 8.29289L22.7071 11.2929C23.0976 11.6834 23.0976 12.3166 22.7071 12.7071L19.7071 15.7071C19.3166 16.0976 18.6834 16.0976 18.2929 15.7071C17.9024 15.3166 17.9024 14.6834 18.2929 14.2929L19.5858 13L11 13C10.4477 13 10 12.5523 10 12C10 11.4477 10.4477 11 11 11L19.5858 11L18.2929 9.70711C17.9024 9.31658 17.9024 8.68342 18.2929 8.29289Z"
+                fill="#fff"
+              />
+            </svg>
+            <span className="mx-2 hidden md:block">Logout</span>
           </button>
         </aside>
+
         <center className="h-full w-full">
           <Outlet context={user} />
         </center>

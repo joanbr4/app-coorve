@@ -8,19 +8,13 @@ import {
   Transition,
   // PopoverPanel,
   // PopoverButton,
-  DialogPanel,
-  TransitionChild,
 } from "@headlessui/react";
-import {
-  Bars3Icon,
-  // ChevronDownIcon,
-  PlayCircleIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { PlayCircleIcon } from "@heroicons/react/24/outline";
 import {
   //  Fragment,
   useState,
 } from "react";
+import { useAuth } from "@/context/AuthProvider";
 
 type TitemMenu = {
   name: string;
@@ -29,11 +23,6 @@ type TitemMenu = {
 };
 
 const menuItems: TitemMenu[] = [
-  // {
-  //   name: "Market Place",
-  //   href: "/marketplace",
-  //   icon: PlayCircleIcon,
-  // },
   {
     name: "Planes",
     href: "#pricing",
@@ -45,18 +34,19 @@ const menuItems: TitemMenu[] = [
     icon: PlayCircleIcon,
   },
 ];
-function Login() {
+function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const open = () => {
-    setMobileMenuOpen(true);
-    console.log("func", mobileMenuOpen);
+    setMobileMenuOpen(!mobileMenuOpen);
+    // console.log("func", mobileMenuOpen);
   };
-  console.log("global", mobileMenuOpen);
 
   return (
-    <nav className="flex h-2 items-center  bg-gray-800 py-6 text-white">
-      <div className="mx-auto mt-6 flex w-[800px] justify-between px-2">
+    <nav className="fixed flex w-full items-center  bg-gray-800 py-4 text-white sm:relative">
+      <div className="mx-auto  flex w-[800px] justify-between px-2">
         <div className="my-auto px-5 sm:items-center sm:pt-2">
           <Link to="/">
             <img
@@ -83,95 +73,108 @@ function Login() {
           </ul>
         </div>
         <button className="text-whie my-2 mr-2 hidden rounded-lg border border-white  p-2 hover:border-2 sm:block">
-          <Link to="/signup">Login</Link>
+          {user ? (
+            <NavLink to="/user/dashboard">User</NavLink>
+          ) : (
+            <NavLink to="/signup">Login</NavLink>
+          )}
         </button>
         <div className="ml-auto mr-2 flex sm:hidden">
           <button
+            className={
+              !mobileMenuOpen
+                ? "hamburger hamburger--squeeze inline-flex items-center justify-center rounded-md p-2.5 "
+                : "hamburger hamburger--squeeze is-active inline-flex items-center justify-center rounded-md p-2.5"
+            }
             type="button"
-            className="inline-flex items-center justify-center rounded-md p-2.5"
             onClick={open}
           >
-            <span className="sr-only">Open main menus</span>
-            <Bars3Icon className="h-9 w-9" aria-hidden="true" />
+            <span className="hamburger-box ">
+              <span className="hamburger-inner"></span>
+            </span>
           </button>
         </div>
 
         <Transition appear show={mobileMenuOpen}>
           <Dialog
             as="div"
-            className="block sm:hidden"
+            className="fixed inset-0 z-10"
             open={mobileMenuOpen}
             onClose={() => setMobileMenuOpen(false)}
           >
-            <div className="fixed inset-0 z-10" />
-            <TransitionChild
-              // as={Fragment}
-              enter="transition ease-out duration-200"
-              enterFrom="opacity-0 translate-y-1"
-              enterTo="opacity-100 translate-y-0"
-              leave="transition ease-in duration-150"
-              leaveFrom="opacity-100 translate-y-0"
-              leaveTo="opacity-0 translate-y-1"
-            >
-              <DialogPanel>
-                <div className="flex items-center justify-between">
-                  <button
-                    type="button"
-                    className="-m-2.5 rounded-md p-2.5 text-white"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {mobileMenuOpen && "hola"}
-
-                    <span className="sr-only">Close menu</span>
-                    <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
-                  <div className="mt-6 flow-root">
-                    {menuItems.map((item: TitemMenu) => (
-                      <NavLink
-                        to={item.href}
-                        className="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-black hover:bg-gray-800/75"
-                        key={item.name}
-                      >
-                        {item.name}
-                      </NavLink>
-                    ))}
-                    <NavLink to="/login">Log In</NavLink>
+            <div className="fixed inset-0 bg-gray-700 bg-opacity-50 sm:hidden" />
+            <div className="fixed inset-0 overflow-y-auto sm:hidden">
+              <div className="flex justify-center p-4 text-center">
+                <Dialog.Panel className="mt-20 w-full max-w-md transform overflow-hidden rounded-2xl bg-gray-800 p-6 text-left align-middle text-white shadow-xl transition-all">
+                  <div className="flex items-center justify-between">
+                    <img
+                      src="src/assets/logo-de-coorve-transparante-1024x269.webp"
+                      alt="Logo"
+                      width="150"
+                    />
+                    <button
+                      className={
+                        !mobileMenuOpen
+                          ? "hamburger hamburger--squeeze inline-flex items-center justify-center rounded-md p-2.5 "
+                          : "hamburger hamburger--squeeze is-active inline-flex items-center justify-center rounded-md p-2.5"
+                      }
+                      type="button"
+                      onClick={open}
+                    >
+                      <span className="hamburger-box ">
+                        <span className="hamburger-inner"></span>
+                      </span>
+                    </button>
                   </div>
-                </div>
-              </DialogPanel>
-            </TransitionChild>
+                  <div className="mt-10 flow-root text-white">
+                    {menuItems.map((item, index) => (
+                      <li className="list-none" key={index}>
+                        {item.name == "Planes" ? (
+                          <a
+                            className="block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-700/75 hover:text-white"
+                            href={item.href}
+                            onClick={open}
+                          >
+                            {item.name}
+                          </a>
+                        ) : (
+                          <NavLink
+                            to={item.href}
+                            className="block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-700/75 hover:text-white"
+                            key={item.name}
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {item.name}
+                          </NavLink>
+                        )}
+                      </li>
+                    ))}
+                    {user ? (
+                      <NavLink
+                        to="/user/dashboard"
+                        className="mt-10 block rounded-lg px-3 py-2 text-base font-semibold leading-7  hover:bg-gray-700/75 hover:text-white"
+                        onClick={() => navigate("/user/dashboard")}
+                      >
+                        User
+                      </NavLink>
+                    ) : (
+                      <NavLink
+                        to="/signup"
+                        className=" mt-10 rounded-lg px-3 py-2 text-base font-semibold leading-7  hover:bg-gray-700/75 hover:text-white"
+                        onClick={() => navigate("/signup")}
+                      >
+                        Log In
+                      </NavLink>
+                    )}
+                  </div>
+                </Dialog.Panel>
+              </div>
+            </div>
           </Dialog>
         </Transition>
       </div>
     </nav>
   );
 }
-function Logout() {
-  const navigate = useNavigate();
 
-  const handlingLogout = async () => {
-    const response = await fetch("/logout", { method: "POST" });
-    if (response.ok) {
-      return navigate("/content");
-    } else {
-      console.log("adssdsd", response);
-    }
-  };
-  return (
-    <nav>
-      <div className="my-auto bg-blue-500 px-5 sm:items-center sm:pt-2">
-        <Link to="/">
-          <img
-            src="src/assets/logo-de-coorve-transparante-1024x269.webp"
-            alt="Logo"
-            width="150"
-          />
-        </Link>
-        <button className="ml-auto flex text-white" onClick={handlingLogout}>
-          Salir
-        </button>
-      </div>
-    </nav>
-  );
-}
-export { Login, Logout };
+export { Header };

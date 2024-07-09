@@ -7,15 +7,15 @@ function Perfil() {
   const [edit, setEdit] = useState<boolean>(false);
   const user = useOutletContext<TUser>();
   return (
-    <div className="-pt-[30px]  flex h-full w-full justify-center bg-blue-900">
-      <div className="mx-10 my-10 grid w-full max-w-[1000px] grid-cols-1 items-center justify-between rounded-lg border bg-blue-400 p-2 lg:grid-cols-2">
+    <div className="-pt-[30px]  flex h-full w-full justify-center bg-gray-800">
+      <div className="mx-10 my-10 grid w-full max-w-[1000px] grid-cols-1 items-center justify-between rounded-lg border bg-gray-700/50 p-2 lg:grid-cols-2">
         {/* <img alt="foto_perfil" className="mx-auto mt-8" />
         <div className="mx-auto mt-8 flex w-full max-w-[400px] flex-col">
           <div className="mr-auto py-2  font-bold text-blue-900">Sobre mi</div>
           <textarea className="h-[100px] p-2" placeholder="Un poco sobre mí" />
         </div> */}
         <div className="mx-auto my-4 flex w-full max-w-[400px] flex-col">
-          <label className="mr-auto py-2  font-bold text-blue-900">
+          <label className="mx-2 mr-auto  py-2 font-bold text-white">
             Nombre
           </label>
           {edit ? (
@@ -24,13 +24,13 @@ function Perfil() {
               defaultValue={user?.name}
             />
           ) : (
-            <div className="rounded-md border bg-white px-2 py-1">
+            <div className=" mx-2 rounded-md border bg-white px-2 py-1">
               {user?.name}
             </div>
           )}
         </div>
         <div className="mx-auto my-4 flex w-full max-w-[400px] flex-col">
-          <label className="mr-auto py-2  font-bold text-blue-900">
+          <label className="mx-2 mr-auto  py-2 font-bold text-white">
             Apellidos
           </label>
           {edit ? (
@@ -39,13 +39,15 @@ function Perfil() {
               defaultValue={user?.apellidos}
             />
           ) : (
-            <div className="rounded-md border bg-white px-2 py-1">
+            <div className="mx-2 rounded-md border bg-white px-2 py-1">
               {user?.apellidos}
             </div>
           )}
         </div>
         <div className="mx-auto my-4 flex w-full max-w-[400px] flex-col">
-          <label className="mr-auto py-2  font-bold text-blue-900">Email</label>
+          <label className="mx-2 mr-auto  py-2 font-bold text-white">
+            Email
+          </label>
           {edit ? (
             <input
               className="rounded-md border px-2 py-1"
@@ -53,23 +55,25 @@ function Perfil() {
               readOnly
             />
           ) : (
-            <div className="rounded-md border bg-white px-2 py-1">
+            <div className="mx-2 rounded-md border bg-white px-2 py-1">
               {user?.email}
             </div>
           )}
         </div>
         <div className="mx-auto my-4 flex w-full max-w-[400px] flex-col">
-          <label className="mr-auto py-2  font-bold text-blue-900">
+          <label className="mx-2 mr-auto  py-2 font-bold text-white">
             Password
           </label>
           {edit ? (
             <input className="rounded-md border px-2" />
           ) : (
-            <div className="rounded-md border bg-white px-2 py-1">*****</div>
+            <div className="mx-2 rounded-md border bg-white px-2 py-1">
+              *****
+            </div>
           )}
         </div>
         <div className="mx-auto my-4 flex w-full max-w-[400px] flex-col">
-          <label className="mr-auto py-2  font-bold text-blue-900">
+          <label className="mx-2 mr-auto  py-2 font-bold text-white">
             Telefono
           </label>
           {edit ? (
@@ -78,13 +82,13 @@ function Perfil() {
               defaultValue={user?.telephone}
             />
           ) : (
-            <div className="rounded-md border bg-white px-2 py-1">
-              {user?.telephone ? user?.telephone : "."}
+            <div className="mx-2 min-h-[34px] rounded-md border bg-white px-2 py-1">
+              {user?.telephone ? user?.telephone : ""}
             </div>
           )}
         </div>
         <div className="mx-auto my-2 flex w-full max-w-[400px] flex-col">
-          <label className="mr-auto py-2  font-bold text-blue-900">
+          <label className="mx-2 mr-auto  py-2 font-bold text-white">
             Residencia
           </label>
           {edit ? (
@@ -93,13 +97,13 @@ function Perfil() {
               defaultValue={user?.residency}
             />
           ) : (
-            <div className=" rounded-md border bg-white px-2 py-1">
-              {user?.residency ? user?.residency : "."}
+            <div className="mx-2 min-h-[34px] rounded-md border bg-white px-2 py-1">
+              {user?.residency ? user?.residency : ""}
             </div>
           )}
         </div>
         <div className="mx-auto my-2 flex w-full max-w-[400px] flex-col">
-          <label className="mr-auto py-2  font-bold text-blue-900">
+          <label className="mx-2 mr-auto  py-2 font-bold text-white">
             Género
           </label>
           {edit ? (
@@ -108,7 +112,7 @@ function Perfil() {
               defaultValue={user?.name}
             />
           ) : (
-            <div className="rounded-md border bg-white px-2 py-1">
+            <div className="2x-1 rounded-md border bg-white px-2 py-1">
               {user?.genere}
             </div>
           )}

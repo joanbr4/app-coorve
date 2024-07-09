@@ -26,7 +26,7 @@ function ResetPass() {
       setErrorEmail(errorZod);
     } else {
       const payload = form;
-      console.log("w323", payload);
+
       fetch("/resetPass/" + form.email, {
         method: "POST",
         headers: {

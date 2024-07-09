@@ -149,7 +149,7 @@ const CircularChart = () => {
     dataChart = data;
     // setDataChart(data);
   }
-  // let dataOption = { layout: {}, plugins: {}, responsive: true };
+
   const option = {
     layout: {
       padding: 39,
@@ -161,7 +161,7 @@ const CircularChart = () => {
         text: "Visualiza tus resultados",
         font: {
           size: 40,
-          weight: "bold" as "bold",
+          weight: "bold" as const,
         },
         color: "white",
         fullSize: true,
@@ -174,7 +174,7 @@ const CircularChart = () => {
           boxHeight: 20,
           font: {
             size: 14,
-            weight: "lighter" as "lighter",
+            weight: "lighter" as const,
           },
         },
       },
@@ -190,8 +190,8 @@ const CircularChart = () => {
         font: {
           size: 40,
         },
-        align: "end" as "end", // Aligns labels to the end of the arc
-        anchor: "end" as "end", // Anchors labels to the end of the arc
+        align: "end" as const, // Aligns labels to the end of the arc
+        anchor: "end" as const, // Anchors labels to the end of the arc
         offset: 8, // Moves labels away from the center of the arc
       },
       tooltip: {
@@ -213,10 +213,9 @@ const CircularChart = () => {
     },
     responsive: true,
   };
-  // dataOption = option;
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div className="flex min-h-screen items-center justify-center bg-gray-800">
       <div className="flex flex-col ">
         <div className="p-8 sm:w-[500px] md:w-[700px] lg:w-[900px]">
           {dataChart ? <Pie data={dataChart} options={option} /> : null}

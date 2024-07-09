@@ -52,7 +52,6 @@ function UpdatePass() {
       const payload = {
         link: link.linkId,
         password: form.password,
-        closed_at: new Date(),
       };
       console.log("w323", payload);
       fetch("/resetPass/" + form.email, {
@@ -70,11 +69,12 @@ function UpdatePass() {
       <div className="m-auto max-w-[400px] rounded-lg border bg-white">
         <div className="m-8 flex flex-col align-baseline">
           <h2 className="my-2 text-xl font-bold">Resetear la contraseña</h2>
-          <p className="mb-2 text-sm">
-            Para resetear su contraseña, por favor rellene los siguientes
-            campos, asegurandote que rellenas cada campo manualmente
-          </p>
-
+          {!sendEmail && (
+            <p className="mb-2 text-sm">
+              Para resetear su contraseña, por favor rellene los siguientes
+              campos, asegurandote que rellenas cada campo manualmente
+            </p>
+          )}
           <div className={sendEmail ? "hidden" : "block"}>
             <form
               className="my-2 flex flex-col "
@@ -173,7 +173,8 @@ function UpdatePass() {
                 ></path>
               </svg>
               <p className="ml-2">
-                Hemos enviado un correo electrónico con instrucciones.
+                Hemos resetado su contraseña correctamente, por favor, vuelva al
+                login.
               </p>
             </div>
             <button className="my-2 w-full rounded-md border bg-gray-800 p-2 text-sm text-white">

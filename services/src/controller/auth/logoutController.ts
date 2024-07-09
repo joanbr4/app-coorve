@@ -11,7 +11,7 @@ const logoutController = (req: Request, res: Response) => {
   //   httpOnly: true,
   //   maxAge: 0,
   // })
-  res.end()
+  res.status(200).send({ msg: "Successfully logged out" })
 }
 
 export { logoutController }

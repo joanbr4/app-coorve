@@ -118,10 +118,10 @@ function Register() {
   return (
     <div
       className="flex h-screen w-screen flex-col
-    bg-gray-500 "
+    bg-gray-800 "
     >
-      <div className="m-auto justify-center rounded-lg border border-solid border-black bg-blue-500 p-6 ">
-        <Form method="POST" className="flex flex-col">
+      <div className="m-auto w-full justify-center rounded-lg border border-solid border-black bg-gray-700 p-6 sm:max-w-[400px] ">
+        <Form method="POST" className="mx-0 flex  flex-col">
           <input
             className="my-2 rounded-lg px-3 py-3"
             {...register("name")}
@@ -138,7 +138,6 @@ function Register() {
             type="text"
           />
           {errorsZod && <div className="text-red-500">{errorsZod.surname}</div>}
-
           <input
             className="my-2 rounded-lg px-3 py-3"
             placeholder="Teléfono"
@@ -161,7 +160,6 @@ function Register() {
             <option value="NS/NC">Prefiero no decirlo</option>
           </select>
           {errorsZod && <div className="text-red-500">{errorsZod.genere}</div>}
-
           <input
             className="my-2 rounded-lg px-3 py-3"
             {...register("email")}
@@ -170,7 +168,6 @@ function Register() {
           />
           {errorsZod && <div className="text-red-500">{errorsZod.email}</div>}
           {errorEmail && <div className="text-red-500">{errorEmail}</div>}
-
           <div className="relative w-full">
             <input
               className="my-2 w-full rounded-lg px-3 py-3"
@@ -205,7 +202,6 @@ function Register() {
               }
             />
           </div>
-
           {errorsZod && (
             <div className="text-red-500">{errorsZod.password}</div>
           )}
@@ -238,15 +234,15 @@ function Register() {
               }
             />
           </div>
-
           {errorsZod && <div className="text-red-500">{errorsZod.confirm}</div>}
-
+          {/* className="mx-auto mt-8 w-1/2 rounded-xl border bg-blue-100 p-2
+          text-black/50 */}
           <button
             type="submit"
-            className="mx-auto w-1/2 rounded-xl border bg-blue-100 p-2 text-black/50
-          "
+            className="group relative mt-6 inline-flex h-12 items-center justify-center overflow-hidden rounded-md bg-gray-800 px-6 font-medium text-neutral-50"
           >
-            Send
+            <span className="absolute h-0 w-0 rounded-md bg-gray-700 transition-all duration-300 group-hover:h-56 group-hover:w-full"></span>
+            <span className="relative">Registrarme</span>
           </button>
         </Form>
       </div>
@@ -255,3 +251,4 @@ function Register() {
 }
 
 export { Register };
+// bg-neutral-950 //black
