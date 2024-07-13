@@ -18,6 +18,7 @@ const apiConfigSchema = z
     sheets_secret: z.string(),
     sheets_key: z.string(),
     folder_id: z.string(),
+    stripe_key_test: z.string(),
   })
   .strict()
 
@@ -49,6 +50,7 @@ const apiConfig = apiConfigSchema.parse({
   sheets_secret: process.env.API_SHEET_CLIENT_SECRET,
   sheets_key: process.env.API_SHEETS_KEY,
   folder_id: process.env.FOLDER_ID,
+  stripe_key_test: process.env.API_STRIPE_TEST,
 })
 
 const dbConfig = dbConfigSchema.parse({

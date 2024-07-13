@@ -15,10 +15,11 @@ export const pathRoot = {
     tokens: {
       validate: "/api/v1/tokens/validate",
     },
-    // itineraries: "/api/v1/itineraries",
-    dashboard: {
-      users: "/api/v1/dashboard/users",
-      auth: "/api/v1/dashboard/auth",
+    stripe: {
+      create_session: "/api/v1/stripe/create-session",
+      create_pricess: "/api/v1/stripe/create_prices",
+      // retrieve_session: "/api/v1/stripe/retrieve-session",
+      retrieve_session: "/api/v1/stripe/retrieve-session/:id",
     },
     google: {
       sheets: "/api/v1/google/sheets",

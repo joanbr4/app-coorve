@@ -1,7 +1,23 @@
 import { tarifas } from "@/dataTarifa";
 import { Ttarifa } from "@/types/types";
+// import { useNavigate } from "react-router-dom";
 
 function TarifasCard() {
+  // const navigate = useNavigate();
+  const createStripe = async (price: number) => {
+    const result = await fetch("/create-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ price }),
+    });
+    const { url } = await result.json();
+    console.log(url);
+    window.location.href = url;
+    // navigate(session.url);
+  };
+
   return (
     <>
       {tarifas.map((tarifa: Ttarifa) => (
@@ -60,19 +76,21 @@ function TarifasCard() {
                 : "mx-auto w-full rounded-md border  bg-gray-800 p-1 text-lg font-bold text-white"
             }
           >
-            <p className="mr-2">{tarifa.action}</p>
-            {tarifa.precio === 0 ? (
-              <svg
-                width="1em"
-                viewBox="0 0 15 12"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M9.6 7H1a1 1 0 1 1 0-2h8.6L7 2.4A1 1 0 0 1 8.4 1l4.3 4.2c.2.3.3.5.3.8 0 .3-.1.5-.3.7L8.4 11A1 1 0 1 1 7 9.5L9.6 7z"
-                  fill="currentColor"
-                ></path>
-              </svg>
-            ) : null}
+            <button onClick={() => createStripe(tarifa.precio)}>
+              <p className="mr-2">{tarifa.action}</p>
+              {tarifa.precio === 0 ? (
+                <svg
+                  width="1em"
+                  viewBox="0 0 15 12"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.6 7H1a1 1 0 1 1 0-2h8.6L7 2.4A1 1 0 0 1 8.4 1l4.3 4.2c.2.3.3.5.3.8 0 .3-.1.5-.3.7L8.4 11A1 1 0 1 1 7 9.5L9.6 7z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+              ) : null}
+            </button>
           </button>
         </div>
       ))}

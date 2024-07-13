@@ -19,12 +19,14 @@ import { Facturación } from "@/pages/facturación";
 import { PrivateRoute } from "./FilteredRoutes";
 // import { ErrorBoundary } from "@/pages/errors/ErrorBoundary";
 import { NotFoundPage } from "@/pages/errors/NotFounPage";
+import PaymentSuccess from "@/pages/payment";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<LandingPage />} />
       <Route path="/content" element={<Content />} />
+      <Route path="/payment-success" element={<PaymentSuccess />} />
       <Route path="/signin" action={registerAction} element={<Register />} />
       <Route path="/signup" element={<Login />} />
       {/* <Route path="/chatgpt" element={<Chatgpt />} /> */}

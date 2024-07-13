@@ -31,6 +31,8 @@ export default defineConfig(({ mode }) => {
           "/me": "http://server:3000/api/v1/auth",
           "/logout": "http://server:3000/api/v1/auth",
           "/sheets": "http://server:3000/api/v1/google",
+          "/create-session": "http://server:3000/api/v1/stripe",
+          "/retrieve-session": "http://server:3000/api/v1/stripe",
         }),
         ...(!isDocker && {
           "/login": "http://localhost:3000/api/v1/auth",
@@ -39,6 +41,8 @@ export default defineConfig(({ mode }) => {
           "/me": "http://localhost:3000/api/v1/auth",
           "/logout": "http://localhost:3000/api/v1/auth",
           "/sheets": "http://localhost:3000/api/v1/google",
+          "/create-session": "http://localhost:3000/api/v1/stripe",
+          "/retrieve-session": "http://localhost:3000/api/v1/stripe",
         }),
       },
     },

@@ -53,7 +53,7 @@ async function resetPassController(req: Request) {
         .where(eq(users.email, email))
     }
   } else {
-    console.log(`this email: ${email} doen't exist`)
+    console.log(`this email: ${email} doesn't exist`)
   }
 }
 

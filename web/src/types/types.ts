@@ -5,6 +5,7 @@ export type Ttarifa = {
   precio: number;
   features: string[];
   action: string;
+  url: string;
 };
 
 export type ErrorfromServer = {
