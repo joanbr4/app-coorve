@@ -30,7 +30,7 @@ const menuItems: TitemMenu[] = [
   },
   {
     name: "Sobre Nosotros",
-    href: "/aboutUs",
+    href: "/nosotros",
     icon: PlayCircleIcon,
   },
 ];

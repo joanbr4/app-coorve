@@ -20,12 +20,14 @@ import { PrivateRoute } from "./FilteredRoutes";
 // import { ErrorBoundary } from "@/pages/errors/ErrorBoundary";
 import { NotFoundPage } from "@/pages/errors/NotFounPage";
 import PaymentSuccess from "@/pages/payment";
+import { Nosotros } from "@/pages/nosotros";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<LandingPage />} />
       <Route path="/content" element={<Content />} />
+      <Route path="/nosotros" element={<Nosotros />} />
       <Route path="/payment-success" element={<PaymentSuccess />} />
       <Route path="/signin" action={registerAction} element={<Register />} />
       <Route path="/signup" element={<Login />} />

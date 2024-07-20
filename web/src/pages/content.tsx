@@ -5,12 +5,6 @@ import { Header } from "../components/header";
 import { TweetEmbed, TweetEmbed2 } from "@/components/TwitterCard";
 import { TarifasCard } from "@/components/Tarifas";
 
-// const minus = (data: string) => {
-//   return data.toLowerCase();
-// };
-// console.log(
-//   minus("LA DECISION MAS INTELIGENTE PARA DESPEGAR TU NEGOCIO A OTRO NIVEL.")
-// );
 function Content() {
   return (
     <div
@@ -55,7 +49,7 @@ function Content() {
             <div className="flex flex-col">
               <span className="xs:my-2 text-xl sm:my-2">
                 Registrate en
-                <span className="ml-1 underline decoration-[#39ba93] decoration-2 underline-offset-2">
+                <span className="underline-offset-7 ml-1 underline decoration-[#39ba93] decoration-8">
                   10 segundos
                 </span>
               </span>
