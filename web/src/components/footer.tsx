@@ -1,22 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export default function Footer() {
+  const navigate = useNavigate();
   return (
     <footer className="mt-auto ">
       <div className="bold bg-gray-800/75 py-2 font-bold text-white">
         <ul className="sm:text-md mx-auto flex  flex-col items-center  px-2 text-sm sm:w-[500px] sm:flex-row sm:items-center sm:justify-between lg:px-8">
           <li>
-            <a href="https://www.linkedin.com/in/joan-torre-00000019a/">
-              Servicios
-            </a>
+            <Link to="">Servicios</Link>
           </li>
           <li>
-            <a href="https://github.com/joantorre">Acerca de nosotros</a>
+            <Link to="">Acerca de nosotros</Link>
           </li>
           <li>
-            <a href="https://www.instagram.com/joan_torre/">Herramientas</a>
+            <Link to="">Herramientas</Link>
           </li>
           <li>
-            <a href="https://twitter.com/joan_torre">Noticias</a>
+            <Link to="">Noticias</Link>
           </li>
         </ul>
       </div>
@@ -34,7 +33,10 @@ export default function Footer() {
           </a>
         </span>
       </div>
-      <div className=" bg-gray-800/75 fill-white">
+      <div
+        className=" cursor-pointer bg-gray-800/75 fill-white"
+        onClick={() => navigate("/content")}
+      >
         <img
           src="src/assets/logo-de-coorve-transparante-1024x269.webp"
           alt="Logo"

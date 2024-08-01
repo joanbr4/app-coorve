@@ -3,13 +3,14 @@ import { facts } from "@/dataFacts";
 import { history } from "@/dataHistory";
 import { stuffs } from "@/dataStuff";
 import { useRef, useState } from "react";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination, A11y } from "swiper/modules";
 import SwiperCore from "swiper";
 import { Swiper as SwiperType } from "swiper/types";
+import { useNavigate } from "react-router-dom";
 
 SwiperCore.use([Navigation, Pagination]);
 
@@ -22,24 +23,35 @@ const stuff = {
 type InitialStateStuff = keyof typeof stuff;
 
 const Nosotros = () => {
-  // const swiper = useSwiper();
   const swiperRef = useRef<SwiperType | null>(null);
   const [showMore, setShowMore] = useState<typeof stuff>(stuff);
+  const navigate = useNavigate();
   return (
     <div className="h-full bg-gray-800">
-      <div className="mx-auto flex  flex-col pt-8">
-        <h1 className="mx-auto font-['Open_Sans'] text-6xl font-bold text-white">
-          Un poco de nuestro
-          <span className="ml-2 underline decoration-[#39ba93] decoration-4 underline-offset-4">
-            recorrido
-          </span>
-        </h1>
+      <div className=" mx-auto flex  flex-col pt-8">
+        <div className="flex md:relative">
+          <div
+            className="absolute ml-[100px] w-[250px] cursor-pointer"
+            onClick={() => navigate(-1)}
+          >
+            <img
+              src="src/assets/logo-de-coorve-transparante-1024x269.webp"
+              alt="logo"
+            />
+          </div>
+          <h1 className="mx-4 mt-[70px] font-['Open_Sans'] text-6xl font-bold text-white md:mx-auto md:mt-0">
+            Un poco de nuestro
+            <span className="ml-2 underline decoration-[#39ba93] decoration-4 underline-offset-4">
+              recorrido
+            </span>
+          </h1>
+        </div>
         {/* <p className="mx-auto mt-4 font-['Open_Sans'] text-white">
           Un camino lleno de aprendizajes y pasión: nuestra historia en Coorve
         </p> */}
         <div className="mx-auto my-8 flex flex-col text-white">
-          <h2 className="my-4 text-3xl">Sobre nosotros</h2>
-          <p className="max-w-[700px]">
+          <h2 className="mx-4 my-4 text-3xl">Sobre nosotros</h2>
+          <p className="mx-4 max-w-[700px]">
             Coorve es una empresa que nace en el 2019, fundada por 2 personas
             que les unía un objetivo, revolucionar el mercado inmobiliario,
             mediante el uso de las nuevas tecnologías y una clara comuniación y
@@ -50,10 +62,10 @@ const Nosotros = () => {
           </p>
         </div>
         <div className="mx-auto my-8">
-          <h4 className="my-4 font-['Open_Sans'] text-3xl  text-white">
+          <h4 className="mx-4 my-4 font-['Open_Sans'] text-3xl text-white  md:mx-0">
             Datos básicos
           </h4>
-          <div className="grid grid-cols-4 ">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 ">
             {facts.map((fact) => (
               <div className="pr-15 m-2 rounded-lg border bg-gray-700 py-8 pl-10 text-white">
                 <h1 className="text-6xl font-bold">{fact.number}</h1>
@@ -67,12 +79,12 @@ const Nosotros = () => {
         </div>
 
         <div className="mx-auto my-10 text-white">
-          <h4 className="my-4 font-['Open_Sans'] text-3xl text-white">
+          <h4 className="mx-4 my-4 font-['Open_Sans'] text-3xl text-white">
             Nuestro equipo
           </h4>
-          <div className="flex">
+          <div className="mx-4 md:flex">
             {stuffs.map((person) => (
-              <div className="mr-5 flex max-w-[500px] flex-col  hover:rounded-t-lg">
+              <div className="mb-8 flex max-w-[500px] flex-col  hover:rounded-t-lg md:mr-5">
                 <div className=" group flex max-w-[500px] flex-col ">
                   <div className="overflow-hidden rounded-lg">
                     <img
@@ -149,16 +161,24 @@ const Nosotros = () => {
             ))}
           </div>
         </div>
-        <div className="mx-auto my-10 text-white">
-          <h4 className="my-4 font-['Open_Sans'] text-3xl">
+        <div className="mx-auto my-10 hidden text-white lg:block">
+          <h4 className="mx-4 my-4 font-['Open_Sans'] text-3xl md:mx-0">
             La historia de Coorve
           </h4>
-          <div className="relative max-w-[1400px]">
+          <div className=" max-w-[1550px] md:relative ">
             <button
               onClick={() => swiperRef.current?.slidePrev()}
-              className="absolute left-0 top-1/2 -translate-y-1/2 transform rounded bg-gray-500 p-2 text-white"
+              className="absolute -left-8 top-1/2 z-50 -translate-y-1/2 transform rounded-[300px] bg-gray-500 p-2 text-white hover:border hover:bg-gray-800"
             >
-              -
+              <svg
+                fill="#ffff"
+                width="20px"
+                height="20px"
+                viewBox="0 0 32 32"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M 26 6 L 6 15.21875 L 6 16.78125 L 26 26 L 26 23.84375 L 9.46875 16 L 26 8.15625 Z" />
+              </svg>
             </button>
 
             <Swiper
@@ -166,7 +186,7 @@ const Nosotros = () => {
               navigation={false}
               // pagination={{ clickable: true }}
               spaceBetween={30}
-              slidesPerView={3}
+              slidesPerView={4}
               breakpoints={{
                 640: {
                   slidesPerView: 1,
@@ -180,18 +200,19 @@ const Nosotros = () => {
                   slidesPerView: 3,
                   spaceBetween: 50,
                 },
-                // 1204: {
-                //   slidesPerView: 4,
-                //   spaceBetween: 50,
-                // },
+                1204: {
+                  slidesPerView: 4,
+                  spaceBetween: 50,
+                },
               }}
               onSwiper={(swiper) => {
                 swiperRef.current = swiper;
               }}
+              className="md:w-[1550px]"
             >
               {history.map((feat, index) => (
                 <SwiperSlide key={index}>
-                  <div className="mx-0 flex w-[350px] flex-col rounded-lg border bg-gray-700 p-8 font-['Open_Sans']">
+                  <div className="mx-0 flex h-[150px] w-[350px] flex-col rounded-lg border bg-gray-700 p-8 font-['Open_Sans']">
                     <img src={feat.url} alt="" />
                     <p className="font-bold">{feat.date}</p>
                     <p>{feat.feat}</p>
@@ -201,9 +222,17 @@ const Nosotros = () => {
             </Swiper>
             <button
               onClick={() => swiperRef.current?.slideNext()}
-              className="absolute right-0 top-1/2 -translate-y-1/2 transform rounded bg-gray-500 p-2 text-white"
+              className="absolute -right-8 top-1/2 z-50 -translate-y-1/2 transform rounded-[300px] bg-gray-500 p-2 text-white hover:border hover:bg-gray-800"
             >
-              +
+              <svg
+                fill="#ffff"
+                width="20px"
+                height="20px"
+                viewBox="0 0 56 56"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M 13.8320 43.5625 C 14.4883 43.5625 14.9336 43.3516 15.4258 43.1172 L 41.7695 31.2813 C 43.1055 30.6484 44.1602 29.6172 44.1602 28.1172 C 44.1602 26.6406 43.1289 25.5625 41.7461 24.9532 L 15.4258 12.8359 C 14.9570 12.6016 14.5351 12.4375 13.9258 12.4375 C 12.7070 12.4375 11.8398 13.2813 11.8398 14.5235 C 11.8398 15.6016 12.4023 16.2110 13.3867 16.6797 L 38.6055 27.8125 L 38.6055 28.0703 L 13.3867 39.2969 C 12.4023 39.7656 11.8398 40.3750 11.8398 41.4531 C 11.8398 42.7422 12.6836 43.5625 13.8320 43.5625 Z" />
+              </svg>
             </button>
           </div>
         </div>

@@ -19,6 +19,10 @@ const history = [
     date: "Julio 2024",
     feat: "Principal agencia de publicidad a la startup mexicana MIINKA",
   },
-  // { url: "", date: "Junio 2024", feat: "" },
+  {
+    url: "",
+    date: "Julio 2024",
+    feat: "Principal agencia de publicidad a la startup mexicana MIINKA",
+  },
 ];
 export { history };

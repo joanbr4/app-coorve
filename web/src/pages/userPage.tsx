@@ -1,10 +1,14 @@
 import { useAuth } from "@/context/AuthProvider";
+import { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 
 function UserPage() {
   const { user, setUser } = useAuth();
+  const [paramId, setParamId] = useState<string>("");
   const navigate = useNavigate();
+  const context = { user: user, setParamId: setParamId };
 
+  //FIXME param active button navigator
   const handlingLogout = async () => {
     console.log("hola");
     const response = await fetch("/logout", {
@@ -22,14 +26,17 @@ function UserPage() {
 
   return (
     <div className="flex h-screen flex-col">
-      {/* <Logout /> */}
       <div className="flex flex-1 flex-col md:flex-row">
         <aside className="flex flex-shrink-0  bg-gray-700 text-white md:flex-col">
           <ul className="ml-8 flex flex-grow md:m-0 md:flex-col">
             <li className="">
               <NavLink
                 to="dashboard"
-                className="m-2 flex rounded-lg p-2 hover:bg-gray-800 hover:text-white md:m-4 md:p-8"
+                className={
+                  paramId == "dashboard"
+                    ? "m-2 flex rounded-lg bg-gray-800 p-2  hover:bg-gray-800 hover:text-white md:m-4 md:p-8"
+                    : "m-2 flex rounded-lg p-2 hover:bg-gray-800 hover:text-white md:m-4 md:p-8"
+                }
               >
                 <svg
                   fill="#ffff"
@@ -49,7 +56,11 @@ function UserPage() {
             <li className="">
               <NavLink
                 to="perfil"
-                className="m-2 flex rounded-lg p-2 hover:bg-gray-800  hover:text-white md:m-4 md:p-8"
+                className={
+                  paramId == "perfil"
+                    ? "m-2 flex rounded-lg bg-gray-800 p-2  hover:bg-gray-800 hover:text-white md:m-4 md:p-8"
+                    : "m-2 flex rounded-lg p-2 hover:bg-gray-800 hover:text-white md:m-4 md:p-8"
+                }
               >
                 <svg
                   width="30px"
@@ -88,7 +99,11 @@ function UserPage() {
             <li className=" ">
               <NavLink
                 to="settings"
-                className="m-2 flex items-center rounded-lg p-2 hover:bg-gray-800 hover:text-white md:m-4 md:p-8"
+                className={
+                  paramId == "settings"
+                    ? "m-2 flex rounded-lg bg-gray-800 p-2  hover:bg-gray-800 hover:text-white md:m-4 md:p-8"
+                    : "m-2 flex rounded-lg p-2 hover:bg-gray-800 hover:text-white md:m-4 md:p-8"
+                }
               >
                 <svg
                   width="30px"
@@ -123,7 +138,11 @@ function UserPage() {
             <li className="  ">
               <NavLink
                 to="facturas"
-                className="m-2 flex rounded-lg p-2 hover:bg-gray-800 hover:text-white md:m-4 md:p-8"
+                className={
+                  paramId == "facturas"
+                    ? "m-2 flex rounded-lg bg-gray-800 p-2  hover:bg-gray-800 hover:text-white md:m-4 md:p-8"
+                    : "m-2 flex rounded-lg p-2 hover:bg-gray-800 hover:text-white md:m-4 md:p-8"
+                }
               >
                 <svg
                   fill="#ffff"
@@ -164,7 +183,7 @@ function UserPage() {
         </aside>
 
         <center className="h-full w-full">
-          <Outlet context={user} />
+          <Outlet context={context} />
         </center>
       </div>
     </div>

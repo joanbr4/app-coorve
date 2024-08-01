@@ -1,11 +1,18 @@
-import { TUser } from "@/types/types";
+import { Tcontext } from "@/types/types";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 
 function Perfil() {
   const [edit, setEdit] = useState<boolean>(false);
-  const user = useOutletContext<TUser>();
+  const { user, setParamId } = useOutletContext<Tcontext<string>>();
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const param = url.pathname.split("/")[2];
+    setParamId(param);
+  }, []);
+
   return (
     <div className="-pt-[30px]  flex h-full w-full justify-center bg-gray-800">
       <div className="mx-10 my-10 grid w-full max-w-[1000px] grid-cols-1 items-center justify-between rounded-lg border bg-gray-700/50 p-2 lg:grid-cols-2">
@@ -15,7 +22,7 @@ function Perfil() {
           <textarea className="h-[100px] p-2" placeholder="Un poco sobre mí" />
         </div> */}
         <div className="mx-auto my-4 flex w-full max-w-[400px] flex-col">
-          <label className="mx-2 mr-auto  py-2 font-bold text-white">
+          <label className="mx-2 mr-auto py-2 text-xl font-bold text-white">
             Nombre
           </label>
           {edit ? (
@@ -30,7 +37,7 @@ function Perfil() {
           )}
         </div>
         <div className="mx-auto my-4 flex w-full max-w-[400px] flex-col">
-          <label className="mx-2 mr-auto  py-2 font-bold text-white">
+          <label className="mx-2 mr-auto py-2 text-xl font-bold text-white">
             Apellidos
           </label>
           {edit ? (
@@ -45,7 +52,7 @@ function Perfil() {
           )}
         </div>
         <div className="mx-auto my-4 flex w-full max-w-[400px] flex-col">
-          <label className="mx-2 mr-auto  py-2 font-bold text-white">
+          <label className="mx-2 mr-auto  py-2 text-xl font-bold text-white">
             Email
           </label>
           {edit ? (
@@ -61,7 +68,7 @@ function Perfil() {
           )}
         </div>
         <div className="mx-auto my-4 flex w-full max-w-[400px] flex-col">
-          <label className="mx-2 mr-auto  py-2 font-bold text-white">
+          <label className="mx-2 mr-auto py-2 text-xl font-bold text-white">
             Password
           </label>
           {edit ? (
@@ -73,7 +80,7 @@ function Perfil() {
           )}
         </div>
         <div className="mx-auto my-4 flex w-full max-w-[400px] flex-col">
-          <label className="mx-2 mr-auto  py-2 font-bold text-white">
+          <label className="mx-2 mr-auto py-2 text-xl font-bold text-white">
             Telefono
           </label>
           {edit ? (
@@ -88,7 +95,7 @@ function Perfil() {
           )}
         </div>
         <div className="mx-auto my-2 flex w-full max-w-[400px] flex-col">
-          <label className="mx-2 mr-auto  py-2 font-bold text-white">
+          <label className="mx-2 mr-auto  py-2 text-xl font-bold text-white">
             Residencia
           </label>
           {edit ? (
@@ -103,7 +110,7 @@ function Perfil() {
           )}
         </div>
         <div className="mx-auto my-2 flex w-full max-w-[400px] flex-col">
-          <label className="mx-2 mr-auto  py-2 font-bold text-white">
+          <label className="mx-2 mr-auto py-2 text-xl font-bold text-white">
             Género
           </label>
           {edit ? (

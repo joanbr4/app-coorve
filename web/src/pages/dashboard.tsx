@@ -1,5 +1,4 @@
-import { useAuth } from "@/context/AuthProvider";
-import { TdataChart } from "@/types/types";
+import { Tcontext, TdataChart } from "@/types/types";
 import {
   Chart,
   PieController,
@@ -13,6 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
+import { useOutletContext } from "react-router-dom";
 
 Chart.register(
   PieController,
@@ -32,10 +32,14 @@ const CircularChart = () => {
   // }>();
   const [dataChartFetch, setDataChartFetch] = useState<TdataChart>();
 
-  const { user } = useAuth();
+  const { user, setParamId } = useOutletContext<Tcontext<string>>();
   const payload = { email: user?.email };
 
   useEffect(() => {
+    const url = new URL(window.location.href);
+    const param = url.pathname.split("/")[2];
+    setParamId(param);
+
     fetch("/sheets", {
       method: "POST",
       // credentials: "include",

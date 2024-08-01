@@ -18,7 +18,6 @@ export const pathRoot = {
     stripe: {
       create_session: "/api/v1/stripe/create-session",
       create_pricess: "/api/v1/stripe/create_prices",
-      // retrieve_session: "/api/v1/stripe/retrieve-session",
       retrieve_session: "/api/v1/stripe/retrieve-session/:id",
     },
     google: {

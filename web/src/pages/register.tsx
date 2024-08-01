@@ -143,16 +143,11 @@ function Register() {
             placeholder="Teléfono"
             {...register("phone")}
             type="text"
-            // {...register("phone", { type: "text" })}
           />
           {errorsZod && <div className="text-red-500">{errorsZod.phone}</div>}
           <select
             className="my-2 rounded-lg px-3 py-3"
             name="genere"
-            // placeholder="Género"
-            // {...register("genere")}
-            // type="text"
-            // {...register("phone", { type: "text" })}
             onChange={(e) => setForm({ ...form, genere: e.target.value })}
           >
             <option value="Hombre">Hombre</option>
@@ -174,9 +169,6 @@ function Register() {
               type={watchPass ? "text" : "password"}
               {
                 ...register("password")
-                // onChange=((e) => {
-                //   setForm((form) => ({ ...form, password: e.target.value }));
-                // })
                 /*eg. a fetch before this, and another button which change a formState would not take this last change bc of async fetch*/
               } /* We pass a function with last value associated to reactState, always within  async func or consecutive setForm */
               placeholder="Password"
@@ -235,8 +227,7 @@ function Register() {
             />
           </div>
           {errorsZod && <div className="text-red-500">{errorsZod.confirm}</div>}
-          {/* className="mx-auto mt-8 w-1/2 rounded-xl border bg-blue-100 p-2
-          text-black/50 */}
+
           <button
             type="submit"
             className="group relative mt-6 inline-flex h-12 items-center justify-center overflow-hidden rounded-md bg-gray-800 px-6 font-medium text-neutral-50"

@@ -35,6 +35,6 @@ export const tarifas: Ttarifa[] = [
       "2 Juntas mensuales en video llamada siempre que sea necesario",
     ],
     url: "https://buy.stripe.com/test_5kAcNj5gQ1zX8Bq6or",
-    action: "Suscribete",
+    action: "Suscríbete",
   },
 ];

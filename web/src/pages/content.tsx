@@ -49,7 +49,7 @@ function Content() {
             <div className="flex flex-col">
               <span className="xs:my-2 text-xl sm:my-2">
                 Registrate en
-                <span className="underline-offset-7 ml-1 underline decoration-[#39ba93] decoration-8">
+                <span className="underline-offset-7 ml-1 underline decoration-[#39ba93] decoration-2">
                   10 segundos
                 </span>
               </span>

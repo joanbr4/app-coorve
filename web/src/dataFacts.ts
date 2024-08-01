@@ -2,22 +2,22 @@ const facts = [
   {
     number: "7.7M+",
     description: "active listings worldwide",
-    time: "as of December 31, 2023",
+    time: "a 1 de Julio de 2024",
   },
   {
     number: "100K+",
     description: "cities and towns with active Airbnb listings",
-    time: "as of December 31, 2023",
+    time: "a 1 de Julio de 2024",
   },
   {
     number: "220+",
     description: "countries and regions with Airbnb listings",
-    time: "as of December 31, 2023",
+    time: "a 1 de Julio de 2024",
   },
   {
     number: "1.5B+",
     description: "Airbnb guest arrivals all-time",
-    time: "as of December 31, 2023",
+    time: "a 1 de Julio de 2024",
   },
   // {
   //   number: "5M+",

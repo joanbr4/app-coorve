@@ -4,6 +4,7 @@ import { hashPassword } from "../../utils/passwordHash"
 import { users } from "../../db/schemas"
 import { db } from "../../db/client"
 import { generatedId } from "../../utils/cuidGenerator"
+import { DuplicateError, NotFoundError } from "../../utils/errors"
 
 export const registerController = async (req: Request, res: Response) => {
   console.log("asdsa", req.body)
@@ -15,13 +16,15 @@ export const registerController = async (req: Request, res: Response) => {
     genere,
     created_at,
   } = req.body
+
   if (req.body == undefined) {
+    throw new NotFoundError("Faltan datos")
   }
 
   const foundUser = await getCheckEmail(email)
   const user = foundUser[0]
 
-  if (user) throw new Error("Ya existe este email")
+  if (user) throw new DuplicateError("Email")
   else {
     const passwordCrypt = await hashPassword(password)
 

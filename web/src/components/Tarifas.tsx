@@ -4,19 +4,19 @@ import { Ttarifa } from "@/types/types";
 
 function TarifasCard() {
   // const navigate = useNavigate();
-  const createStripe = async (price: number) => {
-    const result = await fetch("/create-session", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ price }),
-    });
-    const { url } = await result.json();
-    console.log(url);
-    window.location.href = url;
-    // navigate(session.url);
-  };
+  // const createStripe = async (price: number) => {
+  //   const result = await fetch("/create-session", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ price }),
+  //   });
+  //   const { url } = await result.json();
+  //   console.log(url);
+  //   window.location.href = url;
+  //   // navigate(session.url);
+  // };
 
   return (
     <>
@@ -69,14 +69,14 @@ function TarifasCard() {
             ))}
           </ul>
           <button
-            //FIXME add hoover
             className={
               tarifa.precio === 0
                 ? "mx-auto  flex w-full items-center justify-center rounded-md border bg-white p-1 text-lg font-bold text-gray-800"
-                : "mx-auto w-full rounded-md border  bg-gray-800 p-1 text-lg font-bold text-white"
+                : "mx-auto w-full rounded-md border  bg-gray-800 p-1 text-lg font-bold text-white hover:bg-gray-700"
             }
           >
-            <button onClick={() => createStripe(tarifa.precio)}>
+            <a href={tarifa.url}>
+              {/* <a onClick={() => navigate(tarifa.url)}> */}
               <p className="mr-2">{tarifa.action}</p>
               {tarifa.precio === 0 ? (
                 <svg
@@ -90,7 +90,7 @@ function TarifasCard() {
                   ></path>
                 </svg>
               ) : null}
-            </button>
+            </a>
           </button>
         </div>
       ))}

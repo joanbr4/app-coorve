@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type Ttarifa = {
   titulo: string;
   detalles: string;
@@ -35,4 +37,9 @@ export type TdataChart = {
   agendaron: number;
   renta: number;
   otros: number;
+};
+
+export type Tcontext<T> = {
+  user: TUser;
+  setParamId: Dispatch<SetStateAction<T>>;
 };

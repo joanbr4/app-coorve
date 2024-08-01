@@ -1,9 +1,16 @@
+import { Tcontext } from "@/types/types";
 import { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 
 function Configuration() {
   const [status, setStatus] = useState("Coming soon new features...");
+  const { setParamId } = useOutletContext<Tcontext<string>>();
 
   useEffect(() => {
+    const url = new URL(window.location.href);
+    const param = url.pathname.split("/")[2];
+    setParamId(param);
+
     const statuses = [
       "Coming soon new features...",
       // "Worker is processing...",
