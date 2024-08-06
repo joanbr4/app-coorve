@@ -11,6 +11,7 @@ import { Navigation, Pagination, A11y } from "swiper/modules";
 import SwiperCore from "swiper";
 import { Swiper as SwiperType } from "swiper/types";
 import { useNavigate } from "react-router-dom";
+import logo from "../../public/logo-de-coorve-transparante-1024x269.webp";
 
 SwiperCore.use([Navigation, Pagination]);
 
@@ -34,10 +35,7 @@ const Nosotros = () => {
             className="absolute ml-[100px] w-[250px] cursor-pointer"
             onClick={() => navigate(-1)}
           >
-            <img
-              src="src/assets/logo-de-coorve-transparante-1024x269.webp"
-              alt="logo"
-            />
+            <img src={logo} alt="logo" />
           </div>
           <h1 className="mx-4 mt-[70px] font-['Open_Sans'] text-6xl font-bold text-white md:mx-auto md:mt-0">
             Un poco de nuestro

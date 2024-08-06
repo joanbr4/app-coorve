@@ -4,6 +4,10 @@ import { Header } from "../components/header";
 // import { StickyScroll } from "../components/ui/sticky-scroll-reveal";
 import { TweetEmbed, TweetEmbed2 } from "@/components/TwitterCard";
 import { TarifasCard } from "@/components/Tarifas";
+import line_row from "../assets/image2.png";
+import cercle from "../assets/cercle2.png";
+import lines from "../assets/lines2.png";
+import diagram from "../assets/diagram2.png";
 
 function Content() {
   return (
@@ -142,7 +146,7 @@ function Content() {
               </p>
             </div>
             <div className=" mx-auto pt-[40px] ">
-              <img src="./src/assets/image2.png" />
+              <img src={line_row} />
             </div>
           </div>
           <div className="mx-auto my-[45px] flex w-full max-w-[900px] flex-col items-center justify-between md:flex-row ">
@@ -162,7 +166,7 @@ function Content() {
               </p>
             </div>
             <div className=" xs:w-[700px] mx-auto pt-[40px] ">
-              <img src="./src/assets/cercle2.png" />
+              <img src={cercle} />
             </div>
           </div>
           <div className="mx-auto my-[45px] flex w-full max-w-[900px] flex-col items-center justify-between md:flex-row">
@@ -181,7 +185,7 @@ function Content() {
               </p>
             </div>
             <div className=" xs:max-w-[700px] mx-auto pt-[40px] ">
-              <img src="./src/assets/lines2.png" />
+              <img src={lines} />
             </div>
           </div>
           <div className="mx-auto my-[45px] flex w-full max-w-[900px] flex-col items-center justify-between md:flex-row ">
@@ -201,7 +205,7 @@ function Content() {
               </p>
             </div>
             <div className=" xs:max-w-[700px] mx-auto pt-[40px] ">
-              <img src="./src/assets/diagram2.png" />
+              <img src={diagram} />
             </div>
           </div>
         </div>

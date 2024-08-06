@@ -32,6 +32,8 @@ const TweetEmbed = ({ url }: { url: string }) => {
 };
 const TweetEmbed2 = ({ url }: { url: string }) => {
   useEffect(() => {
+    console.log({ url });
+
     // Cargar el script de Twitter para los widgets
     const script = document.createElement("script");
     script.async = true;
@@ -60,6 +62,3 @@ const TweetEmbed2 = ({ url }: { url: string }) => {
   );
 };
 export { TweetEmbed, TweetEmbed2 };
-{
-  /* <blockquote class="twitter-tweet" data-theme="dark"><p lang="en" dir="ltr">OA MacApp <br><br>pure gold <br><br> <a href="https://t.co/z5LglNUn6g">pic.twitter.com/z5LglNUn6g</a></p>&mdash; Linus ●ᴗ● Ekenstam (@LinusEkenstam) <a href="https://twitter.com/LinusEkenstam/status/1790155407203426695?ref_src=twsrc%5Etfw">May 13, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> */
-}

@@ -1,5 +1,5 @@
-import "dotenv/config";
-import z from "zod";
+import "dotenv/config"
+import z from "zod"
 
 const appConfigSchema = z
   .object({
@@ -9,22 +9,19 @@ const appConfigSchema = z
     generatedJwtExpires: z.string(),
     refreshedJwtExpires: z.string(),
   })
-  .strict();
+  .strict()
 
 const apiConfigSchema = z
   .object({
     resend: z.string(),
-    // sheets_id: z.string(),
-    // sheets_secret: z.string(),
-    // sheets_key: z.string(),
     folder_id: z.string(),
     stripe_key_test: z.string(),
   })
-  .strict();
+  .strict()
 
 const bcryptConfigSchema = z.object({
   saltRounds: z.number(),
-});
+})
 const dbConfigSchema = z.object({
   urlSQLite: z.string(),
   urlDrizzle: z.string(),
@@ -34,7 +31,7 @@ const dbConfigSchema = z.object({
   database: z.string(),
   user: z.string(),
   password: z.string(),
-});
+})
 
 const appConfig = appConfigSchema.parse({
   port: process.env.PORT,
@@ -42,16 +39,13 @@ const appConfig = appConfigSchema.parse({
   refreshJwtKey: process.env.REFRESH_JWT_KEY,
   generatedJwtExpires: process.env.GENERATED_JWT_EXPIRATION,
   refreshedJwtExpires: process.env.REFRESHED_JWT_EXPIRATION,
-});
+})
 
 const apiConfig = apiConfigSchema.parse({
   resend: process.env.API_KEY_RESEND,
-  // sheets_id: process.env.API_SHEET_CLIENT_ID,
-  // sheets_secret: process.env.API_SHEET_CLIENT_SECRET,
-  // sheets_key: process.env.API_SHEETS_KEY,
   folder_id: process.env.FOLDER_ID,
   stripe_key_test: process.env.API_STRIPE_TEST,
-});
+})
 
 const dbConfig = dbConfigSchema.parse({
   urlSQLite: process.env.URL_TO_SQLITE,
@@ -62,10 +56,10 @@ const dbConfig = dbConfigSchema.parse({
   database: process.env.DB_NAME,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-});
+})
 
 const bcryptConfig = bcryptConfigSchema.parse({
   saltRounds: 10,
-});
+})
 
-export { appConfig, bcryptConfig, dbConfig, apiConfig };
+export { appConfig, bcryptConfig, dbConfig, apiConfig }

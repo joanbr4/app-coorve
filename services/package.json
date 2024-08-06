@@ -1,9 +1,8 @@
 {
   "name": "services",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec node --experimental-specifier-resolution=node --import tsx src/main.ts",
@@ -19,7 +18,8 @@
     "lint2:fix": "eslint --ext .ts src --fix",
     "up": "docker compose up -d",
     "up2": "docker start coorve || pnpm container",
-    "container": "docker run --name coorve_db -e POSTGRES_DB=coorve_db -e POSTGRES_PASSWORD=admin postgres:16-alpine"
+    "container": "docker run --name coorve_db -e POSTGRES_DB=coorve_db -e POSTGRES_PASSWORD=admin postgres:16-alpine",
+    "deploy-build": "node dist/main.js"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -38,11 +38,6 @@
   "author": {
     "name": "Joan Bordonaba",
     "email": "joan.bordonaba@coorve.com"
-  },
-  "packageManager": "pnpm@9.5.0",
-  "engines": {
-    "node": ">=20 <=20.15.0",
-    "pnpm": ">=9.5.0"
   },
   "license": "ISC",
   "devDependencies": {

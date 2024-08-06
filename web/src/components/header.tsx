@@ -1,20 +1,9 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-// import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import {
-  Dialog,
-  // Disclosure,
-  // Popover,
-  // PopoverGroup,
-  Transition,
-  // PopoverPanel,
-  // PopoverButton,
-} from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
 import { PlayCircleIcon } from "@heroicons/react/24/outline";
-import {
-  //  Fragment,
-  useState,
-} from "react";
+import { useState } from "react";
 import { useAuth } from "@/context/AuthProvider";
+import logo from "../../public/logo-de-coorve-transparante-1024x269.webp";
 
 type TitemMenu = {
   name: string;
@@ -41,7 +30,6 @@ function Header() {
 
   const open = () => {
     setMobileMenuOpen(!mobileMenuOpen);
-    // console.log("func", mobileMenuOpen);
   };
 
   return (
@@ -49,11 +37,7 @@ function Header() {
       <div className="mx-auto  flex w-[800px] justify-between px-2">
         <div className="my-auto px-5 sm:items-center sm:pt-2">
           <Link to="/">
-            <img
-              src="src/assets/logo-de-coorve-transparante-1024x269.webp"
-              alt="Logo"
-              width="150"
-            />
+            <img src={logo} alt="Logo" width="150" />
           </Link>
         </div>
         <div className="ml-auto hidden items-center sm:flex">

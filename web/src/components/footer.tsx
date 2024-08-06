@@ -1,4 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
+import logo from "../../public/logo-de-coorve-transparante-1024x269.webp";
+
 export default function Footer() {
   const navigate = useNavigate();
   return (
@@ -38,7 +40,7 @@ export default function Footer() {
         onClick={() => navigate("/content")}
       >
         <img
-          src="src/assets/logo-de-coorve-transparante-1024x269.webp"
+          src={logo}
           alt="Logo"
           width="300"
           className="m-auto flex items-center fill-white"
