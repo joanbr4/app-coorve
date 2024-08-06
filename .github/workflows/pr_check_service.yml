@@ -1,0 +1,62 @@
+name: pr_check_service
+
+on:
+  pull_request:
+    branches: [master]
+    paths: ["services/**"]
+
+jobs:
+  pr_check_service:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Check package.json version
+        run: ./scripts/check_version.sh services/package.json
+        shell: bash
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "pnpm"
+          cache-dependency-path: services/pnpm-lock.yml
+
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
+        with:
+          path: ${{ github.workspace }}/services/node_modules
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-
+
+      - name: install dependencies
+        run: |
+          cd ${{ github.workspace }}/services
+          npm ci --legacy-peer-deps
+
+      - name: lint
+        run: |
+          cd ${{ github.workspace }}/services
+          npx eslint src --max-warnings 0
+
+      # - name: test
+      #   run: |
+      #     cd ${{ github.workspace }}/services
+      #     npm run test -- --coverage
+
+      - name: build
+        run: |
+          cd ${{ github.workspace }}/services
+          npm run build
+
+      # - name: SonarCloud Scan
+      #   uses: SonarSource/sonarcloud-github-action@master
+      #   with:
+      #     projectBaseDir: services/sso
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

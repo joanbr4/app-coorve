@@ -3,12 +3,9 @@ import React, {
   createContext,
   useContext,
   useEffect,
-  // useContext,
-  // useEffect,
   useMemo,
   useState,
 } from "react";
-// import { urls } from "../constants";
 import { TUser } from "@/types/types";
 
 export type TAuthContext = {

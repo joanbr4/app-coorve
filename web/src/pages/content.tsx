@@ -21,10 +21,10 @@ function Content() {
           clientes potenciales para el sector inmobiliario
         </span>
         <div className="mx-auto flex flex-auto flex-col font-bold lg:flex-row">
-          <button className="mx-2 my-2 rounded-md border bg-white p-2 font-sans text-lg text-gray-800">
-            Quiero empezar a recibir leads
+          <button className="mx-2 my-2 rounded-md border bg-white p-2 font-sans text-lg text-gray-800 hover:bg-slate-200">
+            <a href="#pricing">Quiero empezar a recibir leads</a>
           </button>
-          <button className="ounded-md mx-2 my-2 flex w-auto justify-between rounded-md border p-2 font-sans text-lg">
+          <button className="mx-2 my-2 flex w-auto justify-between rounded-md border p-2 font-sans text-lg hover:bg-gray-700">
             <span>Ver demo en tiempo real</span>
             <ArrowRightIcon className="mx-2 my-0 size-6 " />
           </button>

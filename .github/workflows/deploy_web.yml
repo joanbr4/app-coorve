@@ -1,0 +1,33 @@
+name: deploy_web
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deply_web_dev:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repositories
+        uses: actions/checkout@v3
+
+      - name: Get versions
+        id: versions
+        run: |
+          service_version=$(grep version: ./config/dev/service.yml | awk '{print $2}')
+          web_version=$(grep version: ./config/dev/web.yml | awk '{print $2}')
+          echo "::set-output name=service_version::$service_version"
+          echo "::set-output name=web_version::$web_version"
+
+      - name: Execute SSH Command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.SERVER_HOST}}
+          username: ${{secrets.SERVER_USERNAME}}
+          key: ${{secrets.SERVER_SSH_KEY}}
+          script: |
+            echo "Deploying SERVICE VERSION: ${{ steps.versions.outputs.service_version }}"
+            echo "Deploying WEB VERSION: ${{ steps.versions.outputs.web_version }}"
+            cd ${{ secrets.SSO_PATH }}/dev
+            bash deploy.sh front ${{ steps.versions.outputs.sso_service_version }} ${{ steps.versions.outputs.usuaris_web_version }}

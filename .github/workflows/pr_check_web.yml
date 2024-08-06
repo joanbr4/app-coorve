@@ -1,0 +1,68 @@
+name: pr_check_web
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - "web/**"
+
+jobs:
+  pr_check_web:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Check package.json version
+        run: ./scripts/check_version.sh web/package.json
+        shell: bash
+
+      # - name: Check CHANGELOG.md has been updated
+      #   run: ./scripts/check_changelog.sh web/wiki/CHANGELOG.md
+      #   shell: bash
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "pnpm"
+          cache-dependency-path: web/pnpm-lock.yml
+
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
+        with:
+          path: ${{ github.workspace }}/web/wiki/node_modules
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-
+
+      - name: install dependencies
+        run: |
+          cd ${{ github.workspace }}/web
+          npm ci --legacy-peer-deps
+
+      - name: lint
+        run: |
+          cd ${{ github.workspace }}/web
+          npx eslint src --max-warnings 0
+
+      # - name: test
+      #   run: |
+      #     cd ${{ github.workspace }}/web
+      #     npm run test -- --coverage
+
+      - name: build
+        run: |
+          cd ${{ github.workspace }}/web
+          npm run build
+
+      # - name: SonarCloud Scan
+      #   uses: SonarSource/sonarcloud-github-action@master
+      #   with:
+      #     projectBaseDir: web/wiki
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

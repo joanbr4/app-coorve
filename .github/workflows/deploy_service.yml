@@ -1,0 +1,45 @@
+name: deploy_service_dev
+
+on:
+  push:
+    # pull_request:
+    #   types:
+    #     - closed
+    branches: [master]
+    paths:
+      - "config/dev/service.yml"
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deply_services_dev:
+    # if: github.event.push == true #only for pr
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get version
+        id: versions
+        run: |
+          service_version=$(grep version: ./config/dev/service.yml | awk '{print $2}')
+          web_version=$(grep version: ./config/dev/web.yml | awk '{print $2}')
+          echo "::set-output name=service_version::$service_version"
+          echo "::set-output name=web_version::$web_version"
+
+      - name: Execute SSH Command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_SSH_KEY}}
+          script: |
+            echo "Deploying SERVICE VERSION: ${{ steps.versions.outputs.service_version }}"
+            echo "Deploying WEB VERSION: ${{ steps.versions.outputs.web_version }}"
+            cd ${{ secrets.SSO_PATH }}/dev
+            bash deploy.sh back ${{ steps.versions.outputs.service_version }} ${{ steps.versions.outputs.web_version }}
