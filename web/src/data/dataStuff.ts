@@ -24,7 +24,7 @@ export const stuffs = [
     nameState: "barrios",
   },
   {
-    url: "public/joan.webp",
+    url: "/joan.webp",
     name: "Joan Bordonaba",
     title: "CTO",
     description:
