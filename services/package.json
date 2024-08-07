@@ -38,10 +38,6 @@
     "name": "Joan Bordonaba",
     "email": "joan.bordonaba@coorve.com"
   },
-  "engines": {
-    "node": ">=20 <=20.15.0",
-    "pnpm": ">=9.5.0 <=9.6.0"
-  },
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.3.0",
