@@ -91,11 +91,7 @@ function Header() {
               <div className="flex justify-center p-4 text-center">
                 <Dialog.Panel className="mt-20 w-full max-w-md transform overflow-hidden rounded-2xl bg-gray-800 p-6 text-left align-middle text-white shadow-xl transition-all">
                   <div className="flex items-center justify-between">
-                    <img
-                      src="src/assets/logo-de-coorve-transparante-1024x269.webp"
-                      alt="Logo"
-                      width="150"
-                    />
+                    <img src={logo} alt="Logo" width="150" />
                     <button
                       className={
                         !mobileMenuOpen

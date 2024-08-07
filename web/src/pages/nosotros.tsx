@@ -37,9 +37,12 @@ const Nosotros = () => {
           >
             <img src={logo} alt="logo" />
           </div>
-          <h1 className="mx-4 mt-[70px] font-['Open_Sans'] text-6xl font-bold text-white md:mx-auto md:mt-0">
+          <h1 className="mx-12 mt-[70px] font-['Open_Sans'] text-6xl font-bold text-white md:mx-auto 2xl:mt-0">
             Un poco de nuestro
-            <span className="ml-2 underline decoration-[#39ba93] decoration-4 underline-offset-4">
+            <p className="ml-2 block underline decoration-[#39ba93] decoration-4 underline-offset-4 md:hidden">
+              recorrido
+            </p>
+            <span className="ml-2 hidden underline decoration-[#39ba93] decoration-4 underline-offset-4 md:inline">
               recorrido
             </span>
           </h1>
@@ -63,7 +66,7 @@ const Nosotros = () => {
           <h4 className="mx-4 my-4 font-['Open_Sans'] text-3xl text-white  md:mx-0">
             Datos básicos
           </h4>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 ">
+          <div className="grid grid-cols-2 lg:grid-cols-4 ">
             {facts.map((fact) => (
               <div className="pr-15 m-2 rounded-lg border bg-gray-700 py-8 pl-10 text-white">
                 <h1 className="text-6xl font-bold">{fact.number}</h1>

@@ -48,10 +48,7 @@ export default function Footer() {
       </div>
       <div className="flex items-center justify-center bg-gray-800/75 py-2 text-[10px] text-white/75">
         <span className="flex justify-center px-2">
-          ™ & © 2024 COORVE INTL S.L. Todos los derechos reservados. COORVE
-          Real Estate™, COORVE Visual™ son propiedad de COORVE INTL S.L. -
-          Posse Lab, Dply y las marcas asociadas son propiedad de sus
-          respectivos dueños.
+          ™ & © 2024 COORVE INTL S.L. Todos los derechos reservados.
         </span>
       </div>
       <div className="sm:font flex justify-center bg-gray-800/75 pb-3 text-xs font-medium text-white  sm:px-8 ">

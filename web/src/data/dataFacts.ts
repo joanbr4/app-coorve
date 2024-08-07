@@ -1,22 +1,22 @@
 const facts = [
   {
-    number: "7.7M+",
-    description: "active listings worldwide",
+    number: "500+",
+    description: "asesores mejoraron sus sistemas",
     time: "a 1 de Julio de 2024",
   },
   {
-    number: "100K+",
-    description: "cities and towns with active Airbnb listings",
+    number: "50k+",
+    description: "leads captados",
     time: "a 1 de Julio de 2024",
   },
   {
-    number: "220+",
-    description: "countries and regions with Airbnb listings",
+    number: "10M+",
+    description: "dolares en ventas",
     time: "a 1 de Julio de 2024",
   },
   {
-    number: "1.5B+",
-    description: "Airbnb guest arrivals all-time",
+    number: "5+",
+    description: "paises y regiones donde opera",
     time: "a 1 de Julio de 2024",
   },
 ];

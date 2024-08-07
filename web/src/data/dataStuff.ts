@@ -18,9 +18,17 @@ export const stuffs = [
   {
     url: "https://coorve.com/wp-content/uploads/2023/05/Diseno-sin-tituloerthjfgbd.jpg",
     name: "Jose Barrios",
-    title: "Diseñador",
+    title: "CDO",
     description:
-      "Jose Barrios es un apasionado del diseño y la experiencia de usuario, con más de 15 años de experiencia en la creación de soluciones innovadoras para grandes empresas. Como líder del área de diseño en Coorve INTL S.L., Jesús aporta su experiencia y conocimientos para crear soluciones de alta calidad y resultados óptimos para los clientes.",
+      "Jose Barrios es un apasionado del diseño y la experiencia de usuario, con más de 20 años de experiencia diseñando obras publicitarias y 4 años dentro de Coorve. Como líder del área de diseño en Coorve INTL S.L., Jose aporta su experiencia y conocimientos para proporcionar los mejores diseños para la captación.",
+    nameState: "barrios",
+  },
+  {
+    url: "../../public/joan.webp",
+    name: "Joan Bordonaba",
+    title: "CTO",
+    description:
+      "Joan Bordonaba es un programador con una gran experiencia, se ha unido a Coorve, para poder llevarlo al siguiente nivel con las implementaciones de las últimas y mejoras tecnologias, su compromiso y dedicación garantizan resultados.",
     nameState: "barrios",
   },
 ];
