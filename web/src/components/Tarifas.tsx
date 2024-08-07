@@ -1,4 +1,4 @@
-import { tarifas } from "@/dataTarifa";
+import { tarifas } from "@/data/dataTarifa";
 import { Ttarifa } from "@/types/types";
 // import { useNavigate } from "react-router-dom";
 

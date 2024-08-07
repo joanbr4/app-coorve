@@ -1,4 +1,3 @@
-// import Header from "../component/header";
 import { Lamp } from "../components/ui/lamp";
 
 function LandingPage() {

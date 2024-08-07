@@ -1,8 +1,5 @@
 import { z } from "zod"
-import { userLoginSchema } from "./login"
 import { userSchema } from "./user"
-
-// export type TSsoLoginRequest = z.infer<typeof userLoginSchema>
 
 export const ssoLoginResponseSchema = userSchema.pick({ id: true }).extend({
   authToken: z.string().min(1),

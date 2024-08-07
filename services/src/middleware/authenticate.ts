@@ -39,11 +39,5 @@ async function authenticate(req: Request, res: Response, next: NextFunction) {
     }
   }
 }
-// const authToken = req.cookies("authToken")
-// if (!authToken) {
-//   throw new UnauthorizedError()
-// }
-// const { id } = await validate(req, { authToken })
-// req.body.user = id
 
 export { authenticate }

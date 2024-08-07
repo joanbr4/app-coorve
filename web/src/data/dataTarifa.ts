@@ -1,4 +1,4 @@
-import { Ttarifa } from "./types/types";
+import { Ttarifa } from "../types/types";
 
 export const tarifas: Ttarifa[] = [
   {

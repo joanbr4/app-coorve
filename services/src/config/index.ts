@@ -25,6 +25,8 @@ const bcryptConfigSchema = z.object({
 const dbConfigSchema = z.object({
   urlSQLite: z.string(),
   urlDrizzle: z.string(),
+  turso_token: z.string(),
+  turso_database: z.string(),
   url: z.string(),
   host: z.string(),
   port: z.string(),
@@ -50,6 +52,8 @@ const apiConfig = apiConfigSchema.parse({
 const dbConfig = dbConfigSchema.parse({
   urlSQLite: process.env.URL_TO_SQLITE,
   urlDrizzle: process.env.URL_TO_DRIZZLE,
+  turso_database: process.env.TURSO_DATABASE_URL,
+  turso_token: process.env.TURSO_AUTH_TOKEN,
   url: process.env.DATABASE_URL,
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,

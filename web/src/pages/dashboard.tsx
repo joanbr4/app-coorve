@@ -8,7 +8,6 @@ import {
   Tooltip,
   TooltipItem,
 } from "chart.js";
-// import { title } from "process";
 import { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
@@ -26,10 +25,6 @@ Chart.register(
 type PieTooltipContext = TooltipItem<"pie">;
 
 const CircularChart = () => {
-  // const [dataChart, setDataChart] = useState<{
-  //   datasets: { data: number[] }[];
-  //   labels: string[];
-  // }>();
   const [dataChartFetch, setDataChartFetch] = useState<TdataChart>();
 
   const { user, setParamId } = useOutletContext<Tcontext<string>>();
@@ -58,7 +53,6 @@ const CircularChart = () => {
       });
   }, []);
 
-  // let dataChart = { datasets: "", labels: "" };
   let dataChart = {
     datasets: [
       {
@@ -151,7 +145,6 @@ const CircularChart = () => {
       labels: listKeysClean,
     };
     dataChart = data;
-    // setDataChart(data);
   }
 
   const option = {

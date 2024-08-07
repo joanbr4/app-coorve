@@ -6,7 +6,6 @@ import cors from "cors"
 import { errorMiddlewareAfter } from "./middleware/errorMiddleware"
 import helmet from "helmet"
 import { tokenPath } from "./routes/tokens"
-// import { client } from "./db/client"
 import cookieParser from "cookie-parser"
 import { apiRouter } from "./routes/apiSheets"
 

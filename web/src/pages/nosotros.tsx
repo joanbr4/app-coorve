@@ -1,7 +1,7 @@
 import Footer from "@/components/footer";
-import { facts } from "@/dataFacts";
-import { history } from "@/dataHistory";
-import { stuffs } from "@/dataStuff";
+import { facts } from "@/data/dataFacts";
+import { history } from "@/data/dataHistory";
+import { stuffs } from "@/data/dataStuff";
 import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";

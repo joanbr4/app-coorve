@@ -7,7 +7,6 @@ import LandingPage from "../pages/landing";
 import { Register, action as registerAction } from "../pages/register";
 import Login from "../pages/login";
 import Content from "../pages/content";
-// import Chatgpt from "@/pages/chatgpt";
 import Faqs from "@/pages/faq";
 import { UserPage } from "@/pages/userPage";
 import { ResetPass } from "@/pages/resetPass";
@@ -31,12 +30,9 @@ const router = createBrowserRouter(
       <Route path="/payment-success" element={<PaymentSuccess />} />
       <Route path="/signin" action={registerAction} element={<Register />} />
       <Route path="/signup" element={<Login />} />
-      {/* <Route path="/chatgpt" element={<Chatgpt />} /> */}
       <Route path="/faqs" element={<Faqs />} />
-      {/* <Route path="/user" element={<UserPage />}> */}
       <Route path="/user" element={<PrivateRoute element={<UserPage />} />}>
         <Route path="dashboard" element={<CircularChart />} />
-        {/* <Route path="dashboard" element={<Dashboard />} /> */}
         <Route path="perfil" element={<Perfil />} />
         <Route path="settings" element={<Configuration />} />
         <Route path="facturas" element={<Facturación />} />

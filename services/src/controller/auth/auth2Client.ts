@@ -1,10 +1,7 @@
 import fs from "fs/promises"
 import { existsSync, writeFileSync } from "fs"
 import path from "path"
-// import { authenticate } from "@google-cloud/local-auth"
 import { Auth, google } from "googleapis"
-// import { oauth2 } from "googleapis/build/src/apis/oauth2"
-// import readLine from "readline"
 import express, { Request, Response } from "express"
 
 const SCOPES = [
@@ -69,26 +66,6 @@ async function getAccessToken(oAuth2Client: Auth.OAuth2Client) {
     const server = app.listen(3001, () => {
       console.log("OAuth2 callback server is running on http://localhost:3001")
     })
-
-    // console.log("Authorize this app by visiting this url:", authUrl)
-    // const rl = readLine.createInterface({
-    //   input: process.stdin,
-    //   output: process.stdout,
-    // })
-    // const code = await new Promise<string>((resolve, reject) => {
-    //   rl.on("close", () => {
-    //     reject(new Error("User did not authorize the app."))
-    //   })
-    //   rl.question("Enter the code from that page here: ", (code: string) => {
-    //     rl.close()
-    //     resolve(code)
-    //   })
-    // })
   })
-  // const token = await oAuth2Client.getToken(code)
-  // console.log("Token: ", token)
-  // oAuth2Client.setCredentials(token.tokens)
-  // writeFileSync(TOKEN_PATH, JSON.stringify(token.tokens))
-  // console.log("Token stored to", TOKEN_PATH)
 }
 export { authorize_fail }
