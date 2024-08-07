@@ -27,12 +27,6 @@ const dbConfigSchema = z.object({
   urlDrizzle: z.string(),
   turso_token: z.string(),
   turso_database: z.string(),
-  url: z.string(),
-  host: z.string(),
-  port: z.string(),
-  database: z.string(),
-  user: z.string(),
-  password: z.string(),
 })
 
 const appConfig = appConfigSchema.parse({
@@ -54,12 +48,6 @@ const dbConfig = dbConfigSchema.parse({
   urlDrizzle: process.env.URL_TO_DRIZZLE,
   turso_database: process.env.TURSO_DATABASE_URL,
   turso_token: process.env.TURSO_AUTH_TOKEN,
-  url: process.env.DATABASE_URL,
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  database: process.env.DB_NAME,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
 })
 
 const bcryptConfig = bcryptConfigSchema.parse({

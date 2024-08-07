@@ -2,6 +2,8 @@
   "build": {
     "env": {
       "NODE_VERSION": "20.15.0"
-    }
+    },
+
+    "rewrites": [{ "source": "/(.*)", "destination": "/" }]
   }
 }
