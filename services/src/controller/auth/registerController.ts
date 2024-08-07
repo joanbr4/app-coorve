@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { getCheckEmail } from "../../repository"
+import { getCheckEmail } from "../../utils/check_email"
 import { hashPassword } from "../../utils/passwordHash"
 import { users } from "../../db/schemas"
 import { db } from "../../db/client"

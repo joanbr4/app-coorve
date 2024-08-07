@@ -1,8 +1,10 @@
 {
-  "build": {
-    "env": {
-      "NODE_VERSION": "20.15.0"
+  "version": 2,
+  "builds": [
+    {
+      "src": "./main.ts",
+      "use": "@vercel/node"
     }
-  },
+  ],
   "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
