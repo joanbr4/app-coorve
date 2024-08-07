@@ -4,10 +4,17 @@ import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  Object.assign(process.env, loadEnv(mode, process.cwd(), ""));
+  // Load environment variables based on the mode
+
+  // Object.assign(process.env, loadEnv(mode, process.cwd(), ""));
+  const env = loadEnv(mode, process.cwd(), "");
 
   // Check if running in Docker
-  const isDocker = process.env.VITE_DOCKER;
+  const isDocker = env.VITE_DOCKER;
+
+  // Set base URL based on environment variables
+  const apiBaseUrl = env.VITE_API_BASE_URL;
+
   return {
     plugins: [react()],
     resolve: {
@@ -35,14 +42,14 @@ export default defineConfig(({ mode }) => {
           "/retrieve-session": "http://server:3000/api/v1/stripe",
         }),
         ...(!isDocker && {
-          "/login": "http://localhost:3000/api/v1/auth",
-          "/register": "http://localhost:3000/api/v1/auth",
-          "/resetPass": "http://localhost:3000/api/v1/auth",
-          "/me": "http://localhost:3000/api/v1/auth",
-          "/logout": "http://localhost:3000/api/v1/auth",
-          "/sheets": "http://localhost:3000/api/v1/google",
-          "/create-session": "http://localhost:3000/api/v1/stripe",
-          "/retrieve-session": "http://localhost:3000/api/v1/stripe",
+          "/login": `${apiBaseUrl}/api/v1/auth`,
+          "/register": `${apiBaseUrl}/api/v1/auth`,
+          "/resetPass": `${apiBaseUrl}/api/v1/auth`,
+          "/me": `${apiBaseUrl}/api/v1/auth`,
+          "/logout": `${apiBaseUrl}/api/v1/auth`,
+          "/sheets": `${apiBaseUrl}/api/v1/google`,
+          "/create-session": `${apiBaseUrl}/api/v1/stripe`,
+          "/retrieve-session": `${apiBaseUrl}/api/v1/stripe`,
         }),
       },
     },
