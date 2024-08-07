@@ -29,6 +29,6 @@ export const stuffs = [
     title: "CTO",
     description:
       "Joan Bordonaba es un programador con una gran experiencia, se ha unido a Coorve, para poder llevarlo al siguiente nivel con las implementaciones de las últimas y mejoras tecnologias, su compromiso y dedicación garantizan resultados.",
-    nameState: "barrios",
+    nameState: "joan",
   },
 ];

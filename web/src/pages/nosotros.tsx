@@ -19,6 +19,7 @@ const stuff = {
   seabroth: false,
   jose: false,
   barrios: false,
+  joan: false,
 };
 
 type InitialStateStuff = keyof typeof stuff;
