@@ -8,13 +8,12 @@
     "dev": "nodemon --exec node --experimental-specifier-resolution=node --import tsx src/main.ts",
     "dev2": "nodemon --exec 'tsx src/main.ts'",
     "build": "tsc",
+    "start": "node dist/index.js",
     "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit migrate",
     "push": "drizzle-kit push",
-    "start": "node dist/index.js",
     "lint": "eslint \"./**/*.{js,ts}\" ",
-    "lint:fix": "eslint \"./**/*.{js,ts}\" --fix",
-    "deploy-build": "node dist/main.js"
+    "lint:fix": "eslint \"./**/*.{js,ts}\" --fix"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
