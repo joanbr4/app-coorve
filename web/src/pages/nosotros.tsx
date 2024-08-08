@@ -157,7 +157,7 @@ const Nosotros = () => {
                   )}
                 </div>
                 {showMore[person.nameState as InitialStateStuff] && (
-                  <p className="absolute top-full mt-4 pb-4 ">
+                  <p className="top-full mt-4 pb-4 md:absolute ">
                     {person.description}
                   </p>
                 )}
