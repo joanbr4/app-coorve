@@ -86,7 +86,7 @@ const Nosotros = () => {
           </h4>
           <div className="mx-4 md:flex">
             {stuffs.map((person) => (
-              <div className="mb-8 flex max-w-[500px] flex-col  hover:rounded-t-lg md:mr-5">
+              <div className="relative mb-8 flex max-w-[500px] flex-col  hover:rounded-t-lg md:mr-5">
                 <div className=" group flex max-w-[500px] flex-col ">
                   <div className="overflow-hidden rounded-lg">
                     <img
@@ -157,7 +157,9 @@ const Nosotros = () => {
                   )}
                 </div>
                 {showMore[person.nameState as InitialStateStuff] && (
-                  <p className="mt-4 pb-4 ">{person.description}</p>
+                  <p className="absolute top-full mt-4 pb-4 ">
+                    {person.description}
+                  </p>
                 )}
               </div>
             ))}

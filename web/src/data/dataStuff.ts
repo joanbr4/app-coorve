@@ -4,7 +4,7 @@ export const stuffs = [
     name: "Guillermo Ochoa",
     title: "Coorve Fundador & CEO",
     description:
-      "Guillermo Ochoa es el CEO de una empresa innovadora y vanguardista que se enfoca en la mejora continua a través de la sencillez y las tecnologías más avanzadas del mercado. Con una visión clara y un enfoque centrado en el cliente, Guillermo lidera un equipo apasionado y comprometido en ofrecer soluciones de alta calidad y resultados óptimos para sus clientes.",
+      "Guillermo Ochoa, con + 4 años de experiencia en el sector inmobiliario, ganando premios al mejor asesor en la famosa Proptech PROPERTISTA. Co-fundador de Coorve, Guillermo lidera un equipo apasionado y comprometido en ofrecer soluciones de calidad y resultados óptimos para sus clientes.",
     nameState: "seabroth",
   },
   {
@@ -12,7 +12,7 @@ export const stuffs = [
     name: "Jose Fabregat",
     title: "Coorve Fundador & MCO",
     description:
-      "Jose Fabregat es un miembro clave del equipo y co-fundador de una empresa innovadora y en constante evolución. Su obsesión por la mejora constante y el aprendizaje lo convierten en un líder excepcional en su industria. Con una visión clara y un enfoque centrado en el cliente, Jose lidera con pasión y compromiso, siempre buscando nuevas formas de mejorar y crecer.",
+      "Jose Fabregat, con + de 5 años de experiencia en campañas de publicidad y marketing inmobiliario, es el co-fundador de Coorve. Su obsesión por la mejora constante y el aprendizaje lo convierten en un líder siempre buscando nuevas formas de mejorar y crecer.",
     nameState: "jose",
   },
   {
@@ -28,7 +28,7 @@ export const stuffs = [
     name: "Joan Bordonaba",
     title: "CTO",
     description:
-      "Joan Bordonaba es un programador con una gran experiencia, se ha unido a Coorve, para poder llevarlo al siguiente nivel con las implementaciones de las últimas y mejoras tecnologias, su compromiso y dedicación garantizan resultados.",
+      "Joan Bordonaba, es un programador con una gran experiencia que se ha unido a Coorve, para poder llevarlo al siguiente nivel con las implementaciones de las últimas y mejoras tecnologias, su compromiso y dedicación garantizan resultados.",
     nameState: "joan",
   },
 ];
