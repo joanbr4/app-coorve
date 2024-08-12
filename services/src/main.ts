@@ -8,6 +8,7 @@ import helmet from "helmet"
 import { tokenPath } from "./routes/tokens"
 import cookieParser from "cookie-parser"
 import { apiRouter } from "./routes/apiSheets"
+import { mockRouter } from "./routes/mock"
 
 const app = express()
 app.use(cors())
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(authRouter)
 app.use(apiRouter)
 app.use(tokenPath)
+app.use(mockRouter)
 
 app.use(errorMiddlewareAfter)
 

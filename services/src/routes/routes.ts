@@ -23,5 +23,8 @@ export const pathRoot = {
     google: {
       sheets: "/api/v1/google/sheets",
     },
+    mock: {
+      mocking: "/api/mock",
+    },
   },
 }
