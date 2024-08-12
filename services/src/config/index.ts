@@ -30,7 +30,7 @@ const dbConfigSchema = z.object({
 })
 
 const appConfig = appConfigSchema.parse({
-  port: process.env.PORT,
+  port: process.env.PORT ?? "3000",
   generateJwtKey: process.env.GENERATE_JWT_KEY,
   refreshJwtKey: process.env.REFRESH_JWT_KEY,
   generatedJwtExpires: process.env.GENERATED_JWT_EXPIRATION,
@@ -44,8 +44,8 @@ const apiConfig = apiConfigSchema.parse({
 })
 
 const dbConfig = dbConfigSchema.parse({
-  urlSQLite: process.env.URL_TO_SQLITE,
-  urlDrizzle: process.env.URL_TO_DRIZZLE,
+  urlSQLite: process.env.URL_TO_SQLITE ?? "",
+  urlDrizzle: process.env.URL_TO_DRIZZLE ?? "",
   turso_database: process.env.TURSO_DATABASE_URL,
   turso_token: process.env.TURSO_AUTH_TOKEN,
 })
