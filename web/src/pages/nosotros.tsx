@@ -11,7 +11,7 @@ import { Navigation, Pagination, A11y } from "swiper/modules";
 import SwiperCore from "swiper";
 import { Swiper as SwiperType } from "swiper/types";
 import { useNavigate } from "react-router-dom";
-import logo from "../../public/logo-de-coorve-transparante-1024x269.webp";
+import logo from "/logo-de-coorve-transparante-1024x269.webp";
 
 SwiperCore.use([Navigation, Pagination]);
 
@@ -29,11 +29,11 @@ const Nosotros = () => {
   const [showMore, setShowMore] = useState<typeof stuff>(stuff);
   const navigate = useNavigate();
   return (
-    <div className="h-full bg-gray-800">
+    <div className="h-full bg-gray-800 font-['Open_Sans']">
       <div className=" mx-auto flex  flex-col pt-8">
         <div className="flex md:relative">
           <div
-            className="absolute ml-[100px] w-[250px] cursor-pointer"
+            className="absolute mx-auto ml-[50px] w-[250px] cursor-pointer sm:ml-[100px]"
             onClick={() => navigate(-1)}
           >
             <img src={logo} alt="logo" />
@@ -69,11 +69,13 @@ const Nosotros = () => {
           </h4>
           <div className="grid grid-cols-2 lg:grid-cols-4 ">
             {facts.map((fact) => (
-              <div className="pr-15 m-2 rounded-lg border bg-gray-700 py-8 pl-10 text-white">
-                <h1 className="text-6xl font-bold">{fact.number}</h1>
-                <div className="mr-4 justify-between font-['Open_Sans']">
+              <div className="sm:pr-15 relative m-2 h-[270px] rounded-lg border bg-gray-700 py-8 text-white sm:pl-10">
+                <h1 className="mx-2 text-6xl font-bold">{fact.number}</h1>
+                <div className="mr-4 justify-between px-4 font-['Open_Sans'] sm:px-0">
                   <p className="my-4">{fact.description}</p>
-                  <p className="mt-20 text-white/50">{fact.time}</p>
+                  <p className="absolute bottom-2 mt-20 text-white/50">
+                    {fact.time}
+                  </p>
                 </div>
               </div>
             ))}

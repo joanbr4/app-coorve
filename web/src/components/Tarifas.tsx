@@ -70,7 +70,7 @@ function TarifasCard() {
           </ul>
           <button
             className={
-              tarifa.precio === 0
+              tarifa.precio === 20
                 ? "mx-auto  flex w-full items-center justify-center rounded-md border bg-white p-1 text-lg font-bold text-gray-800"
                 : "mx-auto w-full rounded-md border  bg-gray-800 p-1 text-lg font-bold text-white hover:bg-gray-700"
             }

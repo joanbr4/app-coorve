@@ -25,7 +25,7 @@ function UserPage() {
   };
 
   return (
-    <div className="flex h-screen flex-col">
+    <div className="flex h-screen flex-col font-['Open_Sans']">
       <div className="flex flex-1 flex-col md:flex-row">
         <aside className="flex flex-shrink-0  bg-gray-700 text-white md:flex-col">
           <ul className="ml-8 flex flex-grow md:m-0 md:flex-col">
@@ -50,7 +50,7 @@ function UserPage() {
                     fillRule="evenodd"
                   />
                 </svg>
-                <span className="mx-2 hidden md:block">Dashboard</span>
+                <span className="mx-2 mt-2 hidden md:block">Dashboard</span>
               </NavLink>
             </li>
             <li className="">
@@ -93,7 +93,7 @@ function UserPage() {
                     </g>
                   </g>
                 </svg>
-                <span className="mx-2 hidden md:block">Perfil</span>
+                <span className="mx-2 mt-1 hidden md:block">Perfil</span>
               </NavLink>
             </li>
             <li className=" ">

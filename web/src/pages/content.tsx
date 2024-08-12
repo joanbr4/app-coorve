@@ -133,7 +133,7 @@ function Content() {
           <div className="mx-auto my-[70px] flex w-full max-w-[900px] flex-col items-center justify-between md:flex-row ">
             <div className="xs:text-left xs:mr-8 mx-auto  text-center md:max-w-[330px]">
               <div className="font-inter xs:max-w-[900px] mx-auto my-2 flex-col  text-4xl  leading-none sm:leading-none">
-                <h3 className="mb-2">
+                <h3 className="font-openSans mb-2 tracking-tight">
                   Master
                   <span className="ml-1 underline decoration-[#39ba93] underline-offset-2">
                     Brockers
@@ -152,7 +152,7 @@ function Content() {
           <div className="mx-auto my-[45px] flex w-full max-w-[900px] flex-col items-center justify-between md:flex-row ">
             <div className="xs:text-left xs:mr-[50px] mx-auto text-center md:order-2 md:max-w-[350px]">
               <div className=" xs:leading-none mx-auto my-2  max-w-[900px] flex-col text-4xl leading-none">
-                <h3 className="mb-2">
+                <h3 className="font-openSans mb-2 tracking-tighter">
                   Brocker
                   <span className="ml-1 underline decoration-[#39ba93] underline-offset-2">
                     independiente
@@ -172,7 +172,7 @@ function Content() {
           <div className="mx-auto my-[45px] flex w-full max-w-[900px] flex-col items-center justify-between md:flex-row">
             <div className="xs:text-left xs:mr-[50px] mx-auto flex  flex-col text-center md:max-w-[350px]">
               <div className="xs:leading-none mx-auto my-2 max-w-[900px] flex-col  font-['Opens_sans']  text-4xl leading-none">
-                <h3 className="mb-2">
+                <h3 className="font-openSans mb-2 tracking-tight">
                   Broker
                   <span className="ml-1 underline decoration-[#39ba93] underline-offset-2">
                     hipotecario
@@ -191,7 +191,7 @@ function Content() {
           <div className="mx-auto my-[45px] flex w-full max-w-[900px] flex-col items-center justify-between md:flex-row ">
             <div className="xs:text-left xs:ml-[50px] mx-auto flex flex-col text-center md:order-2 md:max-w-[350px]">
               <div className="xs:leading-none mx-auto my-2 max-w-[900px] flex-col  font-['Opens_sans']  text-4xl leading-none">
-                <h3 className="mb-2">
+                <h3 className="font-openSans mb-2 tracking-tight">
                   La decisión más inteligente para
                   <span className="ml-1 mr-1 underline decoration-[#39ba93] underline-offset-2">
                     despegar tu negocio
@@ -209,7 +209,7 @@ function Content() {
             </div>
           </div>
         </div>
-        <div className="mx-auto flex flex-col items-center justify-between px-4 lg:flex-row">
+        <div className="mx-auto flex flex-col items-center justify-between lg:flex-row">
           <div className="w-full max-w-[350px] md:mx-4 md:max-w-[400px]">
             <TweetEmbed url={"htppasd"} />
           </div>
@@ -218,8 +218,8 @@ function Content() {
           </div>
         </div>
         <div id="pricing" className="pt-[120px]">
-          <div className="xs:text-left xs:max-w-[350px] xs:ml-[50px] xs:order-2 mx-auto flex flex-col text-center">
-            <div className="xs:leading-none mx-auto my-2 flex max-w-[900px] flex-col  text-6xl  font-bold leading-none">
+          <div className="flex flex-col items-center text-center">
+            <div className="my-2 flex w-full max-w-[900px] flex-col text-6xl font-bold leading-none">
               <h3 className="mb-2">
                 La decisión más inteligente para despegar
                 <span className="ml-2 mr-1 underline decoration-[#39ba93] decoration-4 underline-offset-2">
@@ -227,7 +227,7 @@ function Content() {
                 </span>
               </h3>
             </div>
-            <p className="mb-12 w-full font-['Open_Sans'] text-xl">
+            <p className="mb-12 w-full max-w-[900px] px-2 font-['Open_Sans'] text-xl">
               Tranquilo el sistema lo armamos nosotros para ti, y te damos todas
               las facilidades para que te adaptes a la eficiencia.
             </p>

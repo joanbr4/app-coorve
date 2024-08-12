@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { PlayCircleIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthProvider";
-import logo from "../../public/logo-de-coorve-transparante-1024x269.webp";
+import logo from "/logo-de-coorve-transparante-1024x269.webp";
 
 type TitemMenu = {
   name: string;
@@ -35,13 +35,13 @@ function Header() {
   return (
     <nav className="fixed flex w-full items-center  bg-gray-800 py-4 text-white sm:relative">
       <div className="mx-auto  flex w-[800px] justify-between px-2">
-        <div className="my-auto px-5 sm:items-center sm:pt-2">
+        <div className="my-auto w-[200px] px-5 sm:w-[250px] sm:items-center sm:pt-2">
           <Link to="/">
-            <img src={logo} alt="Logo" width="150" />
+            <img src={logo} alt="Logo" />
           </Link>
         </div>
         <div className="ml-auto hidden items-center sm:flex">
-          <ul className=" -ml-14 flex ">
+          <ul className=" -ml-14 flex text-xl">
             {menuItems.map((item: TitemMenu) => (
               <li
                 className="hover:text-slay-800/25 px-6 py-2 hover:underline"
@@ -56,7 +56,7 @@ function Header() {
             ))}
           </ul>
         </div>
-        <button className="text-whie my-2 mr-2 hidden rounded-lg border border-white  p-2 hover:border-2 sm:block">
+        <button className="my-2 mr-2 hidden rounded-lg border border-white p-2 text-xl text-white transition duration-300  ease-in-out hover:shadow-[0_0_10px_2px_rgba(255,255,255,0.7)] hover:shadow-white sm:block">
           {user ? (
             <NavLink to="/user/dashboard">User</NavLink>
           ) : (

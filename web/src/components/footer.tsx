@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../public/logo-de-coorve-transparante-1024x269.webp";
+import logo from "/logo-de-coorve-transparante-1024x269.webp";
 
 export default function Footer() {
   const navigate = useNavigate();
@@ -7,16 +7,16 @@ export default function Footer() {
     <footer className="mt-auto ">
       <div className="bold bg-gray-800/75 py-2 font-bold text-white">
         <ul className="sm:text-md mx-auto flex  flex-col items-center  px-2 text-sm sm:w-[500px] sm:flex-row sm:items-center sm:justify-between lg:px-8">
-          <li>
+          <li className="hidden">
             <Link to="">Servicios</Link>
           </li>
-          <li>
+          <li className="hidden">
             <Link to="">Acerca de nosotros</Link>
           </li>
-          <li>
+          <li className="hidden">
             <Link to="">Herramientas</Link>
           </li>
-          <li>
+          <li className="hidden">
             <Link to="">Noticias</Link>
           </li>
         </ul>
