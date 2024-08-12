@@ -4,6 +4,7 @@ import z from "zod"
 const appConfigSchema = z
   .object({
     port: z.string(),
+    frontend_url: z.string(),
     generateJwtKey: z.string(),
     refreshJwtKey: z.string(),
     generatedJwtExpires: z.string(),
@@ -31,6 +32,9 @@ const dbConfigSchema = z.object({
 
 const appConfig = appConfigSchema.parse({
   port: process.env.PORT ?? "3000",
+  frontend_url:
+    process.env.FRONTEND_URL ??
+    ("http://server:3000/" || "http://localhost:3000"),
   generateJwtKey: process.env.GENERATE_JWT_KEY,
   refreshJwtKey: process.env.REFRESH_JWT_KEY,
   generatedJwtExpires: process.env.GENERATED_JWT_EXPIRATION,

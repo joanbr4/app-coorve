@@ -11,7 +11,12 @@ import { apiRouter } from "./routes/apiSheets.js"
 import { mockRouter } from "./routes/mock.js"
 
 const app = express()
-app.use(cors())
+app.use(
+  cors({
+    origin: appConfig.frontend_url,
+    credentials: true,
+  })
+)
 
 //Sett http headers appropriately, a collect of small middware
 app.use(helmet())
