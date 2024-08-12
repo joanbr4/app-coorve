@@ -75,8 +75,7 @@ function TarifasCard() {
                 : "mx-auto w-full rounded-md border  bg-gray-800 p-1 text-lg font-bold text-white hover:bg-gray-700"
             }
           >
-            <a href={tarifa.url}>
-              {/* <a onClick={() => navigate(tarifa.url)}> */}
+            <button onClick={() => window.open(tarifa.url)}>
               <p className="mr-2">{tarifa.action}</p>
               {tarifa.precio === 0 ? (
                 <svg
@@ -90,7 +89,7 @@ function TarifasCard() {
                   ></path>
                 </svg>
               ) : null}
-            </a>
+            </button>
           </button>
         </div>
       ))}

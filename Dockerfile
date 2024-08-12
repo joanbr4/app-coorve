@@ -1,16 +1,26 @@
-FROM node:20-alpine as base
+#20-alpine doesn't include musl file, and crush with libsql dir
+FROM node:20 as base 
 
+FROM base as dependencies
+
+WORKDIR /services
+RUN corepack enable
+COPY services/package.json services/pnpm-lock.yaml ./
+RUN pnpm install
 
 # Stage Server
 FROM base as backend-builder
 RUN corepack enable
 WORKDIR /services
-# COPY --from=builder /app/node_modules ./node_modules
 COPY ./services .
-RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm fetch --frozen-lockfile
-RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm install --frozen-lockfile 
+COPY --from=dependencies /services/node_modules ./node_modules
+
+# RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm fetch --frozen-lockfile
+# RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm install --frozen-lockfile 
 EXPOSE 3000
-# RUN  npm install 
+
+# Rebuilds native modules to ensure correct linking
+# RUN pnpm rebuild 
 # RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --production --frozen-lockfile
 CMD ["pnpm", "dev"]
 
