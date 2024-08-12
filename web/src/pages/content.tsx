@@ -124,7 +124,7 @@ function Content() {
         </div>
         <div className="xs:px-8 flex flex-col px-4">
           <div className="font-inter mx-auto my-2 max-w-[900px] text-center text-[3.8rem] font-bold leading-[3.6rem] sm:leading-none">
-            Nueva fuente de generación de leads, totalmente potenciada.
+            Nueva fuente de generación de leads, totalmente potenciada
           </div>
           <p className="xs:mb-[50px] mx-auto  max-w-[950px] text-center font-['Open_Sans'] text-xl">
             Hemos construido el sistema mas eficiente para maximizar el
@@ -223,7 +223,7 @@ function Content() {
               <h3 className="mb-2">
                 La decisión más inteligente para despegar
                 <span className="ml-2 mr-1 underline decoration-[#39ba93] decoration-4 underline-offset-2">
-                  tu negocio a otro nivel.
+                  tu negocio a otro nivel
                 </span>
               </h3>
             </div>
