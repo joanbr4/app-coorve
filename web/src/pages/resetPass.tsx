@@ -1,7 +1,7 @@
 import { resetSchema } from "@/schemas/resetSchema";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import "isomorphic-fetch";
+import fetch from "cross-fetch";
 
 type emailReset = {
   email: string;

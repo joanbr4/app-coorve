@@ -6,7 +6,7 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import "isomorphic-fetch";
+import fetch from "cross-fetch";
 import { TUser } from "@/types/types";
 
 export type TAuthContext = {
@@ -43,13 +43,13 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     fetch("/me", {
       method: "POST",
-      credentials: "include",
+      // credentials: "include",
     })
       .then((res) => {
         if (!res.ok) {
           throw new Error(res.statusText);
         }
-        return res.json();
+        return res.json() as Promise<TUser>;
       })
       .then((data) => {
         setUser(data);

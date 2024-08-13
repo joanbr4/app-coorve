@@ -1,4 +1,4 @@
-import { Tcontext, TdataChart } from "@/types/types";
+import { Tcontext, TdataChart, TdataSheetApi } from "@/types/types";
 import {
   Chart,
   PieController,
@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { useOutletContext } from "react-router-dom";
-import "isomorphic-fetch";
+import fetch from "cross-fetch";
 
 Chart.register(
   PieController,
@@ -47,7 +47,7 @@ const CircularChart = () => {
       .then((res) => {
         console.log("asd", res);
         if (!res.ok) throw new Error(res.statusText);
-        return res.json();
+        return res.json() as Promise<TdataSheetApi>;
       })
       .then((data) => {
         setDataChartFetch(data.data);

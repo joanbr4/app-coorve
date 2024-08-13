@@ -2,7 +2,7 @@ import { resetSchema } from "@/schemas/resetSchema";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
-import "isomorphic-fetch";
+import fetch from "cross-fetch";
 
 type emailReset = {
   email: string;

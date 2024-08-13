@@ -1,11 +1,11 @@
 import { BackgroundGradient } from "@/components/ui/background-gradient";
 import { useAuth } from "@/context/AuthProvider";
 import { UserLogin, loginSchema } from "@/schemas/loginSchema";
-import { ErrorfromServer } from "@/types/types";
+import { ErrorfromServer, TdataFromLogin } from "@/types/types";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import "isomorphic-fetch";
+import fetch from "cross-fetch";
 
 const initialState = {
   email: "",
@@ -76,10 +76,10 @@ function Login() {
         body: JSON.stringify(payload),
       });
       if (response.status !== 200) {
-        const errorMessage: ErrorfromServer = await response.json();
+        const errorMessage = (await response.json()) as ErrorfromServer;
         setErrorLogin(errorMessage.message);
       } else {
-        const data = await response.json();
+        const data = (await response.json()) as TdataFromLogin;
         localStorage.setItem("tokenAuth", data.token);
         localStorage.setItem("tokenRefresh", data.token);
         setUser(data.user);

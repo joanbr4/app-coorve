@@ -1,7 +1,7 @@
 import { useAuth } from "@/context/AuthProvider";
 import { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import "isomorphic-fetch";
+import fetch from "cross-fetch";
 
 function UserPage() {
   const { user, setUser } = useAuth();
@@ -14,7 +14,7 @@ function UserPage() {
     console.log("hola");
     const response = await fetch("/logout", {
       method: "POST",
-      credentials: "include",
+      // credentials: "include",
     });
     if (response.ok) {
       setUser(null);

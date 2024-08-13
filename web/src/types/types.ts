@@ -38,6 +38,13 @@ export type TdataChart = {
   renta: number;
   otros: number;
 };
+export type TdataFromLogin = {
+  user: TUser;
+  token: string;
+};
+export type TdataSheetApi = {
+  data: TdataChart;
+};
 
 export type Tcontext<T> = {
   user: TUser;
