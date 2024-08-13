@@ -11,10 +11,11 @@ export default defineConfig(({ mode }) => {
 
   // Check if running in Docker
   const isDocker = env.VITE_DOCKER;
+  console.log(isDocker);
 
   // Set base URL based on environment variables
   const apiBaseUrl = env.VITE_API_BASE_URL;
-
+  console.log(apiBaseUrl);
   return {
     plugins: [react()],
     resolve: {

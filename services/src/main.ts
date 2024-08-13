@@ -13,7 +13,7 @@ import { mockRouter } from "./routes/mock.js"
 const app = express()
 app.use(
   cors({
-    origin: appConfig.frontend_url,
+    origin: [appConfig.frontend_url],
     credentials: true,
   })
 )
