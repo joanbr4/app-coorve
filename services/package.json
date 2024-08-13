@@ -13,7 +13,8 @@
     "migrate": "drizzle-kit migrate",
     "push": "drizzle-kit push",
     "lint": "eslint \"./**/*.{js,ts}\" ",
-    "lint:fix": "eslint \"./**/*.{js,ts}\" --fix"
+    "lint:fix": "eslint \"./**/*.{js,ts}\" --fix",
+    "deploy": "vercel"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

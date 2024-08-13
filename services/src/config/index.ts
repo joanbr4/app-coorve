@@ -1,4 +1,5 @@
-import "dotenv/config"
+import dotenv from "dotenv/config"
+import path from "path"
 import z from "zod"
 
 const appConfigSchema = z

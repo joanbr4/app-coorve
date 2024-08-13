@@ -20,6 +20,9 @@ import { PrivateRoute } from "./FilteredRoutes";
 import { NotFoundPage } from "@/pages/errors/NotFounPage";
 import PaymentSuccess from "@/pages/payment";
 import { Nosotros } from "@/pages/nosotros";
+import { inject } from "@vercel/analytics";
+
+inject();
 
 const router = createBrowserRouter(
   createRoutesFromElements(
