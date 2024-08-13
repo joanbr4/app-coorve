@@ -43,8 +43,16 @@ export default defineConfig(({ mode }) => {
           "/retrieve-session": "http://server:3000/api/v1/stripe",
         }),
         ...(!isDocker && {
-          "/login": `https://coorve-backend.vercel.app/api/v1/auth`,
-          "/register": `https://coorve-backend.vercel.app/api/v1/auth`,
+          "/login": {
+            target: "https://coorve-backend.vercel.app/api/v1/auth",
+            changeOrigin: true,
+            rewrite: (path) => path.replace(/^\/api/, ""),
+          },
+          "/register": {
+            target: "https://coorve-backend.vercel.app/api/v1/auth",
+            changeOrigin: true,
+            rewrite: (path) => path.replace(/^\/api/, ""),
+          },
           "/resetPass": `https://coorve-backend.vercel.app/api/v1/auth`,
           "/me": `https://coorve-backend.vercel.app/api/v1/auth`,
           "/logout": `https://coorve-backend.vercel.app/api/v1/auth`,
