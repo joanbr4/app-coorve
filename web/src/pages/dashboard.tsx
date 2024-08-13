@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { useOutletContext } from "react-router-dom";
+import "isomorphic-fetch";
 
 Chart.register(
   PieController,

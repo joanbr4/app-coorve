@@ -6,6 +6,7 @@ import React, {
   useMemo,
   useState,
 } from "react";
+import "isomorphic-fetch";
 import { TUser } from "@/types/types";
 
 export type TAuthContext = {

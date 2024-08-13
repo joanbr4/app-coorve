@@ -2,16 +2,20 @@ import { resetSchema } from "@/schemas/resetSchema";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
+import "isomorphic-fetch";
+
 type emailReset = {
   email: string;
   password: string;
   confirm: string;
 };
+
 const initialState = {
   email: "",
   password: "",
   confirm: "",
 };
+
 type InitialStateKeys = keyof typeof initialState;
 
 function UpdatePass() {

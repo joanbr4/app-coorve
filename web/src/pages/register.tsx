@@ -4,6 +4,7 @@ import { UserRegister, registerSchema } from "../schemas/registerSchema";
 import { ErrorfromServer } from "@/types/types";
 import { isErrorFromServer, isUserRegister } from "@/utils/guardFunction";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import "isomorphic-fetch";
 
 const initialState = {
   name: "",

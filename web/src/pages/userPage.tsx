@@ -1,6 +1,7 @@
 import { useAuth } from "@/context/AuthProvider";
 import { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import "isomorphic-fetch";
 
 function UserPage() {
   const { user, setUser } = useAuth();

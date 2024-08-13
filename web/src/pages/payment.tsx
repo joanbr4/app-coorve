@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useLocation, NavLink } from "react-router-dom";
+import "isomorphic-fetch";
 
 const PaymentSuccess = () => {
   const location = useLocation();

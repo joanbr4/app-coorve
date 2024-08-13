@@ -1,12 +1,16 @@
 import { resetSchema } from "@/schemas/resetSchema";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import "isomorphic-fetch";
+
 type emailReset = {
   email: string;
 };
+
 const initialState = {
   email: "",
 };
+
 function ResetPass() {
   const [sendEmail, setSendEmail] = useState<boolean>(false);
   const [form, setForm] = useState<emailReset>(initialState);
