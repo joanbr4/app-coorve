@@ -33,9 +33,9 @@ const dbConfigSchema = z.object({
 
 const appConfig = appConfigSchema.parse({
   port: process.env.PORT ?? "3000",
-  frontend_url:
-    process.env.FRONTEND_URL ??
-    ("http://server:3000/" || "http://localhost:3000"),
+  frontend_url: process.env.DOCKER
+    ? "http://server:3000/"
+    : process.env.FRONTEND_URL,
   generateJwtKey: process.env.GENERATE_JWT_KEY,
   refreshJwtKey: process.env.REFRESH_JWT_KEY,
   generatedJwtExpires: process.env.GENERATED_JWT_EXPIRATION,
