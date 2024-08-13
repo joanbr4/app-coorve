@@ -10,12 +10,12 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
 
   // Check if running in Docker
-  const isDocker = env.VITE_DOCKER;
-  console.log(isDocker);
-
   // Set base URL based on environment variables
-  const apiBaseUrl = env.VITE_API_BASE_URL;
+  const apiBaseUrl = env.VITE_API_DOCKER
+    ? env.VITE_API_DOCKER
+    : env.VITE_API_BASE_URL;
   console.log(apiBaseUrl);
+
   return {
     plugins: [react()],
     resolve: {
@@ -32,35 +32,14 @@ export default defineConfig(({ mode }) => {
         usePolling: true,
       },
       proxy: {
-        ...(isDocker && {
-          "/login": "http://server:3000/api/v1/auth",
-          "/register": "http://server:3000/api/v1/auth",
-          "/resetPass": "http://server:3000/api/v1/auth",
-          "/me": "http://server:3000/api/v1/auth",
-          "/logout": "http://server:3000/api/v1/auth",
-          "/sheets": "http://server:3000/api/v1/google",
-          "/create-session": "http://server:3000/api/v1/stripe",
-          "/retrieve-session": "http://server:3000/api/v1/stripe",
-        }),
-        ...(!isDocker && {
-          // "/login": "https://coorve-backend.vercel.app/api/v1/auth",
-          // "/register": "https://coorve-backend.vercel.app/api/v1/auth",
-          // "/resetPass": "https://coorve-backend.vercel.app/api/v1/auth",
-          // "/me": "https://coorve-backend.vercel.app/api/v1/auth",
-          // "/logout": "https://coorve-backend.vercel.app/api/v1/auth",
-          // "/sheets": "https://coorve-backend.vercel.app/api/v1/google",
-          // "/create-session": "https://coorve-backend.vercel.app/api/v1/stripe",
-          // "/retrieve-session":
-          //   "https://coorve-backend.vercel.app/api/v1/stripe",
-          "/login": `${apiBaseUrl}/api/v1/auth`,
-          "/register": `${apiBaseUrl}/api/v1/auth`,
-          "/resetPass": `${apiBaseUrl}/api/v1/auth`,
-          "/me": `${apiBaseUrl}/api/v1/auth`,
-          "/logout": `${apiBaseUrl}/api/v1/auth`,
-          "/sheets": `${apiBaseUrl}/api/v1/google`,
-          "/create-session": `${apiBaseUrl}/api/v1/stripe`,
-          "/retrieve-session": `${apiBaseUrl}/api/v1/stripe`,
-        }),
+        "/login": `${apiBaseUrl}/api/v1/auth`,
+        "/register": `${apiBaseUrl}/api/v1/auth`,
+        "/resetPass": `${apiBaseUrl}/api/v1/auth`,
+        "/me": `${apiBaseUrl}/api/v1/auth`,
+        "/logout": `${apiBaseUrl}/api/v1/auth`,
+        "/sheets": `${apiBaseUrl}/api/v1/google`,
+        "/create-session": `${apiBaseUrl}/api/v1/stripe`,
+        "/retrieve-session": `${apiBaseUrl}/api/v1/stripe`,
       },
     },
   };

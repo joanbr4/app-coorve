@@ -5,6 +5,8 @@ services:
       context: .
       dockerfile: Dockerfile
       target: backend-builder
+    environment:
+      - DOCKER=true
     develop:
       watch:
         - action: sync
@@ -27,7 +29,7 @@ services:
       dockerfile: Dockerfile
       target: frontend-builder
     environment:
-      - VITE_DOCKER=true
+      - VITE_API_DOCKER=http://server:3000
     develop:
       watch:
         - action: sync
