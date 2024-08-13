@@ -51,13 +51,16 @@ export const action = async ({ request }: { request: Request }) => {
       created_at: new Date(),
     };
     console.log(payload);
-    const response = await fetch("/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
+    const response = await fetch(
+      "https://coorve-backend.vercel.app/api/v1/auth/register",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      }
+    );
     if (response.status !== 200) {
       const errorMessage = await response.json();
       return errorMessage;

@@ -70,11 +70,14 @@ function Login() {
         email: form.email,
         password: form.password,
       };
-      const response = await fetch("/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const response = await fetch(
+        "https://coorve-backend.vercel.app/api/v1/auth/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
       if (response.status !== 200) {
         const errorMessage = (await response.json()) as ErrorfromServer;
         setErrorLogin(errorMessage.message);
