@@ -12,13 +12,18 @@ import { mockRouter } from "./routes/mock.js"
 
 const app = express()
 app.use(cors({ origin: appConfig.frontend_url }))
-console.log(appConfig.frontend_url)
+console.error("cors allowed:", appConfig.frontend_url)
 //Sett http headers appropriately, a collect of small middware
 app.use(helmet())
 app.use(cookieParser())
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+app.use((req, res, next) => {
+  console.log(`Request from origin: ${req.headers.origin}`)
+  next()
+})
 
 app.use(authRouter)
 app.use(apiRouter)
