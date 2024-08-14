@@ -8,7 +8,6 @@ import React, {
 } from "react";
 import fetch from "cross-fetch";
 import { TUser } from "@/types/types";
-
 export type TAuthContext = {
   user: TUser;
   children: React.ReactNode;
@@ -39,6 +38,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     () => ({ children, user, setUser, error, setError, loading }),
     [children, user, error, loading]
   );
+
+  console.log("asdf", import.meta.env.VITE_API_BASE_URL);
 
   useEffect(() => {
     fetch("/me", {
