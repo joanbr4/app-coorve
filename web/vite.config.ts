@@ -32,14 +32,46 @@ export default defineConfig(({ mode }) => {
         usePolling: true,
       },
       proxy: {
-        "/login": `${apiBaseUrl}/api/v1/auth`,
-        "/register": `${apiBaseUrl}/api/v1/auth`,
-        "/resetPass": `${apiBaseUrl}/api/v1/auth`,
-        "/me": `${apiBaseUrl}/api/v1/auth`,
-        "/logout": `${apiBaseUrl}/api/v1/auth`,
-        "/sheets": `${apiBaseUrl}/api/v1/google`,
-        "/create-session": `${apiBaseUrl}/api/v1/stripe`,
-        "/retrieve-session": `${apiBaseUrl}/api/v1/stripe`,
+        "/api/login": {
+          target: `${apiBaseUrl}/api/v1/auth`,
+          changeOrigin: true,
+          rewrite: (path: string) => path.replace(/^\/api/, ""),
+        },
+        "/api/register": {
+          target: `${apiBaseUrl}/api/v1/auth`,
+          changeOrigin: true,
+          rewrite: (path: string) => path.replace(/^\/api/, ""),
+        },
+        "/api/resetPass": {
+          target: `${apiBaseUrl}/api/v1/auth`,
+          changeOrigin: true,
+          rewrite: (path: string) => path.replace(/^\/api/, ""),
+        },
+        "/api/me": {
+          target: `${apiBaseUrl}/api/v1/auth`,
+          changeOrigin: true,
+          rewrite: (path: string) => path.replace(/^\/api/, ""),
+        },
+        "/api/logout": {
+          target: `${apiBaseUrl}/api/v1/auth`,
+          changeOrigin: true,
+          rewrite: (path: string) => path.replace(/^\/api/, ""),
+        },
+        "/api/sheets": {
+          target: `${apiBaseUrl}/api/v1/google`,
+          changeOrigin: true,
+          rewrite: (path: string) => path.replace(/^\/api/, ""),
+        },
+        "/api/create-session": {
+          target: `${apiBaseUrl}/api/v1/stripe`,
+          changeOrigin: true,
+          rewrite: (path: string) => path.replace(/^\/api/, ""),
+        },
+        "/api/retrieve-session": {
+          target: `${apiBaseUrl}/api/v1/stripe`,
+          changeOrigin: true,
+          rewrite: (path: string) => path.replace(/^\/api/, ""),
+        },
       },
     },
   };

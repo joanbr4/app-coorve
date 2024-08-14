@@ -31,7 +31,7 @@ function ResetPass() {
     } else {
       const payload = form;
 
-      fetch("/resetPass/" + form.email, {
+      fetch("/api/resetPass/" + form.email, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
