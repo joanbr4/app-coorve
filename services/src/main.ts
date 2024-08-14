@@ -12,7 +12,7 @@ import { mockRouter } from "./routes/mock.js"
 
 const app = express()
 app.use(cors({ origin: appConfig.frontend_url }))
-
+console.log(appConfig.frontend_url)
 //Sett http headers appropriately, a collect of small middware
 app.use(helmet())
 app.use(cookieParser())
