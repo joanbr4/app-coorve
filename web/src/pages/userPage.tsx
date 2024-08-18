@@ -18,7 +18,7 @@ function UserPage() {
     });
     if (response.ok) {
       setUser(null);
-      return navigate("/content");
+      return navigate("/");
     } else {
       console.log("4534", response);
       console.log("still exist user:", user);

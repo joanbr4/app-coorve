@@ -3,7 +3,6 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import LandingPage from "../pages/landing";
 import { Register, action as registerAction } from "../pages/register";
 import Login from "../pages/login";
 import Content from "../pages/content";
@@ -27,8 +26,7 @@ inject();
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/content" element={<Content />} />
+      <Route path="/" element={<Content />} />
       <Route path="/nosotros" element={<Nosotros />} />
       <Route path="/payment-success" element={<PaymentSuccess />} />
       <Route path="/signin" action={registerAction} element={<Register />} />

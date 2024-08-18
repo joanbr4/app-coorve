@@ -11,9 +11,7 @@ export default defineConfig(({ mode }) => {
 
   // Check if running in Docker
   // Set base URL based on environment variables
-  const apiBaseUrl = env.VITE_API_DOCKER
-    ? env.VITE_API_DOCKER
-    : env.VITE_API_BASE_URL;
+  const apiBaseUrl = env.VITE_API_DOCKER ?? env.VITE_API_BASE_URL;
   console.log(apiBaseUrl);
 
   return {

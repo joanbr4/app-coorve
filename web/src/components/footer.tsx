@@ -37,7 +37,7 @@ export default function Footer() {
       </div>
       <div
         className=" cursor-pointer bg-gray-800/75 fill-white"
-        onClick={() => navigate("/content")}
+        onClick={() => navigate("/")}
       >
         <img
           src={logo}

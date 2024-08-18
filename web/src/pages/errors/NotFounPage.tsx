@@ -8,7 +8,7 @@ export const NotFoundPage = () => {
       <p>Here are some helpful links:</p>
       <div className="boxButtonsNFP">
         <button className="m-2 rounded-md bg-gray-800 p-2 font-bold text-white">
-          <NavLink to="/content">Landing</NavLink>
+          <NavLink to="/">Landing</NavLink>
         </button>
         <button className="m-2 rounded-md bg-gray-800 p-2 font-bold text-white">
           <NavLink to="/signup">Login</NavLink>

@@ -21,6 +21,7 @@
       "pnpm eslint"
     ]
   },
+  "packageManager": "pnpm@^9.0.0",
   "keywords": [
     "node",
     "typescript",
