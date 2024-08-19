@@ -42,7 +42,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   console.log("asdf", import.meta.env.VITE_API_BASE_URL);
 
   useEffect(() => {
-    fetch("/api/me", {
+    fetch("/api/v1/auth/me", {
       method: "POST",
       // credentials: "include",
     })

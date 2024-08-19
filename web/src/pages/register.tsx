@@ -51,7 +51,7 @@ export const action = async ({ request }: { request: Request }) => {
       created_at: new Date(),
     };
     console.log(payload);
-    const response = await fetch("/api/register", {
+    const response = await fetch("/api/v1/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

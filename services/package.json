@@ -1,6 +1,6 @@
 {
   "name": "services",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -21,7 +21,6 @@
       "pnpm eslint"
     ]
   },
-  "packageManager": "pnpm@^9.0.0",
   "keywords": [
     "node",
     "typescript",

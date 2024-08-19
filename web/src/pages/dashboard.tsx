@@ -36,7 +36,7 @@ const CircularChart = () => {
     const param = url.pathname.split("/")[2];
     setParamId(param);
 
-    fetch("/api/sheets", {
+    fetch("/api/v1/google/sheets", {
       method: "POST",
       credentials: "include",
       headers: {

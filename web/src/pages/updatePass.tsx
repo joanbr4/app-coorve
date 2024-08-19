@@ -58,7 +58,7 @@ function UpdatePass() {
         password: form.password,
       };
       console.log("w323", payload);
-      fetch("/api/resetPass/" + form.email, {
+      fetch("/api/v1/auth/resetPass/" + form.email, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
