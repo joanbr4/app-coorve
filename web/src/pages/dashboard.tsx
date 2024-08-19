@@ -13,6 +13,7 @@ import { Pie } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { useOutletContext } from "react-router-dom";
 import fetch from "cross-fetch";
+import { url_be } from "./login";
 
 Chart.register(
   PieController,
@@ -36,7 +37,7 @@ const CircularChart = () => {
     const param = url.pathname.split("/")[2];
     setParamId(param);
 
-    fetch("/api/v1/google/sheets", {
+    fetch(url_be + "/api/v1/google/sheets", {
       method: "POST",
       credentials: "include",
       headers: {

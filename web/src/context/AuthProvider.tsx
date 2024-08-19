@@ -8,6 +8,7 @@ import React, {
 } from "react";
 import fetch from "cross-fetch";
 import { TUser } from "@/types/types";
+import { url_be } from "@/pages/login";
 export type TAuthContext = {
   user: TUser;
   children: React.ReactNode;
@@ -42,7 +43,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   console.log("asdf", import.meta.env.VITE_API_BASE_URL);
 
   useEffect(() => {
-    fetch("/api/v1/auth/me", {
+    fetch(url_be + "/api/v1/auth/me", {
       method: "POST",
       // credentials: "include",
     })

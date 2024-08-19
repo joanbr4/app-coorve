@@ -3,6 +3,7 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import fetch from "cross-fetch";
+import { url_be } from "./login";
 
 type emailReset = {
   email: string;
@@ -58,7 +59,7 @@ function UpdatePass() {
         password: form.password,
       };
       console.log("w323", payload);
-      fetch("/api/v1/auth/resetPass/" + form.email, {
+      fetch(url_be + "/api/v1/auth/resetPass/" + form.email, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

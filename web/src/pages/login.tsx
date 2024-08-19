@@ -7,6 +7,9 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import fetch from "cross-fetch";
 
+export const url_be = import.meta.env.VITE_API_BASE_URL;
+console.log("url-be:", url_be);
+
 const initialState = {
   email: "",
   password: "",
@@ -70,7 +73,7 @@ function Login() {
         email: form.email,
         password: form.password,
       };
-      const response = await fetch("/api/v1/auth/login", {
+      const response = await fetch(url_be + "/api/v1/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

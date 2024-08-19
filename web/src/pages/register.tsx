@@ -5,6 +5,7 @@ import { ErrorfromServer } from "@/types/types";
 import { isErrorFromServer, isUserRegister } from "@/utils/guardFunction";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import fetch from "cross-fetch";
+const url_be = import.meta.env.VITE_API_BASE_URL;
 
 const initialState = {
   name: "",
@@ -51,7 +52,7 @@ export const action = async ({ request }: { request: Request }) => {
       created_at: new Date(),
     };
     console.log(payload);
-    const response = await fetch("/api/v1/auth/register", {
+    const response = await fetch(url_be + "/api/v1/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -2,6 +2,7 @@ import { resetSchema } from "@/schemas/resetSchema";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import fetch from "cross-fetch";
+import { url_be } from "./login";
 
 type emailReset = {
   email: string;
@@ -31,7 +32,7 @@ function ResetPass() {
     } else {
       const payload = form;
 
-      fetch("/api/v1/auth/resetPass" + form.email, {
+      fetch(url_be + "/api/v1/auth/resetPass" + form.email, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

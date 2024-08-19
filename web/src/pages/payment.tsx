@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useLocation, NavLink } from "react-router-dom";
+import { url_be } from "./login";
 // import fetch from "cross-fetch";;
 
 const PaymentSuccess = () => {
@@ -9,7 +10,7 @@ const PaymentSuccess = () => {
     const sessionId = params.get("session_id");
     console.log(sessionId);
     if (sessionId) {
-      fetch(`/retrieve-session/${sessionId}`)
+      fetch(url_be + `/retrieve-session/${sessionId}`)
         .then((response) => response.json())
         .then((data) => {
           console.log("Customer data:", data);

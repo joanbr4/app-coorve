@@ -2,6 +2,7 @@ import { useAuth } from "@/context/AuthProvider";
 import { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import fetch from "cross-fetch";
+import { url_be } from "./login";
 
 function UserPage() {
   const { user, setUser } = useAuth();
@@ -12,7 +13,7 @@ function UserPage() {
   //FIXME param active button navigator
   const handlingLogout = async () => {
     console.log("hola");
-    const response = await fetch("/api/v1/auth/logout", {
+    const response = await fetch(url_be + "/api/v1/auth/logout", {
       method: "POST",
       // credentials: "include",
     });
