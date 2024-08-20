@@ -18,7 +18,15 @@ const apiConfigSchema = z
     resend: z.string(),
     folder_id: z.string(),
     stripe_key_test: z.string(),
+    google_cl_id: z.string(),
+    google_cl_secret: z.string(),
+    google_redirect_uris: z.string(),
+    google_project_id: z.string(),
+    google_auth_uri: z.string(),
+    google_token_uri: z.string(),
+    google_auth_provider_cert_url: z.string(),
   })
+
   .strict()
 
 const bcryptConfigSchema = z.object({
@@ -46,6 +54,13 @@ const apiConfig = apiConfigSchema.parse({
   resend: process.env.API_KEY_RESEND,
   folder_id: process.env.FOLDER_ID,
   stripe_key_test: process.env.API_STRIPE_TEST,
+  google_cl_id: process.env.GOOGLE_CLIENT_ID,
+  google_cl_secret: process.env.GOOGLE_CLIENT_SECRET,
+  google_redirect_uris: process.env.GOOGLE_REDIRECT_URIS,
+  google_project_id: process.env.GOOGLE_PROJECT_ID,
+  google_auth_uri: process.env.GOOGLE_AUTH_URI,
+  google_token_uri: process.env.GOOGLE_TOKEN_URI,
+  google_auth_provider_cert_url: process.env.GOOGLE_AUTH_PROVIDER_CERT_URL,
 })
 
 const dbConfig = dbConfigSchema.parse({
