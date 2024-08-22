@@ -2,7 +2,6 @@ import fs from "fs/promises"
 import path from "path"
 import { authenticate } from "@google-cloud/local-auth"
 import { Auth, google } from "googleapis"
-import { credentials } from "../../credentials"
 // import { oauth2 } from "googleapis/build/src/apis/oauth2"
 // import readLine from "readline"
 // import express, { Request, Response } from "express"
@@ -16,8 +15,7 @@ const SCOPES = [
 // created automatically when the authorization flow completes for the first
 // time.
 const TOKEN_PATH = path.join(process.cwd(), "token.json")
-const CREDENTIALS_PATH = credentials
-// const CREDENTIALS_PATH = path.join(process.cwd(), "credentials.ts")
+const CREDENTIALS_PATH = path.join(process.cwd(), "credentials.json")
 
 /**
  * Reads previously authorized credentials from the save file.
