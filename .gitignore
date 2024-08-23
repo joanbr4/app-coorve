@@ -5,6 +5,7 @@ assets/
 
 # Sensitive files
 /services/credentials.json
+/services/temp_credentials.json
 /services/token.json
 **/*.env
 

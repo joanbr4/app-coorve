@@ -1,6 +1,6 @@
 import { Auth, google } from "googleapis";
 import { ErrorsApisDrive, NotFoundError } from "../utils/errors";
-import { authorize } from "./auth/auth2Clientv2";
+import { authorize } from "./auth/auth2Clientv3";
 import { apiConfig } from "../config/index";
 import { eq } from "drizzle-orm";
 import { db } from "../db/client";
@@ -110,6 +110,7 @@ const sheetsController = async (req: Request, res: Response) => {
     const { name: nameUser, apellidos: apellidosUser } = dataUser[0];
     console.log("email", email, nameUser);
     const folderId = apiConfig.folder_id;
+
     const auth = await authorize();
     const nameFile = "Buyers - " + nameUser + " " + apellidosUser; //XLS doesnt works for api
     console.log("file", nameFile);

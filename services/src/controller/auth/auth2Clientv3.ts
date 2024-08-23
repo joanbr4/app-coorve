@@ -2,26 +2,15 @@ import fs from "fs/promises";
 import path from "path";
 import { authenticate } from "@google-cloud/local-auth";
 import { Auth, google } from "googleapis";
-// import { oauth2 } from "googleapis/build/src/apis/oauth2"
-// import readLine from "readline"
-// import express, { Request, Response } from "express"
+import { apiConfig } from "../../config";
 
-// If modifying these scopes, delete token.json.
 const SCOPES = [
   "https://www.googleapis.com/auth/drive.metadata.readonly",
   "https://www.googleapis.com/auth/spreadsheets.readonly",
 ];
-// The file token.json stores the user's access and refresh tokens, and is
-// created automatically when the authorization flow completes for the first
-// time.
-const TOKEN_PATH = path.join(process.cwd(), "token.json");
-const CREDENTIALS_PATH = path.join(process.cwd(), "credentials.json");
 
-/**
- * Reads previously authorized credentials from the save file.
- *
- * @return {Promise<OAuth2Client|null>}
- */
+const TOKEN_PATH = path.join(process.cwd(), "token.json");
+
 async function loadSavedCredentialsIfExist(): Promise<Auth.OAuth2Client | null> {
   try {
     const content = await fs.readFile(TOKEN_PATH, "utf-8");
@@ -32,42 +21,56 @@ async function loadSavedCredentialsIfExist(): Promise<Auth.OAuth2Client | null> 
   }
 }
 
-/**
- * Serializes credentials to a file compatible with GoogleAuth.fromJSON.
- *
- * @param {OAuth2Client} client
- * @return {Promise<void>}
- */
 async function saveCredentials(client: Auth.OAuth2Client) {
-  const content = await fs.readFile(CREDENTIALS_PATH, "utf-8");
-  const keys = JSON.parse(content);
-  const key = keys.installed || keys.web;
   const payload = JSON.stringify({
     type: "authorized_user",
-    client_id: key.client_id,
-    client_secret: key.client_secret,
+    client_id: apiConfig.google_cl_id,
+    client_secret: apiConfig.google_cl_secret,
     refresh_token: client.credentials.refresh_token,
   });
   await fs.writeFile(TOKEN_PATH, payload);
 }
 
-/**
- * Load or request or authorization to call APIs.
- *
- */
-async function authorizeV2(): Promise<Auth.OAuth2Client> {
+async function createTemporaryCredentialsFile(): Promise<string> {
+  const tempCredentialsPath = path.join(process.cwd(), "temp_credentials.json");
+
+  const credentials = {
+    installed: {
+      client_id: apiConfig.google_cl_id,
+      project_id: apiConfig.google_project_id,
+      auth_uri: apiConfig.google_auth_uri,
+      token_uri: apiConfig.google_token_uri,
+      auth_provider_x509_cert_url: apiConfig.google_auth_provider_cert_url,
+      client_secret: apiConfig.google_cl_secret,
+      redirect_uris: [apiConfig.google_redirect_uris],
+    },
+  };
+
+  await fs.writeFile(tempCredentialsPath, JSON.stringify(credentials));
+  return tempCredentialsPath;
+}
+
+async function authorize(): Promise<Auth.OAuth2Client> {
   let client = await loadSavedCredentialsIfExist();
   if (client) {
     return client;
   }
+
+  const tempCredentialsPath = await createTemporaryCredentialsFile();
+
   client = await authenticate({
     scopes: SCOPES,
-    keyfilePath: CREDENTIALS_PATH,
+    keyfilePath: tempCredentialsPath,
   });
+
   if (client?.credentials) {
     await saveCredentials(client);
   }
+
+  // Clean up the temporary credentials file
+  await fs.unlink(tempCredentialsPath);
+
   return client;
 }
 
-export { authorizeV2 };
+export { authorize };

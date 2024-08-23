@@ -1,6 +1,6 @@
 export const stuffs = [
   {
-    url: "https://coorve.com/wp-content/uploads/2023/05/Diseno-sin-tituloerthjfgbd.jpg",
+    url: "/guillermo.webp",
     name: "Guillermo Ochoa",
     title: "Coorve Fundador & CEO",
     description:
@@ -8,7 +8,7 @@ export const stuffs = [
     nameState: "seabroth",
   },
   {
-    url: "https://coorve.com/wp-content/uploads/2023/05/Diseno-sin-titulo.jpg",
+    url: "/jose_f.webp",
     name: "Jose Fabregat",
     title: "Coorve Fundador & MCO",
     description:
@@ -16,7 +16,7 @@ export const stuffs = [
     nameState: "jose",
   },
   {
-    url: "https://coorve.com/wp-content/uploads/2023/05/Diseno-sin-tituloerthjfgbd.jpg",
+    url: "https://image.cdn2.seaart.ai/2023-11-01/21446429860970501/b13efc5242b6f3833889b58b74f548538be4438b_high.webp",
     name: "Jose Barrios",
     title: "CDO",
     description:
