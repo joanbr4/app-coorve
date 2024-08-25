@@ -10,6 +10,7 @@ const SCOPES = [
 ];
 
 const TOKEN_PATH = path.join(process.cwd(), "token.json");
+const CREDENTIALS_PATH = path.join(process.cwd(), "credentials.json");
 
 async function loadSavedCredentialsIfExist(): Promise<Auth.OAuth2Client | null> {
   try {
@@ -22,53 +23,63 @@ async function loadSavedCredentialsIfExist(): Promise<Auth.OAuth2Client | null> 
 }
 
 async function saveCredentials(client: Auth.OAuth2Client) {
+  const content = await fs.readFile(CREDENTIALS_PATH, "utf-8");
+  const keys = JSON.parse(content);
+  const key = keys.installed || keys.web;
   const payload = JSON.stringify({
     type: "authorized_user",
-    client_id: apiConfig.google_cl_id,
-    client_secret: apiConfig.google_cl_secret,
+    client_id: key.client_id,
+    client_secret: key.client_secret,
     refresh_token: client.credentials.refresh_token,
   });
   await fs.writeFile(TOKEN_PATH, payload);
 }
-
-async function createTemporaryCredentialsFile(): Promise<string> {
-  const tempCredentialsPath = path.join(process.cwd(), "temp_credentials.json");
-
+async function createCredentialsFileIfNotExists(): Promise<void> {
   const credentials = {
     installed: {
       client_id: apiConfig.google_cl_id,
       project_id: apiConfig.google_project_id,
-      auth_uri: apiConfig.google_auth_uri,
-      token_uri: apiConfig.google_token_uri,
-      auth_provider_x509_cert_url: apiConfig.google_auth_provider_cert_url,
+      auth_uri: "https://accounts.google.com/o/oauth2/auth",
+      token_uri: "https://oauth2.googleapis.com/token",
+      auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
       client_secret: apiConfig.google_cl_secret,
       redirect_uris: [apiConfig.google_redirect_uris],
     },
   };
 
-  await fs.writeFile(tempCredentialsPath, JSON.stringify(credentials));
-  return tempCredentialsPath;
+  try {
+    await fs.writeFile(CREDENTIALS_PATH, JSON.stringify(credentials), "utf-8");
+
+    // Optional: Check that the file exists and is readable
+    await fs.access(CREDENTIALS_PATH);
+  } catch (err) {
+    console.error("Error writing credentials file:", err);
+    throw err;
+  }
 }
 
 async function authorize(): Promise<Auth.OAuth2Client> {
+  await createCredentialsFileIfNotExists();
+
   let client = await loadSavedCredentialsIfExist();
   if (client) {
     return client;
   }
-
-  const tempCredentialsPath = await createTemporaryCredentialsFile();
+  console.log("bye-bye2");
 
   client = await authenticate({
     scopes: SCOPES,
-    keyfilePath: tempCredentialsPath,
+    keyfilePath: CREDENTIALS_PATH,
   });
+
+  console.log("bye-bye3");
 
   if (client?.credentials) {
     await saveCredentials(client);
   }
 
   // Clean up the temporary credentials file
-  await fs.unlink(tempCredentialsPath);
+  // await fs.unlink(TEMP_CREDENTIALS_PATH);
 
   return client;
 }

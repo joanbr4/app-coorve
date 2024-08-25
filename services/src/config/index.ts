@@ -1,6 +1,12 @@
-import dotenv from "dotenv/config"
-import path from "path"
-import z from "zod"
+import dotenv from "dotenv";
+import path from "path";
+import z from "zod";
+
+dotenv.config({
+  path:
+    process.env.NODE_ENV?.trim() === "production" ? ".env.production" : ".env",
+  override: true,
+});
 
 const appConfigSchema = z
   .object({
@@ -11,7 +17,7 @@ const appConfigSchema = z
     generatedJwtExpires: z.string(),
     refreshedJwtExpires: z.string(),
   })
-  .strict()
+  .strict();
 
 const apiConfigSchema = z
   .object({
@@ -22,22 +28,19 @@ const apiConfigSchema = z
     google_cl_secret: z.string(),
     google_redirect_uris: z.string(),
     google_project_id: z.string(),
-    google_auth_uri: z.string(),
-    google_token_uri: z.string(),
-    google_auth_provider_cert_url: z.string(),
   })
 
-  .strict()
+  .strict();
 
 const bcryptConfigSchema = z.object({
   saltRounds: z.number(),
-})
+});
 const dbConfigSchema = z.object({
   urlSQLite: z.string(),
   urlDrizzle: z.string(),
   turso_token: z.string(),
   turso_database: z.string(),
-})
+});
 
 const appConfig = appConfigSchema.parse({
   port: process.env.PORT ?? "3000",
@@ -48,7 +51,7 @@ const appConfig = appConfigSchema.parse({
   refreshJwtKey: process.env.REFRESH_JWT_KEY,
   generatedJwtExpires: process.env.GENERATED_JWT_EXPIRATION,
   refreshedJwtExpires: process.env.REFRESHED_JWT_EXPIRATION,
-})
+});
 
 const apiConfig = apiConfigSchema.parse({
   resend: process.env.API_KEY_RESEND,
@@ -58,20 +61,17 @@ const apiConfig = apiConfigSchema.parse({
   google_cl_secret: process.env.GOOGLE_CLIENT_SECRET,
   google_redirect_uris: process.env.GOOGLE_REDIRECT_URIS,
   google_project_id: process.env.GOOGLE_PROJECT_ID,
-  google_auth_uri: process.env.GOOGLE_AUTH_URI,
-  google_token_uri: process.env.GOOGLE_TOKEN_URI,
-  google_auth_provider_cert_url: process.env.GOOGLE_AUTH_PROVIDER_CERT_URL,
-})
+});
 
 const dbConfig = dbConfigSchema.parse({
   urlSQLite: process.env.URL_TO_SQLITE ?? "",
   urlDrizzle: process.env.URL_TO_DRIZZLE ?? "",
   turso_database: process.env.TURSO_DATABASE_URL,
   turso_token: process.env.TURSO_AUTH_TOKEN,
-})
+});
 
 const bcryptConfig = bcryptConfigSchema.parse({
   saltRounds: 10,
-})
+});
 
-export { appConfig, bcryptConfig, dbConfig, apiConfig }
+export { appConfig, bcryptConfig, dbConfig, apiConfig };

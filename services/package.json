@@ -1,12 +1,13 @@
 {
   "name": "services",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --exec node --experimental-specifier-resolution=node --import tsx src/main.ts",
+    "dev": "nodemon  --ignore credentials.json --exec node --experimental-specifier-resolution=node --import tsx src/main.ts",
     "dev2": "nodemon --exec 'tsx src/main.ts'",
+    "dev:produc": "set NODE_ENV=production && nodemon  --ignore credentials.json --ignore .env --exec node --experimental-specifier-resolution=node --import tsx src/main.ts",
     "build": "tsc",
     "start": "node dist/main.js",
     "generate": "drizzle-kit generate",

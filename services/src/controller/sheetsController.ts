@@ -101,6 +101,7 @@ async function listMajors(
 }
 
 const sheetsController = async (req: Request, res: Response) => {
+  console.log("hola");
   try {
     const { email } = req.body;
     const dataUser = await db

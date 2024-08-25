@@ -2,9 +2,6 @@ import fs from "fs/promises";
 import path from "path";
 import { authenticate } from "@google-cloud/local-auth";
 import { Auth, google } from "googleapis";
-// import { oauth2 } from "googleapis/build/src/apis/oauth2"
-// import readLine from "readline"
-// import express, { Request, Response } from "express"
 
 // If modifying these scopes, delete token.json.
 const SCOPES = [
@@ -55,7 +52,7 @@ async function saveCredentials(client: Auth.OAuth2Client) {
  * Load or request or authorization to call APIs.
  *
  */
-async function authorizeV2(): Promise<Auth.OAuth2Client> {
+async function authorize(): Promise<Auth.OAuth2Client> {
   let client = await loadSavedCredentialsIfExist();
   if (client) {
     return client;
@@ -64,10 +61,12 @@ async function authorizeV2(): Promise<Auth.OAuth2Client> {
     scopes: SCOPES,
     keyfilePath: CREDENTIALS_PATH,
   });
+
   if (client?.credentials) {
     await saveCredentials(client);
   }
+
   return client;
 }
 
-export { authorizeV2 };
+export { authorize };
