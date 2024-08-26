@@ -39,7 +39,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build ./web --tag ghcr.io/joanbr4/coorve-web-v2:latest
+          docker build . --target frontend-builder --tag ghcr.io/joanbr4/coorve-web-v2:latest
           docker push ghcr.io/joanbr4/coorve-web-v2:latest
 
         # uses: docker/build-push-action@v4
