@@ -39,7 +39,7 @@ jobs:
 
       - name: Build and push Docker images
         run: |
-          docker build /services --tag ghcr.io/joanbr4/coorve-service-v2:latest
+          docker build ./services --tag ghcr.io/joanbr4/coorve-service-v2:latest
           docker push ghcr.io/joanbr4/coorve-service-v2:latest
         # uses: docker/build-push-action@v3
         # with:
