@@ -29,19 +29,19 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ github.workspace }}/services/node_modules
-          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/pnpm-lock.json') }}
           restore-keys: |
             ${{ runner.OS }}-node-
 
       - name: install dependencies
         run: |
           cd ${{ github.workspace }}/services
-          npm ci --legacy-peer-deps
+          pnpm install --frozen-lockfile --legacy-peer-deps
 
       - name: lint
         run: |
           cd ${{ github.workspace }}/services
-          npx eslint src --max-warnings 0
+          pnpm dlx eslint src --max-warnings 0
 
       # - name: test
       #   run: |
@@ -51,7 +51,7 @@ jobs:
       - name: build
         run: |
           cd ${{ github.workspace }}/services
-          npm run build
+          pnpm build
 
       # - name: SonarCloud Scan
       #   uses: SonarSource/sonarcloud-github-action@master

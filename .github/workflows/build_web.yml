@@ -5,6 +5,10 @@ on:
     branches: [master]
     paths:
       - "web/**"
+  pull_request:
+    branches: [master]
+    paths:
+      - "web/**"
 
 jobs:
   build_web:
@@ -26,33 +30,40 @@ jobs:
       - name: Login Docker GitHub
         uses: docker/login-action@v2
         with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GH_TOKEN_COORVE }}
           # registry: docker.pkg.github.com
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          # username: ${{secrets.DOCKERHUB_USERNAME}}
+          # password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: web
-          push: true
-          tags: bordotch/coorve-web:${{steps.version.outputs.version}}
-
-      - name: Update version
         run: |
-          git config --global user.name "Coorve bot"
-          git config --global user.email "bot@coorve.com"
-          version=$(grep version: ./config/dev/web.yml | awk '{print $2}')
-          sed -i "s/version: $version/version: ${{ steps.version.outputs.version }}/" ./config/dev/web.yml
-          git add ./config/dev/web.yml
-          git commit -m "Bump web image to v${{ steps.version.outputs.version }}"
+          docker build /services --tag ghcr.io/joanbr4/coorve-web-v2:latest
+          docker push ghcr.io/joanbr4/coorve-web-v2:latest
 
-      - name: Create a Pull Request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          title: "Bump web image version to v${{ steps.version.outputs.version }}"
-          commit-message: "Bump web image version to v${{ steps.version.outputs.version }}"
-          branch: "bump-web-to-v${{ steps.version.outputs.version }}"
-          delete-branch: true
-          token: ${{ secrets.GITHUB_TOKEN }}
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          assignees: ${{ github.actor }}
+        # uses: docker/build-push-action@v4
+        # with:
+        #   context: web
+        #   push: true
+        #   tags: bordotch/coorve-web:${{steps.version.outputs.version}}
+
+      # - name: Update version
+      #   run: |
+      #     git config --global user.name "Coorve bot"
+      #     git config --global user.email "bot@coorve.com"
+      #     version=$(grep version: ./config/dev/web.yml | awk '{print $2}')
+      #     sed -i "s/version: $version/version: ${{ steps.version.outputs.version }}/" ./config/dev/web.yml
+      #     git add ./config/dev/web.yml
+      #     git commit -m "Bump web image to v${{ steps.version.outputs.version }}"
+
+      # - name: Create a Pull Request
+      #   uses: peter-evans/create-pull-request@v3
+      #   with:
+      #     title: "Bump web image version to v${{ steps.version.outputs.version }}"
+      #     commit-message: "Bump web image version to v${{ steps.version.outputs.version }}"
+      #     branch: "bump-web-to-v${{ steps.version.outputs.version }}"
+      #     delete-branch: true
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+      #     assignees: ${{ github.actor }}

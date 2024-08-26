@@ -20,16 +20,13 @@ COPY --from=dependencies /services/node_modules ./node_modules
 EXPOSE 3000
 
 # Rebuilds native modules to ensure correct linking
-# RUN pnpm rebuild 
 # RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --production --frozen-lockfile
 CMD ["pnpm", "dev"]
-
-# CMD ["npm","run", "dev"]
 
 # Stage Client
 FROM base as frontend-builder
 RUN corepack enable
-# ENV VITE_DOCKER='Hola Docker'
+
 WORKDIR /web
 # COPY --from=builder /app/node_modules ./node_modules
 COPY ./web .
@@ -38,4 +35,3 @@ COPY ./web .
 RUN  pnpm install
 EXPOSE 5173
 CMD ["pnpm", "dev"]
-# CMD ["npm","run", "dev"]
