@@ -1,14 +1,16 @@
-import { Auth, google } from "googleapis";
+import { google } from "googleapis";
 import { ErrorsApisDrive, NotFoundError } from "../utils/errors";
-import { authorize } from "./auth/auth2Clientv3";
-import { apiConfig } from "../config/index";
+import { savedToken } from "./auth/auth2Client";
+import { apiConfig, appConfig } from "../config/index";
 import { eq } from "drizzle-orm";
 import { db } from "../db/client";
 import { users } from "../db/schemas";
 import { Request, Response } from "express";
+import { OAuth2Client } from "google-auth-library";
+import { pathRoot } from "../routes/routes";
 
 async function listFiles(
-  authClient: Auth.OAuth2Client,
+  authClient: OAuth2Client,
   fileName: string,
   folderId: string
 ): Promise<string[] | void> {
@@ -50,7 +52,7 @@ let dataObjTable = {
 type InitialDataObject = typeof dataObjTable;
 
 async function listMajors(
-  auth: Auth.OAuth2Client,
+  auth: OAuth2Client,
   sheetId: string
 ): Promise<InitialDataObject | void> {
   const sheets = google.sheets({ version: "v4", auth });
@@ -103,28 +105,41 @@ async function listMajors(
 const sheetsController = async (req: Request, res: Response) => {
   console.log("hola");
   try {
-    const { email } = req.body;
+    let userEmail = req.query.userEmail as string;
     const dataUser = await db
       .select()
       .from(users)
-      .where(eq(users.email, email));
+      .where(eq(users.email, userEmail));
     const { name: nameUser, apellidos: apellidosUser } = dataUser[0];
-    console.log("email", email, nameUser);
+    console.log("email", userEmail, nameUser);
     const folderId = apiConfig.folder_id;
+    if (!savedToken) {
+      res.status(400).send({ message: "token no exist" });
+    } else {
+      const { refresh_token, ...remainingToken } = savedToken;
 
-    const auth = await authorize();
-    const nameFile = "Buyers - " + nameUser + " " + apellidosUser; //XLS doesnt works for api
-    console.log("file", nameFile);
-    const filesListId = await listFiles(auth, nameFile, folderId);
-    if (filesListId == undefined)
-      throw new NotFoundError("Not Found a User's File");
-    if (filesListId.length > 1) throw new NotFoundError("More 1 match file");
+      const auth = new OAuth2Client(
+        apiConfig.google_cl_id,
+        apiConfig.google_cl_secret,
+        appConfig.backend_url + apiConfig.google_redirect_uris
+      );
+      auth.setCredentials(savedToken);
 
-    const fileId = filesListId[0];
-    const dataUserTable = await listMajors(auth, fileId);
-    console.log("data", dataUserTable);
+      const nameFile = "Buyers - " + nameUser + " " + apellidosUser; //XLS doesnt works for api
+      console.log("file", nameFile);
+      const filesListId = await listFiles(auth, nameFile, folderId);
+      if (filesListId == undefined)
+        throw new NotFoundError("Not Found a User's File");
+      if (filesListId.length > 1) throw new NotFoundError("More 1 match file");
 
-    res.send({ data: dataUserTable });
+      const fileId = filesListId[0];
+      const dataUserTable = await listMajors(auth, fileId);
+      console.log("data", dataUserTable);
+      res.send({
+        data: dataUserTable,
+        token: remainingToken,
+      });
+    }
   } catch (error) {
     const err = error as ErrorsApisDrive;
     console.log(

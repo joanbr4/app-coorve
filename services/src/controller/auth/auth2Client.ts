@@ -1,71 +1,101 @@
-import fs from "fs/promises";
-import { existsSync, writeFileSync } from "fs";
-import path from "path";
-import { Auth, google } from "googleapis";
-import express, { Request, Response } from "express";
+import { OAuth2Client } from "google-auth-library";
+import { google } from "googleapis";
+import { apiConfig, appConfig } from "../../config";
+import { Request, Response } from "express";
+import { pathRoot } from "../../routes/routes";
 
 const SCOPES = [
   "https://www.googleapis.com/auth/drive.metadata.readonly",
   "https://www.googleapis.com/auth/spreadsheets.readonly",
 ];
-const TOKEN_PATH = path.join(process.cwd(), "token.json");
-const CREDENTIALS_PATH = path.join(process.cwd(), "credentials.json");
 
-async function authorize_v1(): Promise<Auth.OAuth2Client> {
-  const content = await fs.readFile(CREDENTIALS_PATH, "utf-8");
-  const credentials = JSON.parse(content);
+// In-memory storage for token (Note: This will not persist across function invocations)
+export let savedToken: any = null;
 
-  const { client_secret, client_id } = credentials.installed;
-  //  || credentials.web
-
-  const oAuth2Client = new google.auth.OAuth2(
-    client_id,
-    client_secret,
-    "http://localhost:3000/oauth2callback"
-    // redirect_uris
-  );
-  if (existsSync(TOKEN_PATH)) {
-    const token = await fs.readFile(TOKEN_PATH, "utf-8");
-    oAuth2Client.setCredentials(JSON.parse(token));
-  } else {
-    await getAccessToken(oAuth2Client);
+async function loadSavedCredentialsIfExist(): Promise<OAuth2Client | null> {
+  if (savedToken) {
+    const client = new OAuth2Client(
+      apiConfig.google_cl_id,
+      apiConfig.google_cl_secret,
+      apiConfig.google_redirect_uris
+    );
+    client.setCredentials(savedToken);
+    return client;
   }
-  return oAuth2Client;
+  return null;
 }
 
-async function getAccessToken(oAuth2Client: Auth.OAuth2Client) {
-  return new Promise<void>((resolve, reject) => {
-    const authUrl = oAuth2Client.generateAuthUrl({
-      access_type: "offline",
-      scope: SCOPES,
-    });
+function saveCredentials(client: OAuth2Client) {
+  savedToken = client.credentials;
+  return savedToken;
+}
 
-    console.log("Authorize this app by visiting this url:", authUrl);
+async function oAuthController(req: Request, res: Response) {
+  console.log("hola Oauth");
+  const userEmail = req.query.userEmail as string;
 
-    const app = express();
-    app.use("/oauth2callback", async (req: Request, res: Response) => {
-      const code = req.query.code as string;
-      if (!code) {
-        res.send("Error: No code found in the URL");
-        return reject("No code found in the URL");
-      }
-      try {
-        const { tokens } = await oAuth2Client.getToken(code);
-        oAuth2Client.setCredentials(tokens);
-        writeFileSync(TOKEN_PATH, JSON.stringify(tokens));
-        console.log("Token stored to", TOKEN_PATH);
-        res.send("Authorization successful! You can close this window.");
-        resolve();
-      } catch (err) {
-        res.send(`Error retrieving access token: ${err}`);
-        reject(err);
-      } finally {
-        server.close();
-      }
-    });
-    const server = app.listen(3001, () => {
-      console.log("OAuth2 callback server is running on http://localhost:3001");
-    });
+  const client = new OAuth2Client(
+    apiConfig.google_cl_id,
+    apiConfig.google_cl_secret,
+    appConfig.backend_url + apiConfig.google_redirect_uris
+  );
+
+  // Generate a url that asks permissions for the required scopes
+  const authorizationUrl = client.generateAuthUrl({
+    access_type: "offline",
+    scope: SCOPES,
+    state: userEmail,
   });
+
+  // console.log("Authorize this app by visiting this url:", authorizationUrl);
+  res.redirect(authorizationUrl);
 }
-export { authorize_v1 };
+
+async function oAuth2CallbackController(req: Request, res: Response) {
+  const code = req.query.code as string;
+  const userEmail = req.query.state as string;
+
+  console.log("code:", code);
+  const client = new OAuth2Client(
+    apiConfig.google_cl_id,
+    apiConfig.google_cl_secret,
+    appConfig.backend_url + apiConfig.google_redirect_uris
+  );
+
+  const { tokens } = await client.getToken(code);
+  console.log("token:", tokens);
+  client.setCredentials(tokens);
+
+  saveCredentials(client);
+
+  res.cookie("refresh_token", tokens.refresh_token, {
+    httpOnly: true,
+    secure: true, // Only send over HTTPS
+    sameSite: "strict",
+  });
+
+  console.log("Authorization successful!");
+  // res.redirect(
+  //   `http://localhost:3000/api/v1/google/sheets?userEmail=${userEmail}`
+  // );
+  // res.redirect("http://localhost:5173/user/dashboard");
+  res.send(`
+    <html>
+      <body>
+        <script>
+          // Inform the parent window about the successful authentication
+          if (window.opener) {
+            window.opener.postMessage({ type: 'GOOGLE_AUTH_SUCCESS', token: '${tokens.access_token}' }, '${appConfig.frontend_url}');
+          }
+          // Close the popup window after a short delay to ensure the message is sent
+          setTimeout(() => {
+            window.close();
+          }, 500);
+        </script>
+        <p>Authorization successful! You can close this window.</p>
+      </body>
+    </html>
+  `);
+}
+
+export { oAuth2CallbackController, oAuthController };

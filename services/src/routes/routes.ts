@@ -22,9 +22,11 @@ export const pathRoot = {
     },
     google: {
       sheets: "/api/v1/google/sheets",
+      callback: "/api/v1/google/callback",
+      auth: "/api/v1/google/auth",
     },
     mock: {
       mocking: "/api/mock",
     },
   },
-}
+};

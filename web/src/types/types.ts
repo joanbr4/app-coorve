@@ -42,8 +42,17 @@ export type TdataFromLogin = {
   user: TUser;
   token: string;
 };
+
+export type Ttoken = {
+  access_token: string;
+  scope: string;
+  token_type: string;
+  expiry_date: string;
+};
+
 export type TdataSheetApi = {
   data: TdataChart;
+  token: Ttoken;
 };
 
 export type Tcontext<T> = {

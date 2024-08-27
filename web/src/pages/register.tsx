@@ -5,7 +5,7 @@ import { ErrorfromServer } from "@/types/types";
 import { isErrorFromServer, isUserRegister } from "@/utils/guardFunction";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import fetch from "cross-fetch";
-const url_be = import.meta.env.VITE_API_BASE_URL;
+import { url_be } from "./login";
 
 const initialState = {
   name: "",

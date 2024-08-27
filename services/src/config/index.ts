@@ -12,6 +12,7 @@ const appConfigSchema = z
   .object({
     port: z.string(),
     frontend_url: z.string(),
+    backend_url: z.string(),
     generateJwtKey: z.string(),
     refreshJwtKey: z.string(),
     generatedJwtExpires: z.string(),
@@ -44,9 +45,8 @@ const dbConfigSchema = z.object({
 
 const appConfig = appConfigSchema.parse({
   port: process.env.PORT ?? "3000",
-  frontend_url: process.env.DOCKER
-    ? process.env.DOCKER
-    : process.env.FRONTEND_URL,
+  frontend_url: process.env.DOCKER_FE ?? process.env.FRONTEND_URL,
+  backend_url: process.env.DOCKER_BE ?? process.env.BACKEND_URL,
   generateJwtKey: process.env.GENERATE_JWT_KEY,
   refreshJwtKey: process.env.REFRESH_JWT_KEY,
   generatedJwtExpires: process.env.GENERATED_JWT_EXPIRATION,

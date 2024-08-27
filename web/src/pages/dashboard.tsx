@@ -30,27 +30,42 @@ const CircularChart = () => {
   const [dataChartFetch, setDataChartFetch] = useState<TdataChart>();
 
   const { user, setParamId } = useOutletContext<Tcontext<string>>();
-  const payload = { email: user?.email };
+  // const payload = { email: user?.email };
 
   useEffect(() => {
     const url = new URL(window.location.href);
     const param = url.pathname.split("/")[2];
     setParamId(param);
-
-    fetch(url_be + "/api/v1/google/sheets", {
-      method: "POST",
+    fetch(url_be + `/api/v1/google/sheets?userEmail=${user?.email}`, {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(payload),
     })
       .then((res) => {
         console.log("asd", res);
-        if (!res.ok) throw new Error(res.statusText);
+        if (!res.ok) {
+          const authWindow = window.open(
+            `${import.meta.env.VITE_BE_URL}/api/v1/google/auth?userEmail=${user?.email}`,
+            "_blank",
+            "width=500,height=600"
+          );
+          window.addEventListener("message", (event) => {
+            if (event.origin !== import.meta.env.VITE_FE_URL) return;
+            if (event.data.type === "GOOGLE_AUTH_SUCCESS") {
+              localStorage.setItem("auth_toke", event.data.token);
+              authWindow?.close();
+            }
+            setDataChartFetch(undefined);
+          });
+        }
         return res.json() as Promise<TdataSheetApi>;
       })
       .then((data) => {
+        localStorage.setItem("access_token", data.token.access_token);
+        localStorage.setItem("expiry_date", data.token.expiry_date);
+        localStorage.setItem("scope", data.token.scope);
+        localStorage.setItem("token_type", data.token.token_type);
         setDataChartFetch(data.data);
       });
   }, []);

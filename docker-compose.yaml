@@ -6,7 +6,8 @@ services:
       dockerfile: Dockerfile
       target: backend-builder
     environment:
-      - DOCKER=http://client:5173
+      - DOCKER_FE=http://client:5173
+      - DOCKER_BE=http://server:3000
     develop:
       watch:
         - action: sync
@@ -29,7 +30,7 @@ services:
       dockerfile: Dockerfile
       target: frontend-builder
     environment:
-      - VITE_API_DOCKER=http://server:3000
+      - VITE_BE_DOCKER=http://server:3000
     develop:
       watch:
         - action: sync

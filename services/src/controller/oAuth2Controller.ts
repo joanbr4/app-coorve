@@ -16,7 +16,7 @@ const oauth2Client = new OAuth2Client(
   // + pathRoot.v1.google.sheets
 );
 
-const oauthController = (req: Request, res: Response) => {
+const oauthControllsdsder = (req: Request, res: Response) => {
   const url = oauth2Client.generateAuthUrl({
     access_type: "offline",
     scope: SCOPES,
@@ -30,5 +30,3 @@ const oauthCallbackController = async (req: Request, res: Response) => {
   oauth2Client.setCredentials(tokens);
   res.send("Successfully authenticated with Google Drive API!");
 };
-
-export { oauthController, oauthCallbackController };

@@ -4,18 +4,23 @@ import { pathRoot } from "./routes";
 import sheetsController from "../controller/sheetsController";
 import { asyncHandler } from "../utils/asyncHandler";
 import {
-  oauthCallbackController,
-  oauthController,
-} from "../controller/oAuth2Controller";
+  oAuth2CallbackController,
+  oAuthController,
+} from "../controller/auth/auth2Client";
+// import {
+//   oauthCallbackController,
+//   oauthController,
+// } from "../controller/oAuth2Controller";
 // import { stripeController } from "../controller/sessionStripeController"
 // import { retrieveController } from "../controller/retriveStripeController"
 
 export const apiRouter = express.Router();
 
-apiRouter.get(pathRoot.v1.google.sheets, asyncHandler(oauthController));
+apiRouter.get(pathRoot.v1.google.sheets, asyncHandler(sheetsController));
+apiRouter.get(pathRoot.v1.google.auth, asyncHandler(oAuthController));
 apiRouter.get(
-  pathRoot.v1.google.sheets + "/outh2callback",
-  asyncHandler(oauthCallbackController)
+  pathRoot.v1.google.callback,
+  asyncHandler(oAuth2CallbackController)
 );
 
 apiRouter.post(
