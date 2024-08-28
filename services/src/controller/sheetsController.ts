@@ -122,7 +122,7 @@ const sheetsController = async (req: Request, res: Response) => {
       const auth = new OAuth2Client(
         apiConfig.google_cl_id,
         apiConfig.google_cl_secret,
-        appConfig.backend_url + apiConfig.google_redirect_uris
+        apiConfig.google_redirect_uris
       )
       auth.setCredentials(token)
 

@@ -37,7 +37,7 @@ async function oAuthController(req: Request, res: Response) {
   const client = new OAuth2Client(
     apiConfig.google_cl_id,
     apiConfig.google_cl_secret,
-    appConfig.backend_url + apiConfig.google_redirect_uris
+    apiConfig.google_redirect_uris
   )
 
   // Generate a url that asks permissions for the required scopes
@@ -59,7 +59,7 @@ async function oAuth2CallbackController(req: Request, res: Response) {
   const client = new OAuth2Client(
     apiConfig.google_cl_id,
     apiConfig.google_cl_secret,
-    appConfig.backend_url + apiConfig.google_redirect_uris
+    apiConfig.google_redirect_uris
   )
 
   const { tokens } = await client.getToken(code)
