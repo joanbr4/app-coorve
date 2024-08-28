@@ -12,7 +12,10 @@ function UserPage() {
 
   //FIXME param active button navigator
   const handlingLogout = async () => {
-    console.log("hola");
+    localStorage.removeItem("token_auth_user");
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("expiry_date");
+    localStorage.removeItem("access_token");
     const response = await fetch(url_be + "/api/v1/auth/logout", {
       method: "POST",
       // credentials: "include",

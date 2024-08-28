@@ -83,8 +83,9 @@ function Login() {
         setErrorLogin(errorMessage.message);
       } else {
         const data = (await response.json()) as TdataFromLogin;
-        localStorage.setItem("tokenAuth", data.token);
-        localStorage.setItem("tokenRefresh", data.token);
+        console.log("data_TOken:", data);
+        localStorage.setItem("token_auth_user", data.authTokenUser);
+        // localStorage.setItem("token_refresh_user", data.refreshTokenUser);
         setUser(data.user);
         navigate("/user/dashboard");
       }

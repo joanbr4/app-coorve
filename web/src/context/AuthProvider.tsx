@@ -39,13 +39,18 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     () => ({ children, user, setUser, error, setError, loading }),
     [children, user, error, loading]
   );
-
-  console.log("asdf", import.meta.env.VITE_BE_URL);
+  const userToken = localStorage.getItem("token_auth_user");
+  const payload = { auth_token_user: userToken };
+  console.log("payload", payload);
 
   useEffect(() => {
     fetch(url_be + "/api/v1/auth/me", {
       method: "POST",
       credentials: "include",
+      headers: {
+        "Content-Type": "application/json", // Add this line
+      },
+      body: JSON.stringify(payload),
     })
       .then((res) => {
         if (!res.ok) {

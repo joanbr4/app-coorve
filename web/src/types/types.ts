@@ -40,7 +40,8 @@ export type TdataChart = {
 };
 export type TdataFromLogin = {
   user: TUser;
-  token: string;
+  authTokenUser: string;
+  refreshTokenUser: string;
 };
 
 export type Ttoken = {

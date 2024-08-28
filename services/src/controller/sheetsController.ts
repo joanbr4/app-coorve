@@ -1,39 +1,39 @@
-import { google } from "googleapis";
-import { ErrorsApisDrive, NotFoundError } from "../utils/errors";
-import { savedToken } from "./auth/auth2Client";
-import { apiConfig, appConfig } from "../config/index";
-import { eq } from "drizzle-orm";
-import { db } from "../db/client";
-import { users } from "../db/schemas";
-import { Request, Response } from "express";
-import { OAuth2Client } from "google-auth-library";
-import { pathRoot } from "../routes/routes";
+import { google } from "googleapis"
+import { ErrorsApisDrive, NotFoundError } from "../utils/errors"
+import { savedToken } from "./auth/auth2Client"
+import { apiConfig, appConfig } from "../config/index"
+import { eq } from "drizzle-orm"
+import { db } from "../db/client"
+import { users } from "../db/schemas"
+import { Request, Response } from "express"
+import { OAuth2Client } from "google-auth-library"
+import { pathRoot } from "../routes/routes"
 
 async function listFiles(
   authClient: OAuth2Client,
   fileName: string,
   folderId: string
 ): Promise<string[] | void> {
-  const drive = google.drive({ version: "v3", auth: authClient });
+  const drive = google.drive({ version: "v3", auth: authClient })
   const res = await drive.files.list({
     pageSize: 200,
     fields: "nextPageToken, files(id, name)",
     q: `'${folderId}' in parents`,
-  });
+  })
 
-  const files = res.data.files;
+  const files = res.data.files
 
   if (files?.length === 0 || files == undefined) {
-    console.log("No files found.");
-    return;
+    console.log("No files found.")
+    return
   }
 
   const fileId = files
     .filter((file) => file.name?.includes(fileName))
-    .map((file) => file.id as string);
+    .map((file) => file.id as string)
 
-  console.log("Files:", fileId);
-  return fileId;
+  console.log("Files:", fileId)
+  return fileId
 }
 let dataObjTable = {
   total: 0,
@@ -48,43 +48,43 @@ let dataObjTable = {
   primer_contacto: 0,
   interesado: 0,
   otros: 0,
-};
-type InitialDataObject = typeof dataObjTable;
+}
+type InitialDataObject = typeof dataObjTable
 
 async function listMajors(
   auth: OAuth2Client,
   sheetId: string
 ): Promise<InitialDataObject | void> {
-  const sheets = google.sheets({ version: "v4", auth });
+  const sheets = google.sheets({ version: "v4", auth })
   const res = await sheets.spreadsheets.values.get({
     spreadsheetId: sheetId,
     range: "Comprador!A1:M",
-  });
-  const rows = res.data.values as Array<string[]>;
+  })
+  const rows = res.data.values as Array<string[]>
 
   if (!rows || rows.length === 0) {
-    console.log("No data found.");
-    return;
+    console.log("No data found.")
+    return
   }
 
   rows.forEach((row) => {
-    if (row[4] == "Categoria") dataObjTable.otros += 0;
-    else if (row[4] == "No interesa") dataObjTable.no_interesa += 1;
+    if (row[4] == "Categoria") dataObjTable.otros += 0
+    else if (row[4] == "No interesa") dataObjTable.no_interesa += 1
     else if (row[4] == "Fuera de presupuesto")
-      dataObjTable.fuera_presupuesto += 1;
-    else if (row[4] == "Cita realizada") dataObjTable.cita_realizada += 1;
-    else if (row[4] == "Contestaron") dataObjTable.contestaron += 1;
-    else if (row[4] == "NO constestaron") dataObjTable.NO_contestaron += 1;
-    else if (row[4] == "Agendaron cita") dataObjTable.agendaron += 1;
-    else if (row[4] == "Renta") dataObjTable.renta += 1;
-    else if (row[4] == "") dataObjTable.no_calificados += 1;
-    else if (row[4] == "Primer Contacto") dataObjTable.primer_contacto += 1;
-    else if (row[4] == "Interesado") dataObjTable.interesado += 1;
-    else dataObjTable.otros += 1;
-  });
-  dataObjTable.total = rows.length - 1;
+      dataObjTable.fuera_presupuesto += 1
+    else if (row[4] == "Cita realizada") dataObjTable.cita_realizada += 1
+    else if (row[4] == "Contestaron") dataObjTable.contestaron += 1
+    else if (row[4] == "NO constestaron") dataObjTable.NO_contestaron += 1
+    else if (row[4] == "Agendaron cita") dataObjTable.agendaron += 1
+    else if (row[4] == "Renta") dataObjTable.renta += 1
+    else if (row[4] == "") dataObjTable.no_calificados += 1
+    else if (row[4] == "Primer Contacto") dataObjTable.primer_contacto += 1
+    else if (row[4] == "Interesado") dataObjTable.interesado += 1
+    else dataObjTable.otros += 1
+  })
+  dataObjTable.total = rows.length - 1
 
-  const copyTable = { ...dataObjTable };
+  const copyTable = { ...dataObjTable }
   dataObjTable = {
     total: 0,
     no_interesa: 0,
@@ -98,60 +98,61 @@ async function listMajors(
     primer_contacto: 0,
     interesado: 0,
     otros: 0,
-  };
-  return copyTable;
+  }
+  return copyTable
 }
 
 const sheetsController = async (req: Request, res: Response) => {
-  console.log("hola");
   try {
-    let userEmail = req.query.userEmail as string;
+    const token = req.body.token
+
+    let userEmail = req.query.userEmail as string
     const dataUser = await db
       .select()
       .from(users)
-      .where(eq(users.email, userEmail));
-    const { name: nameUser, apellidos: apellidosUser } = dataUser[0];
-    console.log("email", userEmail, nameUser);
-    const folderId = apiConfig.folder_id;
-    if (!savedToken) {
-      res.status(400).send({ message: "token no exist" });
+      .where(eq(users.email, userEmail))
+    const { name: nameUser, apellidos: apellidosUser } = dataUser[0]
+    console.log("email", userEmail, nameUser)
+    const folderId = apiConfig.folder_id
+    if (!token) {
+      res.status(400).send({ message: "token no exist" })
     } else {
-      const { refresh_token, ...remainingToken } = savedToken;
+      const { refresh_token, ...remainingToken } = token
 
       const auth = new OAuth2Client(
         apiConfig.google_cl_id,
         apiConfig.google_cl_secret,
         appConfig.backend_url + apiConfig.google_redirect_uris
-      );
-      auth.setCredentials(savedToken);
+      )
+      auth.setCredentials(token)
 
-      const nameFile = "Buyers - " + nameUser + " " + apellidosUser; //XLS doesnt works for api
-      console.log("file", nameFile);
-      const filesListId = await listFiles(auth, nameFile, folderId);
+      const nameFile = "Buyers - " + nameUser + " " + apellidosUser //XLS doesnt works for api
+      console.log("file", nameFile)
+      const filesListId = await listFiles(auth, nameFile, folderId)
       if (filesListId == undefined)
-        throw new NotFoundError("Not Found a User's File");
-      if (filesListId.length > 1) throw new NotFoundError("More 1 match file");
+        throw new NotFoundError("Not Found a User's File")
+      if (filesListId.length > 1) throw new NotFoundError("More 1 match file")
 
-      const fileId = filesListId[0];
-      const dataUserTable = await listMajors(auth, fileId);
-      console.log("data", dataUserTable);
+      const fileId = filesListId[0]
+      const dataUserTable = await listMajors(auth, fileId)
+      console.log("data", dataUserTable)
       res.send({
         data: dataUserTable,
         token: remainingToken,
-      });
+      })
     }
   } catch (error) {
-    const err = error as ErrorsApisDrive;
+    const err = error as ErrorsApisDrive
     console.log(
       err.message,
       "on",
       err.errors?.[0].location,
       err.errors?.[0].locationType
-    );
+    )
     throw new Error(
       `${err.message} "on" ${err.errors?.[0].location} ${err.errors?.[0].locationType}`
-    );
+    )
   }
-};
+}
 
-export default sheetsController;
+export default sheetsController

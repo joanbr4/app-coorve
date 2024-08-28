@@ -38,9 +38,6 @@ const CircularChart = () => {
     setParamId(param);
     fetch(url_be + `/api/v1/google/sheets?userEmail=${user?.email}`, {
       credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
     })
       .then((res) => {
         console.log("asd", res);
@@ -64,8 +61,6 @@ const CircularChart = () => {
       .then((data) => {
         localStorage.setItem("access_token", data.token.access_token);
         localStorage.setItem("expiry_date", data.token.expiry_date);
-        localStorage.setItem("scope", data.token.scope);
-        localStorage.setItem("token_type", data.token.token_type);
         setDataChartFetch(data.data);
       });
   }, []);

@@ -5,7 +5,7 @@ import { eq } from "drizzle-orm"
 
 const authMeController = async (req: Request, res: Response) => {
   const { id } = req.body
-
+  console.log("íd_body", id)
   const dataUser = await db.select().from(users).where(eq(users.id, id))
   const user = dataUser[0]
   console.log("from meController", user)
