@@ -1,17 +1,15 @@
 import { Request, Response } from "express"
 
 const logoutController = (req: Request, res: Response) => {
+  console.log("logout!")
+
   res.clearCookie("auth_token_user")
   res.clearCookie("refresh_token_user")
-  res.clearCookie("refresh_token_google")
-  res.clearCookie("auth_token_google")
-  res.cookie("refresh_token_google", null, {
-    httpOnly: true,
-    maxAge: 0,
+  res.clearCookie("auth_token_google", {
+    path: "/",
   })
-  res.cookie("auth_token_google", null, {
-    httpOnly: true,
-    maxAge: 0,
+  res.clearCookie("refresh_token_google", {
+    path: "/",
   })
 
   res.status(200).send({ msg: "Successfully logged out" })

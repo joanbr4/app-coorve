@@ -9,8 +9,8 @@ async function authenticate(req: Request, res: Response, next: NextFunction) {
   const authTokenHeader = req.header("Authorization")
   const authTokenFromCookie = req.cookies.auth_token_user
   const authTokenFromBody = req.body.auth_token_user
-  console.log("authToken", authTokenFromBody)
-  console.log("authToken", authTokenFromCookie)
+  console.log("authTokenBody", authTokenFromBody)
+  console.log("authTokenCookie", authTokenFromCookie)
   let authToken
   if (authTokenHeader?.startsWith("Bearer ")) {
     authToken = authTokenHeader.slice().replace("Bearer ", "")

@@ -60,11 +60,12 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       })
       .then((data) => {
         setUser(data);
-        setLoading(false);
       })
       .catch((err) => {
         setError(err.message);
         setUser(null);
+      })
+      .finally(() => {
         setLoading(false);
       });
   }, []);
