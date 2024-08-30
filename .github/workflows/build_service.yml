@@ -50,7 +50,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: web
+          context: .
+          target: backend-builder
           push: true
           tags: bordotch/coorve-service:v${{ env.version }}
 
