@@ -6,7 +6,7 @@ import { asyncHandler } from "../utils/asyncHandler"
 import {
   oAuth2CallbackController,
   oAuthController,
-} from "../controller/auth/auth2Client"
+} from "../controller/auth/oAuth2Controller"
 import { authenticateGoogle } from "../middleware/authenticateGoogle"
 // import {
 //   oauthCallbackController,

@@ -8,7 +8,7 @@ import {
   Tooltip,
   TooltipItem,
 } from "chart.js";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Pie } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { useOutletContext } from "react-router-dom";
@@ -28,32 +28,63 @@ type PieTooltipContext = TooltipItem<"pie">;
 
 const CircularChart = () => {
   const [dataChartFetch, setDataChartFetch] = useState<TdataChart>();
-
+  const authWindowRef = useRef<Window | null>(null);
   const { user, setParamId } = useOutletContext<Tcontext<string>>();
   // const payload = { email: user?.email };
+
+  const refreshData = async () => {
+    try {
+      const response = await fetch(
+        url_be + `/api/v1/google/sheets?userEmail=${user?.email}`,
+        {
+          credentials: "include",
+        }
+      );
+      const data = (await response.json()) as TdataSheetApi;
+      localStorage.setItem("access_token", data.token.access_token);
+      localStorage.setItem("expiry_date", data.token.expiry_date);
+      setDataChartFetch(data.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   useEffect(() => {
     const url = new URL(window.location.href);
     const param = url.pathname.split("/")[2];
     setParamId(param);
+
+    const handleMessage = (event: MessageEvent) => {
+      if (event.origin !== import.meta.env.VITE_FE_URL) return;
+      if (event.data === "oauth-success") {
+        localStorage.setItem("auth_token", event.data.token);
+        if (authWindowRef.current) authWindowRef.current.close();
+        refreshData();
+      }
+    };
+
+    // Set up message listener
+    window.addEventListener("message", handleMessage);
+
     fetch(url_be + `/api/v1/google/sheets?userEmail=${user?.email}`, {
       credentials: "include",
     })
       .then((res) => {
         console.log("asd", res);
         if (!res.ok) {
-          const authWindow = window.open(
+          authWindowRef.current = window.open(
             `${import.meta.env.VITE_BE_URL}/api/v1/google/auth?userEmail=${user?.email}`,
             "_blank",
             "width=500,height=600"
           );
           window.addEventListener("message", (event) => {
             if (event.origin !== import.meta.env.VITE_FE_URL) return;
-            if (event.data.type === "GOOGLE_AUTH_SUCCESS") {
-              localStorage.setItem("auth_toke", event.data.token);
-              authWindow?.close();
+            if (event.data === "oauth-success") {
+              localStorage.setItem("auth_token", event.data.token);
+              authWindowRef.current?.close();
+              refreshData();
             }
-            setDataChartFetch(undefined);
+            // setDataChartFetch(undefined);
           });
         }
         return res.json() as Promise<TdataSheetApi>;

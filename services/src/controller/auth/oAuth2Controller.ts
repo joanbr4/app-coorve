@@ -71,16 +71,19 @@ async function oAuth2CallbackController(req: Request, res: Response) {
   res.cookie("refresh_token_google", tokens.refresh_token, {
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24 * 7, //7d
-    secure: true, // Only send over HTTPS
-    sameSite: "strict",
-    // path: "/", // Ensure path is root by default
+    secure: appConfig.port ? false : true, // Only send over HTTPS
+    sameSite: "lax",
+    path: "/",
+    domain: appConfig.port ? "localhost" : "coorve.vercel.app", // Ensure path is root by default
   })
+
   res.cookie("auth_token_google", tokens.access_token, {
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24, //1d
-    secure: true, // Only send over HTTPS
-    sameSite: "strict",
-    // path: "/", // Ensure path is root by default
+    secure: appConfig.port ? false : true, // Only send over HTTPS
+    sameSite: "lax",
+    path: "/", // Ensure path is root by default
+    domain: appConfig.port ? "localhost" : "coorve.vercel.app", // Ensure path is root by default
   })
 
   console.log("Authorization successful!")

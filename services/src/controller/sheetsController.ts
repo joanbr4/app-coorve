@@ -1,6 +1,6 @@
 import { google } from "googleapis"
 import { ErrorsApisDrive, NotFoundError } from "../utils/errors"
-import { savedToken } from "./auth/auth2Client"
+import { savedToken } from "./auth/oAuth2Controller"
 import { apiConfig, appConfig } from "../config/index"
 import { eq } from "drizzle-orm"
 import { db } from "../db/client"
