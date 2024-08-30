@@ -51,6 +51,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
+          dockerfile: ./Dockerfile
           target: backend-builder
           push: true
           tags: bordotch/coorve-service:v${{ env.version }}

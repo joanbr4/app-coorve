@@ -50,6 +50,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
+          dockerfile: ./Dockerfile
           target: frontend-builder
           push: true
           tags: bordotch/coorve-web:v${{ env.version }}
