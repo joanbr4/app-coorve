@@ -31,6 +31,8 @@ services:
       target: frontend-builder
     environment:
       - VITE_BE_DOCKER=http://server:3000
+      - VITE_FE_DOCKER=http://client:5173
+
     develop:
       watch:
         - action: sync

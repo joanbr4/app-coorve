@@ -55,7 +55,11 @@ const CircularChart = () => {
     setParamId(param);
 
     const handleMessage = (event: MessageEvent) => {
-      if (event.origin !== import.meta.env.VITE_FE_URL) return;
+      if (
+        event.origin !== import.meta.env.VITE_FE_DOCKER ??
+        import.meta.env.VITE_FE_URL
+      )
+        return;
       if (event.data === "oauth-success") {
         localStorage.setItem("auth_token", event.data.token);
         if (authWindowRef.current) authWindowRef.current.close();
@@ -73,12 +77,16 @@ const CircularChart = () => {
         console.log("asd", res);
         if (!res.ok) {
           authWindowRef.current = window.open(
-            `${import.meta.env.VITE_BE_URL}/api/v1/google/auth?userEmail=${user?.email}`,
+            `${import.meta.env.VITE_BE_DOCKER ?? import.meta.env.VITE_BE_URL}/api/v1/google/auth?userEmail=${user?.email}`,
             "_blank",
             "width=500,height=600"
           );
           window.addEventListener("message", (event) => {
-            if (event.origin !== import.meta.env.VITE_FE_URL) return;
+            if (
+              event.origin !== import.meta.env.VITE_FE_DOCKER ??
+              import.meta.env.VITE_FE_URL
+            )
+              return;
             if (event.data === "oauth-success") {
               localStorage.setItem("auth_token", event.data.token);
               authWindowRef.current?.close();

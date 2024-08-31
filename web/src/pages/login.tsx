@@ -7,7 +7,8 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import fetch from "cross-fetch";
 
-export const url_be = import.meta.env.VITE_BE_URL;
+export const url_be =
+  import.meta.env.VITE_BE_DOCKER ?? import.meta.env.VITE_BE_URL;
 console.log("url-be:", url_be);
 
 const initialState = {

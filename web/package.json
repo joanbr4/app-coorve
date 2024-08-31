@@ -1,7 +1,7 @@
 {
   "name": "tailwindvite",
   "private": true,
-  "version": "1.0.12",
+  "version": "1.0.13",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -16,6 +16,11 @@
       "pnpm lint"
     ]
   },
+  "author": {
+    "name": "Joan Bordonaba",
+    "email": "joan.bordonaba@gmail.com"
+  },
+  "license": "Apache-2.0",
   "dependencies": {
     "@headlessui/react": "^2.0.3",
     "@heroicons/react": "^2.1.3",
