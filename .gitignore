@@ -8,6 +8,7 @@ assets/
 /services/temp_credentials.json
 /services/token.json
 **/*.env
+**/*.env.production
 
 # Editor directories and files
 .vscode/*
