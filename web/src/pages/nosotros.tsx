@@ -88,7 +88,7 @@ const Nosotros = () => {
           </h4>
           <div className="mx-4 md:flex">
             {stuffs.map((person) => (
-              <div className="relative mb-8 flex max-w-[500px] flex-col  hover:rounded-t-lg md:mr-5">
+              <div className="2k:mb-10 relative mb-16 flex max-w-[500px] flex-col  hover:rounded-t-lg sm:mr-5">
                 <div className=" group flex max-w-[500px] flex-col ">
                   <div className="overflow-hidden rounded-lg">
                     <img
@@ -97,7 +97,7 @@ const Nosotros = () => {
                       className="transform overflow-visible object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
                     />
                   </div>
-                  <h2 className=" mt-4 text-2xl  group-hover:underline">
+                  <h2 className="mt-4 text-2xl group-hover:underline">
                     {person.name}
                   </h2>
                 </div>
@@ -167,14 +167,14 @@ const Nosotros = () => {
             ))}
           </div>
         </div>
-        <div className="mx-auto my-10 hidden text-white lg:block">
+        <div className="mx-auto my-14 hidden text-white lg:block">
           <h4 className="mx-4 my-4 font-['Open_Sans'] text-3xl md:mx-0">
             La historia de Coorve
           </h4>
-          <div className=" max-w-[1550px] md:relative ">
+          <div className=" max-w-[1550px] md:relative">
             <button
               onClick={() => swiperRef.current?.slidePrev()}
-              className="absolute -left-8 top-1/2 z-50 -translate-y-1/2 transform rounded-[300px] bg-gray-500 p-2 text-white hover:border hover:bg-gray-800"
+              className="absolute -left-8 top-1/2 z-50 mx-2 -translate-y-1/2 transform rounded-[300px] bg-gray-500  p-2 text-white hover:border hover:bg-gray-800"
             >
               <svg
                 fill="#ffff"
@@ -228,7 +228,7 @@ const Nosotros = () => {
             </Swiper>
             <button
               onClick={() => swiperRef.current?.slideNext()}
-              className="absolute -right-8 top-1/2 z-50 -translate-y-1/2 transform rounded-[300px] bg-gray-500 p-2 text-white hover:border hover:bg-gray-800"
+              className="absolute -right-8 top-1/2 z-50 mx-2 -translate-y-1/2 transform rounded-[300px] bg-gray-500 p-2 text-white hover:border hover:bg-gray-800"
             >
               <svg
                 fill="#ffff"

@@ -12,7 +12,9 @@ module.exports = {
   theme: {
     extend: {
       screens: {
+        "2xs": "375px",
         xs: "550px",
+        "2k": "1920px",
       },
       fontFamily: {
         satoshi: ["Satoshi", "sans-serif"],

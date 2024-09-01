@@ -17,7 +17,7 @@ function Content() {
     >
       <Header />
       <div className="mb-24 mt-28 flex w-full flex-col text-white ">
-        <div className="font-inter mx-auto my-2 max-w-[900px] text-center text-8xl text-[80px] font-bold leading-[3.8rem] sm:leading-none">
+        <div className="mx-auto my-2 max-w-[900px] text-center font-inter text-8xl text-[80px] font-bold leading-[3.8rem] sm:leading-none">
           Next gen del real state
         </div>
         <span className="mx-auto my-2 max-w-[950px] text-center font-['Open_Sans'] text-2xl">
@@ -51,7 +51,7 @@ function Content() {
               </svg>
             </div>
             <div className="flex flex-col">
-              <span className="xs:my-2 text-xl sm:my-2">
+              <span className="text-xl xs:my-2 sm:my-2">
                 Registrate en
                 <span className="underline-offset-7 ml-1 underline decoration-[#39ba93] decoration-2">
                   10 segundos
@@ -59,7 +59,7 @@ function Content() {
               </span>
               <span className="my-2 md:max-w-60">
                 Lo unico que debes hacer es registrarte, y una vez dentro
-                suscribete a tu membresia.
+                suscríbete a tu membresia.
               </span>
             </div>
           </div>
@@ -117,23 +117,23 @@ function Content() {
               </span>
               <span className="my-2 md:max-w-60">
                 Ahora lo único que debes preocuparte es en recibir todos los
-                clientes que empezaran a llegar para cerrar mas negocios!.
+                clientes que empezaran a llegar para cerrar mas negocios!
               </span>
             </div>
           </div>
         </div>
-        <div className="xs:px-8 flex flex-col px-4">
-          <div className="font-inter mx-auto my-2 max-w-[900px] text-center text-[3.8rem] font-bold leading-[3.6rem] sm:leading-none">
+        <div className="flex flex-col px-4 xs:px-8">
+          <div className="mx-auto my-2 max-w-[900px] text-center font-inter text-[3.8rem] font-bold leading-[3.6rem] sm:leading-none">
             Nueva fuente de generación de leads, totalmente potenciada
           </div>
-          <p className="xs:mb-[50px] mx-auto  max-w-[950px] text-center font-['Open_Sans'] text-xl">
+          <p className="mx-auto max-w-[950px]  text-center font-['Open_Sans'] text-xl xs:mb-[50px]">
             Hemos construido el sistema mas eficiente para maximizar el
             presupuesto de nuestros aliados
           </p>
           <div className="mx-auto my-[70px] flex w-full max-w-[900px] flex-col items-center justify-between md:flex-row ">
-            <div className="xs:text-left xs:mr-8 mx-auto  text-center md:max-w-[330px]">
-              <div className="font-inter xs:max-w-[900px] mx-auto my-2 flex-col  text-4xl  leading-none sm:leading-none">
-                <h3 className="font-openSans mb-2 tracking-tight">
+            <div className="mx-auto text-center xs:mr-8  xs:text-left md:max-w-[330px]">
+              <div className="mx-auto my-2 flex-col font-inter text-4xl  leading-none  xs:max-w-[900px] sm:leading-none">
+                <h3 className="mb-2 font-openSans tracking-tight">
                   Master
                   <span className="ml-1 underline decoration-[#39ba93] underline-offset-2">
                     Brockers
@@ -150,29 +150,29 @@ function Content() {
             </div>
           </div>
           <div className="mx-auto my-[45px] flex w-full max-w-[900px] flex-col items-center justify-between md:flex-row ">
-            <div className="xs:text-left xs:mr-[50px] mx-auto text-center md:order-2 md:max-w-[350px]">
-              <div className=" xs:leading-none mx-auto my-2  max-w-[900px] flex-col text-4xl leading-none">
-                <h3 className="font-openSans mb-2 tracking-tighter">
+            <div className="mx-auto text-center xs:mr-[50px] xs:text-left md:order-2 md:max-w-[350px]">
+              <div className=" mx-auto my-2 max-w-[900px]  flex-col text-4xl leading-none xs:leading-none">
+                <h3 className="mb-2 font-openSans tracking-tighter">
                   Brocker
-                  <span className="ml-1 underline decoration-[#39ba93] underline-offset-2">
+                  <span className="2xs:inline ml-1 block underline decoration-[#39ba93] underline-offset-2">
                     independiente
                   </span>
                 </h3>
               </div>
-              <p className="text-l w-full font-['Open_Sans']">
+              <p className="text-l mx-auto w-full font-['Open_Sans']">
                 Nuestro sistema permite que los pequeños que esten buscando una
                 alternativa potente y eficiente que acelere el cierre de sus
                 operaciones esta en el lugar correcto.
               </p>
             </div>
-            <div className=" xs:w-[700px] mx-auto pt-[40px] ">
+            <div className=" mx-auto pt-[40px] xs:w-[700px] ">
               <img src={cercle} />
             </div>
           </div>
           <div className="mx-auto my-[45px] flex w-full max-w-[900px] flex-col items-center justify-between md:flex-row">
-            <div className="xs:text-left xs:mr-[50px] mx-auto flex  flex-col text-center md:max-w-[350px]">
-              <div className="xs:leading-none mx-auto my-2 max-w-[900px] flex-col  font-['Opens_sans']  text-4xl leading-none">
-                <h3 className="font-openSans mb-2 tracking-tight">
+            <div className="mx-auto flex flex-col text-center  xs:mr-[50px] xs:text-left md:max-w-[350px]">
+              <div className="mx-auto my-2 max-w-[900px] flex-col font-['Opens_sans']  text-4xl  leading-none xs:leading-none">
+                <h3 className="mb-2 font-openSans tracking-tight">
                   Broker
                   <span className="ml-1 underline decoration-[#39ba93] underline-offset-2">
                     hipotecario
@@ -180,20 +180,20 @@ function Content() {
                 </h3>
               </div>
               <p className="text-l w-full font-['Open_Sans']">
-                Sistema ideado para la captacion de asesores inmobiliarios y
+                Sistema ideado para la captación de asesores inmobiliarios y
                 compradores.
               </p>
             </div>
-            <div className=" xs:max-w-[700px] mx-auto pt-[40px] ">
+            <div className=" mx-auto pt-[40px] xs:max-w-[700px] ">
               <img src={lines} />
             </div>
           </div>
           <div className="mx-auto my-[45px] flex w-full max-w-[900px] flex-col items-center justify-between md:flex-row ">
-            <div className="xs:text-left xs:ml-[50px] mx-auto flex flex-col text-center md:order-2 md:max-w-[350px]">
-              <div className="xs:leading-none mx-auto my-2 max-w-[900px] flex-col  font-['Opens_sans']  text-4xl leading-none">
-                <h3 className="font-openSans mb-2 tracking-tight">
+            <div className="mx-auto flex flex-col text-center xs:ml-[50px] xs:text-left md:order-2 md:max-w-[350px]">
+              <div className="mx-auto my-2 max-w-[900px] flex-col font-['Opens_sans']  text-4xl  leading-none xs:leading-none">
+                <h3 className="mb-2 font-openSans tracking-tight">
                   La decisión más inteligente para
-                  <span className="ml-1 mr-1 underline decoration-[#39ba93] underline-offset-2">
+                  <span className="ml-4 mr-1 underline decoration-[#39ba93] underline-offset-2">
                     despegar tu negocio
                   </span>
                   a otro nivel
@@ -204,7 +204,7 @@ function Content() {
                 todas las facilidades para que te adaptes a la eficiencia.
               </p>
             </div>
-            <div className=" xs:max-w-[700px] mx-auto pt-[40px] ">
+            <div className=" mx-auto pt-[40px] xs:max-w-[700px] ">
               <img src={diagram} />
             </div>
           </div>
