@@ -84,10 +84,10 @@ const Nosotros = () => {
             Nuestro equipo
           </h4>
           <div className="mx-4 md:flex">
-            {stuffs.map((person, index) => (
+            {stuffs.map((person) => (
               <div
                 key={person.name}
-                className="2k:mb-10 relative mb-16 flex max-w-[500px] flex-col last:mr-0 hover:rounded-t-lg sm:mr-5"
+                className="relative mb-16 flex max-w-[500px] flex-col last:mr-0 hover:rounded-t-lg sm:mr-5 2k:mb-10"
               >
                 <div className=" group flex max-w-[500px] flex-col ">
                   <div className="overflow-hidden rounded-lg">
