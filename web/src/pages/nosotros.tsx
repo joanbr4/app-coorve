@@ -33,17 +33,14 @@ const Nosotros = () => {
       <div className=" mx-auto flex  flex-col pt-8">
         <div className="flex md:relative">
           <div
-            className="absolute mx-auto ml-[50px] w-[250px] cursor-pointer sm:ml-[100px]"
+            className="align-center absolute ml-[50px] w-[250px] cursor-pointer sm:ml-[100px]"
             onClick={() => navigate(-1)}
           >
             <img src={logo} alt="logo" />
           </div>
-          <h1 className="mx-12 mt-[70px] font-['Open_Sans'] text-6xl font-bold text-white md:mx-auto 2xl:mt-0">
+          <h1 className="mt-[70px] text-center font-['Open_Sans'] text-6xl font-bold text-white sm:mx-auto 2xl:mt-0">
             Un poco de nuestro
-            <p className="ml-2 block underline decoration-[#39ba93] decoration-4 underline-offset-4 md:hidden">
-              recorrido
-            </p>
-            <span className="ml-2 hidden underline decoration-[#39ba93] decoration-4 underline-offset-4 md:inline">
+            <span className="ml-2 block underline decoration-[#39ba93] decoration-4 underline-offset-4 md:inline">
               recorrido
             </span>
           </h1>
@@ -87,8 +84,11 @@ const Nosotros = () => {
             Nuestro equipo
           </h4>
           <div className="mx-4 md:flex">
-            {stuffs.map((person) => (
-              <div className="2k:mb-10 relative mb-16 flex max-w-[500px] flex-col  hover:rounded-t-lg sm:mr-5">
+            {stuffs.map((person, index) => (
+              <div
+                key={person.name}
+                className="2k:mb-10 relative mb-16 flex max-w-[500px] flex-col last:mr-0 hover:rounded-t-lg sm:mr-5"
+              >
                 <div className=" group flex max-w-[500px] flex-col ">
                   <div className="overflow-hidden rounded-lg">
                     <img
