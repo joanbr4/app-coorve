@@ -30,8 +30,7 @@ function TarifasCard() {
             <p className="text-center">{tarifa.detalles}</p>
           </div>
           <div className="my-3 flex justify-center text-center text-5xl">
-            ${tarifa.precio}{" "}
-            <span className="mt-auto text-xl">/{tarifa.time}</span>
+            $ {tarifa.precio} <span className="mt-auto text-xl">MXN</span>
           </div>
           <ul className=" mx-auto my-6 text-left">
             {tarifa.features.map((feat, index) => (
@@ -70,8 +69,8 @@ function TarifasCard() {
           </ul>
           <button
             className={
-              tarifa.precio === 20
-                ? "mx-auto  flex w-full items-center justify-center rounded-md border bg-white p-1 text-lg font-bold text-gray-800"
+              tarifa.precio === 450
+                ? "mx-auto  flex w-full items-center justify-center rounded-md border bg-white p-1 text-lg font-bold text-gray-800 hover:bg-slate-200"
                 : "mx-auto w-full rounded-md border  bg-gray-800 p-1 text-lg font-bold text-white hover:bg-gray-700"
             }
           >

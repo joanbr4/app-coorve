@@ -5,7 +5,7 @@ export const tarifas: Ttarifa[] = [
     titulo: "Semanal",
     detalles: "Comprueba tu inversión",
     time: "SEM",
-    precio: 20,
+    precio: 450,
     features: [
       "Accesos de cuenta publicitaria",
       "Creación de oferta de valor",
@@ -23,7 +23,7 @@ export const tarifas: Ttarifa[] = [
     titulo: "Mensual",
     detalles: "Maximiza tu inversión",
     time: "MES",
-    precio: 50,
+    precio: 950,
     features: [
       "Accesos de cuenta publicitaria",
       "Creación de oferta de valor",

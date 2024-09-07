@@ -9,19 +9,19 @@ const logoutController = (req: Request, res: Response) => {
   res.clearCookie("refresh_token_google", {
     httpOnly: true,
     expires: new Date(0),
-    secure: appConfig.port ? false : true, // Only send over HTTPS
+    secure: appConfig.port == "3000" ? false : true, // Only send over HTTPS
     sameSite: "lax",
     path: "/", // Ensure path is root by default
-    domain: appConfig.port ? "localhost" : "coorve.vercel.app", // Ensure path is root by default
+    domain: appConfig.port == "3000" ? "localhost" : "coorve.vercel.app", // Ensure path is root by default
   })
 
   res.clearCookie("auth_token_google", {
     httpOnly: true,
     expires: new Date(0),
-    secure: appConfig.port ? false : true, // Only send over HTTPS
+    secure: appConfig.port == "3000" ? false : true, // Only send over HTTPS
     sameSite: "lax",
     path: "/", // Ensure path is root by default
-    domain: appConfig.port ? "localhost" : "coorve.vercel.app", // Ensure path is root by default
+    domain: appConfig.port == "3000" ? "localhost" : "coorve.vercel.app", // Ensure path is root by default
   })
 
   res.status(200).send({ msg: "Successfully logged out" })
