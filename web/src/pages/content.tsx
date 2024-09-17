@@ -154,7 +154,7 @@ function Content() {
               <div className=" mx-auto my-2 max-w-[900px]  flex-col text-4xl leading-none xs:leading-none">
                 <h3 className="mb-2 font-openSans tracking-tighter">
                   Brocker
-                  <span className="2xs:inline ml-1 block underline decoration-[#39ba93] underline-offset-2">
+                  <span className="ml-1 block underline decoration-[#39ba93] underline-offset-2 2xs:inline">
                     independiente
                   </span>
                 </h3>
