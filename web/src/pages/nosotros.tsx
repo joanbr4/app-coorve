@@ -167,11 +167,11 @@ const Nosotros = () => {
             ))}
           </div>
         </div>
-        <div className="mx-auto my-14 hidden text-white lg:block">
+        <div className="mx-auto my-14  text-white lg:block">
           <h4 className="mx-4 my-4 font-['Open_Sans'] text-3xl md:mx-0">
             La historia de Coorve
           </h4>
-          <div className=" max-w-[1550px] md:relative">
+          <div className="mx-2 max-w-[500px] md:relative md:max-w-[736px] xl:max-w-[1170px] 2xl:max-w-[1560px]">
             <button
               onClick={() => swiperRef.current?.slidePrev()}
               className="absolute -left-8 top-1/2 z-50 mx-2 -translate-y-1/2 transform rounded-[300px] bg-gray-500  p-2 text-white hover:border hover:bg-gray-800"
@@ -194,19 +194,23 @@ const Nosotros = () => {
               spaceBetween={30}
               slidesPerView={4}
               breakpoints={{
-                640: {
+                400: {
                   slidesPerView: 1,
-                  spaceBetween: 20,
+                  spaceBetween: 30,
                 },
-                768: {
+                758: {
                   slidesPerView: 2,
-                  spaceBetween: 40,
+                  spaceBetween: 30,
                 },
                 1024: {
+                  slidesPerView: 2,
+                  spaceBetween: 50,
+                },
+                1210: {
                   slidesPerView: 3,
                   spaceBetween: 50,
                 },
-                1204: {
+                1350: {
                   slidesPerView: 4,
                   spaceBetween: 50,
                 },
@@ -214,7 +218,7 @@ const Nosotros = () => {
               onSwiper={(swiper) => {
                 swiperRef.current = swiper;
               }}
-              className="md:w-[1550px]"
+              className=""
             >
               {history.map((feat, index) => (
                 <SwiperSlide key={index}>

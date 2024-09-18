@@ -20,6 +20,9 @@ import { NotFoundPage } from "@/pages/errors/NotFounPage";
 import PaymentSuccess from "@/pages/payment";
 import { Nosotros } from "@/pages/nosotros";
 import { inject } from "@vercel/analytics";
+import { PolicyCookies } from "@/pages/policyCookies";
+import { TermsUse } from "@/pages/termsUse";
+import { Privacity } from "@/pages/privacity";
 
 inject();
 
@@ -32,6 +35,9 @@ const router = createBrowserRouter(
       <Route path="/signin" action={registerAction} element={<Register />} />
       <Route path="/signup" element={<Login />} />
       <Route path="/faqs" element={<Faqs />} />
+      <Route path="/politica-de-cookies" element={<PolicyCookies />} />
+      <Route path="/terminos-de-uso" element={<TermsUse />} />
+      <Route path="/privacidad" element={<Privacity />} />
       <Route path="/user" element={<PrivateRoute element={<UserPage />} />}>
         <Route path="dashboard" element={<CircularChart />} />
         <Route path="perfil" element={<Perfil />} />

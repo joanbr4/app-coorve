@@ -54,13 +54,13 @@ export default function Footer() {
       <div className="sm:font flex justify-center bg-gray-800/75 pb-3 text-xs font-medium text-white  sm:px-8 ">
         <ul className="grid grid-cols-2 sm:flex sm:max-w-[600px]">
           <li className="sm:px-2">
-            <Link to="">Aviso de privacidad</Link>
+            <Link to="/privacidad">Aviso de privacidad</Link>
           </li>
           <li className="sm:px-2">
-            <Link to="">Términos de uso</Link>
+            <Link to="/terminos-de-uso">Términos de uso</Link>
           </li>
           <li className="sm:px-2">
-            <Link to="">Politica de Cookies</Link>
+            <Link to="/politica-de-cookies">Politica de Cookies</Link>
           </li>
           <li className="sm:px-2">
             <Link to="">Informacion de la</Link> empresa
