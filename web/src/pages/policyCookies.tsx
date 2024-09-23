@@ -5,7 +5,7 @@ const PolicyCookies = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-slate-800">
+    <div className="h-screen bg-slate-800">
       <div
         className="align-center absolute ml-[40px] mt-3 w-[100px] cursor-pointer md:ml-[50px] lg:w-[250px]"
         onClick={() => navigate(-1)}
@@ -43,7 +43,8 @@ const PolicyCookies = () => {
             <span className="font-bold">Cookies de personalización:</span>{" "}
             Permiten recordar tus preferencias para mejorar tu experiencia en
             futuras visitas, como el idioma o la región.
-            <li></li>
+          </li>
+          <li>
             <span className="font-bold">Cookies analíticas: </span>Recogen
             información sobre cómo los usuarios interactúan con el sitio web,
             como las páginas que visitan, el tiempo de permanencia o los errores

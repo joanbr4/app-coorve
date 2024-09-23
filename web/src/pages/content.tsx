@@ -28,7 +28,12 @@ function Content() {
           <button className="mx-2 my-2 rounded-md border bg-white p-2 font-sans text-lg text-gray-800 hover:bg-slate-200">
             <a href="#pricing">Quiero empezar a recibir leads</a>
           </button>
-          <button className="mx-2 my-2 flex w-auto justify-between rounded-md border p-2 font-sans text-lg hover:bg-gray-700">
+          <button
+            onClick={() =>
+              window.open("https://www.youtube.com/watch?v=synuEsSrueQ")
+            }
+            className="mx-2 my-2 flex w-auto justify-between rounded-md border p-2 font-sans text-lg hover:bg-gray-700"
+          >
             <span>Ver demo en tiempo real</span>
             <ArrowRightIcon className="mx-2 my-0 size-6 " />
           </button>
