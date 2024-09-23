@@ -12,7 +12,7 @@ const history = [
   {
     url: "",
     date: "Noviembre 2021",
-    feat: "Cerramos contrato con una empresa de Miami para promover desarrollos de ultra lujo en la región.",
+    feat: "Contrato con una empresa de Miami para promover desarrollos de ultra lujo en la región.",
   },
   {
     url: "",

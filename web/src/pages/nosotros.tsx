@@ -87,7 +87,7 @@ const Nosotros = () => {
             {stuffs.map((person) => (
               <div
                 key={person.name}
-                className="relative mb-16 flex max-w-[500px] flex-col last:mr-0 hover:rounded-t-lg sm:mr-5 2k:mb-10"
+                className="relative mb-0 flex max-w-[500px] flex-col last:mr-0 hover:rounded-t-lg sm:mr-5 md:mb-16 2k:mb-10"
               >
                 <div className=" group flex max-w-[500px] flex-col ">
                   <div className="overflow-hidden rounded-lg">
@@ -167,14 +167,14 @@ const Nosotros = () => {
             ))}
           </div>
         </div>
-        <div className="mx-auto my-14  text-white lg:block">
+        <div className="mx-auto my-14 text-white md:block">
           <h4 className="mx-4 my-4 font-['Open_Sans'] text-3xl md:mx-0">
             La historia de Coorve
           </h4>
-          <div className="mx-2 max-w-[500px] md:relative md:max-w-[736px] xl:max-w-[1170px] 2xl:max-w-[1560px]">
+          <div className="mx-2 max-w-[345px] md:relative md:max-w-[736px] xl:max-w-[1170px] 2xl:max-w-[1560px]">
             <button
               onClick={() => swiperRef.current?.slidePrev()}
-              className="absolute -left-8 top-1/2 z-50 mx-2 -translate-y-1/2 transform rounded-[300px] bg-gray-500  p-2 text-white hover:border hover:bg-gray-800"
+              className="absolute -left-8 top-1/2 z-50 mx-2 hidden -translate-y-1/2 transform rounded-[300px] bg-gray-500 p-2  text-white hover:border hover:bg-gray-800 md:block"
             >
               <svg
                 fill="#ffff"
@@ -194,7 +194,7 @@ const Nosotros = () => {
               spaceBetween={30}
               slidesPerView={4}
               breakpoints={{
-                400: {
+                280: {
                   slidesPerView: 1,
                   spaceBetween: 30,
                 },
@@ -222,7 +222,7 @@ const Nosotros = () => {
             >
               {history.map((feat, index) => (
                 <SwiperSlide key={index}>
-                  <div className="mx-0 flex h-[150px] w-[350px] flex-col rounded-lg border bg-gray-700 p-8 font-['Open_Sans']">
+                  <div className="mx-2 flex h-[150px] w-[320px] flex-col rounded-lg border bg-gray-700 p-8 font-['Open_Sans'] md:mx-0 md:w-[350px]">
                     <img src={feat.url} alt="" />
                     <p className="font-bold">{feat.date}</p>
                     <p>{feat.feat}</p>
@@ -232,7 +232,7 @@ const Nosotros = () => {
             </Swiper>
             <button
               onClick={() => swiperRef.current?.slideNext()}
-              className="absolute -right-8 top-1/2 z-50 mx-2 -translate-y-1/2 transform rounded-[300px] bg-gray-500 p-2 text-white hover:border hover:bg-gray-800"
+              className="absolute -right-8 top-1/2 z-50 mx-2 hidden -translate-y-1/2 transform rounded-[300px] bg-gray-500 p-2 text-white hover:border hover:bg-gray-800 md:block"
             >
               <svg
                 fill="#ffff"
