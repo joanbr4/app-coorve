@@ -26,12 +26,12 @@ Chart.register(
 
 type PieTooltipContext = TooltipItem<"pie">;
 
-const CircularChart = () => {
+const Login = () => {
   const [dataChartFetch, setDataChartFetch] = useState<TdataChart>();
   const authWindowRef = useRef<Window | null>(null);
   const { user, setParamId } = useOutletContext<Tcontext<string>>();
   // const payload = { email: user?.email };
-
+  const dataENV = import.meta.env.VITE_FE_DOCKER ?? import.meta.env.VITE_FE_URL;
   const refreshData = async () => {
     try {
       const response = await fetch(
@@ -40,6 +40,7 @@ const CircularChart = () => {
           credentials: "include",
         }
       );
+      console.error("res", response);
       const data = (await response.json()) as TdataSheetApi;
       localStorage.setItem("access_token", data.token.access_token);
       localStorage.setItem("expiry_date", data.token.expiry_date);
@@ -55,11 +56,7 @@ const CircularChart = () => {
     setParamId(param);
 
     const handleMessage = (event: MessageEvent) => {
-      if (
-        event.origin !== import.meta.env.VITE_FE_DOCKER ??
-        import.meta.env.VITE_FE_URL
-      )
-        return;
+      if (event.origin !== dataENV) return;
       if (event.data === "oauth-success") {
         localStorage.setItem("auth_token", event.data.token);
         if (authWindowRef.current) authWindowRef.current.close();
@@ -82,11 +79,7 @@ const CircularChart = () => {
             "width=500,height=600"
           );
           window.addEventListener("message", (event) => {
-            if (
-              event.origin !== import.meta.env.VITE_FE_DOCKER ??
-              import.meta.env.VITE_FE_URL
-            )
-              return;
+            if (event.origin !== dataENV) return;
             if (event.data === "oauth-success") {
               localStorage.setItem("auth_token", event.data.token);
               authWindowRef.current?.close();
@@ -278,4 +271,5 @@ const CircularChart = () => {
   );
 };
 
-export default CircularChart;
+// export default CircularChart;
+export default Login;

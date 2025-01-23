@@ -107,12 +107,15 @@ const sheetsController = async (req: Request, res: Response) => {
     const token = req.body.token
 
     let userEmail = req.query.userEmail as string
+
     const dataUser = await db
       .select()
       .from(users)
       .where(eq(users.email, userEmail))
     const { name: nameUser, apellidos: apellidosUser } = dataUser[0]
-    console.log("email", userEmail, nameUser)
+
+    console.log("token:", token, "email", userEmail, "user:", nameUser)
+
     const folderId = apiConfig.folder_id
     if (!token) {
       res.status(400).send({ message: "token no exist" })

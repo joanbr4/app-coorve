@@ -9,6 +9,7 @@ import { tokenPath } from "./routes/tokens.js"
 import cookieParser from "cookie-parser"
 import { apiRouter } from "./routes/apiSheets.js"
 import { mockRouter } from "./routes/mock.js"
+import { testConnection } from "./db/client"
 
 const app = express()
 
@@ -34,8 +35,13 @@ app.use(mockRouter)
 
 app.use(errorMiddleware)
 
-app.listen(appConfig.port, () =>
-  console.log(`Server is running on http://localhost:${appConfig.port}`)
-)
+app.listen(appConfig.port, () => {
+  testConnection()
+  console.log(
+    process.env.DOCKER_BE
+      ? `Server is running on http://server:${appConfig.port}`
+      : `Server is running on http://localhost:${appConfig.port}`
+  )
+})
 
 export { app }
