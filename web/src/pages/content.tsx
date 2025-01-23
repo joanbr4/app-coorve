@@ -17,7 +17,7 @@ function Content() {
     >
       <Header />
       <div className="mb-24 mt-28 flex w-full flex-col text-white ">
-        <div className="mx-auto my-2 max-w-[900px] text-center font-inter text-8xl text-[80px] font-bold leading-[3.8rem] sm:leading-none">
+        <div className="mx-auto my-2 max-w-[900px] text-center font-inter text-8xl text-[77px] font-bold leading-[3.8rem] sm:leading-none">
           Next gen del Real Estate
         </div>
         <span className="mx-auto my-2 max-w-[950px] text-center font-['Open_Sans'] text-2xl">
